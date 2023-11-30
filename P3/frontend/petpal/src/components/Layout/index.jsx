@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
 import { APIContext } from "../../contexts/APIContext";
 import './style.css';
-import logo from "../../img/logo.png"
-import logo1 from "../../img/logo1.png"
-import login from "../../img/login.png"
+import logo from "../../assets/images/logo.png"
+import logo1 from "../../assets/images/logo1.png"
+import login from "../../assets/images/login.png"
+
+/* TODO: update the link */
+/* TODO: Drop Down link */
 
 const Layout = () => {
     return <>
