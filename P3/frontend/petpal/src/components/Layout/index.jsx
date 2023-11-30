@@ -6,6 +6,8 @@ import './style.css';
 import logo from "../../assets/images/logo.png"
 import logo1 from "../../assets/images/logo1.png"
 import login from "../../assets/images/login.png"
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 /* TODO: update the link */
 /* TODO: Drop Down link */
@@ -26,22 +28,27 @@ const Layout = () => {
         </ul>
       
         <div style={{width:20 + 'px'}}></div>
-        
-        <div className="dropdown text-end">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src={login} alt="mdo" width="32" height="32" className="rounded-circle" />
-          </a>
-          <ul className="dropdown-menu text-small">
-            <li><a className="dropdown-item" href="seekerLogin.html">Seeker Login</a></li>
-            <li><hr className="dropdown-divider"></hr></li>
-            <li><a className="dropdown-item" href="shelterLogin.html">Shelter Login</a></li>
-          </ul>
-        </div>
+
+        <Dropdown>
+          <Dropdown.Toggle style={{backgroundColor:"#B55D4C", borderColor:"#B55D4C"}}>
+          <img src={login} alt="mdo" width="32" height="32" className="rounded-circle" />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Seeker Login</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item href="#/action-2">Shelter Login</Dropdown.Item>
+          </Dropdown.Menu>
+      </Dropdown>
+
+
+
         </div>
         </div>
         </header>
 
         <main>
+            
             <Outlet />
         </main>
       
