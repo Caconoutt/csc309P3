@@ -8,8 +8,7 @@ import LoginSeeker from './pages/LoginSeeker';
 import LoginShelter from './pages/LoginShelter';
 import LayoutSeeker from './components/LayoutSeeker';
 import LayoutShelter from './components/LayoutShelter';
-import HomeSeeker from './pages/HomeSeeker';
-import HomeShelter from './pages/HomeShelter';
+
 
 function Webpages(){
   return <BrowserRouter>
@@ -26,13 +25,11 @@ function Webpages(){
     </Route>
 
     <Route path="/" element={<LayoutSeeker />}> 
-      <Route path="HomeSeeker" element={<HomeSeeker />}/>
-    
+      <Route path="HomeSeeker" element={<Home />}/>
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
-      <Route path="HomeShelter" element={<HomeShelter />} />
-    
+      <Route path="HomeShelter" element={<Home />} />
     </Route>
   </Routes>
   </BrowserRouter>;

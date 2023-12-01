@@ -1,3 +1,4 @@
+import { Outlet, Link, useLocation } from "react-router-dom"
 import logo from "../../assets/images/logo.png"
 import logo1 from "../../assets/images/logo1.png"
 import "../Home/style.css"
@@ -30,8 +31,12 @@ const LoginSeeker = () => {
             <div className="form-check text-start remember-me-margin">
                 <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
                 <label className="form-check-label" for="flexCheckDefault">
-                    Agree to Terms&Condition
+                    Remember Me
                 </label>
+            </div>
+
+            <div class="text-end">
+            <label><Link to="/RegisterSeeker" className="signup"><span className="signup">Sign up</span></Link></label>
             </div>
 
          

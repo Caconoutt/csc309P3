@@ -25,7 +25,7 @@ const RegisterSeeker = () => {
                 <label for="floatingUsername">Username</label>
             </div>
             <div className="form-floating">
-                <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
+                <input type="email" className="form-control" id="registerEmail" placeholder="name@example.com" />
                 <label for="floatingInput">Email address</label>
             </div>
             <div className="form-floating">

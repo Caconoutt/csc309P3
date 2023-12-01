@@ -8,23 +8,19 @@ import logo1 from "../../assets/images/logo1.png"
 import login from "../../assets/images/login.png"
 import Dropdown from 'react-bootstrap/Dropdown';
 
-
-/* TODO: update the link */
-/* TODO: Drop Down link */
-
 const Layout = () => {
     return <>
         <header className="p-3 mb-3 border-bottom">
         <div className="container">
         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     
-        <a href="index.html" className="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+        <Link to="/" className="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
             <img id="logo1" src={logo1} />
             <img id="logo" src={logo} />
-        </a>
+        </Link>
 
         <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="index.html" className="nav-link px-2 headerText">Home</a></li>
+          <li><Link to="/" className="nav-link px-2 headerText">Home</Link></li>
         </ul>
       
         <div style={{width:20 + 'px'}}></div>
@@ -35,20 +31,17 @@ const Layout = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Seeker Login</Dropdown.Item>
+            <Dropdown.Item><Link to="/LoginSeeker">Seeker Login</Link></Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item href="#/action-2">Shelter Login</Dropdown.Item>
+            <Dropdown.Item><Link to="/LoginShelter">Shelter Login</Link></Dropdown.Item>
           </Dropdown.Menu>
-      </Dropdown>
-
-
+        </Dropdown>
 
         </div>
         </div>
         </header>
 
         <main>
-            
             <Outlet />
         </main>
       
