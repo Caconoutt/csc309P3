@@ -38,7 +38,7 @@ div.form-floating input[type="text"] {
   border-bottom-left-radius: 0;
 }
 
-div.form-floating input[id="registerEmail"] {
+#registerEmail {
   margin-bottom: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -46,14 +46,15 @@ div.form-floating input[id="registerEmail"] {
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[placeholder="Password"] {
+#registerPw1 {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[placeholder="PasswordDoubleCheck"]{
+#registerPw2{
+  margin-top: -10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   margin-bottom: 10px;
@@ -66,6 +67,12 @@ div.form-floating input[id="registerEmail"] {
 
 .text-end{
     text-align: right;
+}
+
+#errorMsg{
+  color:aquamarine;
+  font-size: 18px;
+  font-weight: 800;
 }
 
 .btnStyle{

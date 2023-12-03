@@ -1,10 +1,58 @@
+import { useState } from "react";
 import logo from "../../assets/images/logo.png"
 import logo1 from "../../assets/images/logo1.png"
-import "../Home/style.css"
-import "./style.css"
+
+
 
 
 const RegisterSeeker = () => {
+    //initial variables
+    const [errorMsg, setErrorMsg] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPw1] = useState("");
+    const [password2, setPw2] = useState("");
+    const [isChecked, setChecked] = useState(false);
+
+
+    const signUp =  async() => {
+        
+        if (password !== password2) {
+            setErrorMsg("Passwords do not match.");
+            return 
+        }
+
+        if (isChecked === false) {
+            setErrorMsg("Please agree to Term&Condition.");
+            return
+        }
+
+        const userData = {'username': username, 'email': email, 'password': password, 'password2': password2}
+        
+        try{
+            const resp = await fetch('http://localhost:8000/account/seeker/',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+                
+            });
+            if (!resp.ok){
+                const errorData = await resp.json();
+                const allError = Object.values(errorData);
+                setErrorMsg("Error Messages: " + allError);
+            }
+            else{
+                window.location.href = "/LoginSeeker";
+            }
+        }
+        catch (error){
+            console.error('Error:', error);
+        }
+    }
+
+
     return <>
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">
@@ -18,41 +66,42 @@ const RegisterSeeker = () => {
 
         
         <div id="showOne">
-            <form>
             
             <div className="form-floating">
-                <input type="text" className="form-control" id="floatingUsername" placeholder="username" />
+                <input value={username} onChange={e => setUsername(e.target.value)} type="text" className="form-control" id="floatingUsername" placeholder="username" />
                 <label for="floatingUsername">Username</label>
             </div>
             <div className="form-floating">
-                <input type="email" className="form-control" id="registerEmail" placeholder="name@example.com" />
+                <input value={email} onChange={e => setEmail(e.target.value)} type="email" className="form-control" id="registerEmail" placeholder="name@example.com" />
                 <label for="floatingInput">Email address</label>
             </div>
             <div className="form-floating">
-                <input type="password" className="form-control" id="floatingPassword" placeholder="Password" />
+                <input value={password} onChange={e => setPw1(e.target.value)} type="password" className="form-control" id="registerPw1" placeholder="Password" />
                 <label for="floatingPassword">Password</label>
             </div>
             <div className="form-floating">
-                <input type="password" className="form-control" id="floatingPassword" placeholder="PasswordDoubleCheck" />
+                <input value={password2} onChange={e => setPw2(e.target.value)} type="password" className="form-control" id="registerPw2" placeholder="PasswordDoubleCheck" />
                 <label for="floatingPassword">Password Doublecheck</label>
             </div>
 
+            <div className="text-start">
+            <span id="errorMsg">{errorMsg}</span>
+            </div>
+
             <div className="form-check text-start remember-me-margin">
-                <input className="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" />
+                <input className="form-check-input" type="checkbox" value={isChecked} onChange={() => {setChecked(!isChecked)}} id="flexCheckDefault" />
                 <label className="form-check-label" for="flexCheckDefault">
                     Agree to Terms&Condition
                 </label>
             </div>
 
          
-            <button className="btn btnStyle w-100 py-2" type="submit"><a href="seekerLogin.html">Sign up Meow!</a></button>
-            </form>
+            <button onClick={signUp} className="btn btnStyle w-100 py-2">Sign up Meow!</button>
+            
 
         </div>
         </main>
         </div>
-
-    
     </>
 }
 
