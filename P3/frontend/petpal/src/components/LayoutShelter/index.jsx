@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { APIContext } from "../../contexts/APIContext";
+import { APIContext } from "../../contexts/AuthContext";
 import "../../pages/Home/style.css"
 import '../Layout/style.css';
 import logo from "../../assets/images/logo.png"

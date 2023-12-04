@@ -4,6 +4,7 @@ import logo1 from "../../assets/images/logo1.png"
 import "../Home/style.css"
 import "../LoginSeeker/style.css"
 import { useState } from "react"
+import { useUserData } from "../../contexts/AuthContext"
 
 
 
@@ -11,34 +12,42 @@ const LoginShelter = () => {
     const [username, setUsername] = useState("");
     const [password, setPw] = useState("");
     const [errorMsg, setErrorMsg] =useState("");
+    const {token, setToken} = useUserData();
+    
 
     const login = async() =>{
         if (username === "" || password === ""){
             setErrorMsg("Error Messages: All fields are required.");
-            return
+            return;
         }
 
         const userData = {'username': username, 'password':password};
 
         try{
-            const resp = fetch("http://localhost:8000/account/token/", {
+            const resp = await fetch("http://localhost:8000/account/token/", {
                 method:"POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(userData),
-            })
+            });
+            const new_resp = await resp.json();
+
             if (!resp.ok){
-                if ((await resp).status === 401){
+                if (new_resp.status === 401){
                     setErrorMsg("Error Messages: Unauthorized Action");
-                    return
+
+                    console.log(new_resp);
+                    return;
                 }
-                const errorData = await resp.json();
-                const allError = Object.values(errorData);
+                
+                const allError = Object.values(new_resp);
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
-                window.location.href("/HomeShelter");
+                setToken(new_resp.access);
+                //console.log(token);
+                window.location.href = "/HomeShelter";
             }
         }
         catch(error){
@@ -48,28 +57,7 @@ const LoginShelter = () => {
 
     }
 
-    const logout = async() =>{
-        try{
-            const resp = fetch("http://localhost:8000/account/logout/",{
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Token <user_token>',
-                  },
-            });
-            if (resp.ok) {
-                // Successful logout
-                console.log('User logged out successfully');
-                // Perform any client-side logout actions, such as clearing the token from local storage
-              } else {
-                // Handle logout error
-                console.error('Logout failed:', resp.statusText);
-              }
-        }
-        catch(error){
-            console.error("Error: ", error);
-        }
-    }
+    
 
     return <>
     <div className="page d-flex align-items-center py-4">
@@ -104,7 +92,7 @@ const LoginShelter = () => {
          
             <button onClick={login} className="btn btnStyle w-100 py-2" type="submit">Log in Meow!</button>
 
-            //<button onClick={logout} className="btn btnStyle w-100 py-2" type="submit">Log OUT</button>
+            
             
 
         </div>

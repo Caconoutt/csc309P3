@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom"
-import { APIContext } from "../../contexts/APIContext";
+import { APIContext } from "../../contexts/AuthContext";
 import "../../pages/Home/style.css"
 import '../Layout/style.css';
 import logo from "../../assets/images/logo.png"
@@ -8,6 +8,7 @@ import logo1 from "../../assets/images/logo1.png"
 import login from "../../assets/images/login.png"
 import noti_new from "../../assets/images/noti_new.png"
 import Dropdown from 'react-bootstrap/Dropdown';
+import Logout from "../Logout";
 
 const LayoutSeeker = () =>{
     return <>
@@ -50,7 +51,7 @@ const LayoutSeeker = () =>{
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item><Link to="/">Logout</Link></Dropdown.Item>
+            <Logout />
           </Dropdown.Menu>
     </Dropdown>
 

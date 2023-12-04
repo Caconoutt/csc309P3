@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation } from "react-router-dom"
 import logo from "../../assets/images/logo.png"
 import logo1 from "../../assets/images/logo1.png"
 import { useState } from "react"
+import { useUserData } from "../../contexts/AuthContext"
 
 
 
@@ -10,6 +11,8 @@ const LoginSeeker = () => {
     const [username, setUsername] = useState("");
     const [password, setPw] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
+    const {token, setToken} = useUserData();
+
 
     const logIn = async() => {
         if (username === "" || password === ""){
@@ -26,17 +29,21 @@ const LoginSeeker = () => {
                 },
                 body: JSON.stringify(userData),
             });
+            const new_resp = await resp.json();
             if (!resp.ok){
                 if ((await resp).status === 401){
-                    setErrorMsg("Error Messages: Unauthorized Action");
-                    return
+                    setErrorMsg("Error Messages: " + new_resp.detail);
+                    console.log(new_resp.detail);
+                    return;
                 }
+
                 
-                const errorData = await resp.json();
-                const allError = Object.values(errorData);
+                const allError = Object.values(new_resp);
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
+                console.log(new_resp.access);
+                setToken(new_resp.access);
                 window.location.href = "/HomeSeeker";
             }
         }
