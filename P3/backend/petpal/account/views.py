@@ -37,17 +37,26 @@ class BlogAPIView(RetrieveUpdateDestroyAPIView): #shelter update own blog
     obj = get_object_or_404(Blog, id=self.kwargs['pk'])
     self.check_object_permissions(self.request, obj)
     return obj
-
-class RetrieveBlogAPIView(RetrieveAPIView): #everyone can view the blog
-  permission_classes = []
-  serializer_class = BlogSerializer
-
-class BlogList(ListAPIView): #shelter only view his blog
+  
+class BlogList(ListAPIView): #shelter only view his bloglist
   serializer_class = BlogSerializer
   def get_queryset(self):
     owner = self.request.user
     return Blog.objects.filter(owner=owner)
-  
+
+class RetrieveBlogList(ListAPIView): #others view shelter_id's blog lis
+  serializer_class = BlogSerializer
+  def get_queryset(self):
+    owner = get_object_or_404(Shelter, id=self.kwargs['shelter_id'])
+    return Blog.objects.filter(owner=owner)
+
+class RetrieveBlog(RetrieveAPIView): #everyone can view the blog
+  serializer_class = BlogSerializer
+  def get_object(self):
+    shelter = get_object_or_404(Shelter, id=self.kwargs['shelter_id'])
+    blog = get_object_or_404(Blog, id=self.kwargs['blog_id'], owner=shelter)
+    return blog
+
 
 #Register Seeker
 class RegisterSeekerAPIView(CreateAPIView):

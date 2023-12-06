@@ -5,7 +5,7 @@ from .views import RegisterShelterAPIView, RetrieveShelter
 from .views import SeekerRetrieveShelter, ShelterList, ShelterRetrieveSeeker
 from. views import NotiList, RetrieveNoti
 from. views import LogoutView
-from .views import NewBlogAPIView, BlogAPIView, BlogList
+from .views import NewBlogAPIView, BlogAPIView, BlogList,RetrieveBlogList,RetrieveBlog
 
 
 
@@ -19,12 +19,13 @@ urlpatterns = [
   path('shelter/seeker/profile/<int:seeker_id>/', ShelterRetrieveSeeker.as_view()),
 
   #extra feature: shelter blog
-  #TODO: should involve shelter_id
+  #shelter POV
   path('shelter/blog/list/', BlogList.as_view()), #shelter list of blog
   path('shelter/blog/', NewBlogAPIView.as_view()), #shelter create own blog
   path('shelter/blog/<int:pk>/', BlogAPIView.as_view()), #shelter update own blog
-  #TODO
-  #path('shelter/<int:shelter_id>/blog/<int:blog_id>'), #seeker/shelter see the blog
+  #others POV
+  path('shelter/<int:shelter_id>/blog/list/',RetrieveBlogList.as_view()), #others see the bloglist
+  path('shelter/<int:shelter_id>/blog/<int:blog_id>/', RetrieveBlog.as_view()), #others see the blog
 
   #logout
   path('logout/', LogoutView.as_view()),
