@@ -11,7 +11,7 @@ const Home = () => {
         Accept: 'application/json',
       },
       mode: 'cors',
-      body: JSON.stringify({ username: 'seeker_1', password: 'alyssa347lovetea' }),
+      body: JSON.stringify({ username: 'finale', password: 'alyssashelter333' }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -25,7 +25,8 @@ const Home = () => {
     <>
       <h1>HOME</h1>
       <Link to='/PetCreate'>pet create</Link>
-      <Link to='/PetDetail'>pet create</Link>
+      <Link to='/PetDetail'>pet detail</Link>
+      <Link to='/ShelterManage'>Shelter Manage</Link>
     </>
   )
 }

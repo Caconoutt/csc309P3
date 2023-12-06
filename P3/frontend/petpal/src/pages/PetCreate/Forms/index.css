@@ -1,0 +1,27 @@
+.createFormsWrap {
+    width: 800px;
+    margin: 0 auto;
+  }
+  
+  .formLabel {
+    color: antiquewhite;
+  }
+  
+  .submit-wrap {
+    color: antiquewhite;
+    margin-bottom: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+  }
+  
+  .submit-btn {
+    width: 50px;
+    height: 50px;
+    background: url('../../../assets/images/logo.png') no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    margin-left: 10px;
+  }
