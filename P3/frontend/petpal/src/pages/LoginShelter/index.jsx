@@ -75,12 +75,12 @@ const LoginShelter = () => {
         <div id="showOne">
             
             <div className="form-floating">
-                <input value={username} onChange={e=>setUsername(e.target.value)} type="text" className="form-control" id="loginUsername" placeholder="username" />
-                <label for="floatingInput">Username</label>
+                <input value={username} onChange={e=>setUsername(e.target.value)} type="text" className="form-control" id="loginUsername" placeholder="Username" />
+                <label for="placeholder">Username</label>
             </div>
             <div className="form-floating">
                 <input value={password} onChange={e=>setPw(e.target.value)} type="password" className="form-control" id="loginPw" placeholder="Password" />
-                <label for="floatingPassword">Password</label>
+                <label for="placeholder">Password</label>
             </div>
 
             <div className="text-start">

@@ -1,3 +1,8 @@
+input::placeholder, label[for="placeholder"]{
+  color:cornflowerblue !important;
+  font-weight: 600;
+}
+
 body {
   height: 100%;
   background-color: #B55D4C;
