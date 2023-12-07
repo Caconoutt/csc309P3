@@ -1,5 +1,5 @@
 // AuthContext.js
-import { createContext, useContext, useState, setState } from 'react';
+import { createContext, useContext, useState, setState, useEffect } from 'react';
 
 export const UserData = createContext({
   token: "",
@@ -10,13 +10,17 @@ export const useUserData = () => {
   return useContext(UserData);
 };
 
-export const UserDataProvider = ({ children }) => {
-  const [token, setToken] = useState('');
-
+export const UserDataProvider = ({children}) => {
+  const [token, setToken] = useState(() =>{
+    return localStorage.getItem('token') || ''
+  });
+  useEffect(() => {
+    setToken(localStorage.getItem('token'))
+  }, [token])
   return (
-    <UserData.Provider value={{ token, setToken }}>
+    <UserData.Provider value = {{token, setToken}}>
       {children}
     </UserData.Provider>
-  );
-};
+  )
+}
 

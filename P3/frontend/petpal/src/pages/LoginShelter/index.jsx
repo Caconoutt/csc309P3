@@ -45,7 +45,9 @@ const LoginShelter = () => {
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
+                
                 setToken(new_resp.access);
+                localStorage.setItem('token', new_resp.access);
                 //console.log(token);
                 window.location.href = "/HomeShelter";
             }

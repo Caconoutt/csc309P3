@@ -12,6 +12,7 @@ import IntroApplication from './pages/application/IntroApplication';
 import CreateApplication from './pages/application/CreateApplication';
 import ReviewApplication from './pages/application/ReviewApplication';
 import ListApplication from './pages/application/ListApplication';
+import { UserDataProvider } from './contexts/AuthContext';
 
 
 function Webpages(){
@@ -47,7 +48,11 @@ function Webpages(){
 }
 
 function App(){
-  return <Webpages />;
+  return (
+    <UserDataProvider>
+      <Webpages />
+    </UserDataProvider>
+  );
 }
 
 export default App;

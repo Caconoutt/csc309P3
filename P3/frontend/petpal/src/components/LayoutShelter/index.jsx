@@ -8,6 +8,7 @@ import logo1 from "../../assets/images/logo1.png"
 import login from "../../assets/images/login.png"
 import noti_new from "../../assets/images/noti_new.png"
 import Dropdown from 'react-bootstrap/Dropdown';
+import Logout from "../Logout";
 
 const LayoutShelter = () =>{
     return <>
@@ -49,7 +50,7 @@ const LayoutShelter = () =>{
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item><Link to="/">Logout</Link></Dropdown.Item>
+            <Logout />
           </Dropdown.Menu>
     </Dropdown>
 

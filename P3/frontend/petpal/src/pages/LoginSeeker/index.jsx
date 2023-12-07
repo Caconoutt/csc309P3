@@ -42,8 +42,9 @@ const LoginSeeker = () => {
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
-                console.log(new_resp.access);
+                
                 setToken(new_resp.access);
+                localStorage.setItem('token', new_resp.access);
                 window.location.href = "/HomeSeeker";
             }
         }
