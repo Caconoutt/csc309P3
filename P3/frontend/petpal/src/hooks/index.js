@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 
 const defaultState = {
-	shelter: 8,
+	// shelter: ,
 	name: '',
 	Breed: '',
 	gender: '',
 	age: '',
 	size: '',
 	color: '',
-	contact: '123456',
+	contact: '',
 	location: '',
 	medical_history: '',
 	special_needs: '',

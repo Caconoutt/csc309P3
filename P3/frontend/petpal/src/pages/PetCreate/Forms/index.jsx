@@ -55,6 +55,18 @@ function Forms({ handleSubmit }) {
 						onChange={(event) => handleChange(event, 'Breed')}
 					/>
 				</Form.Group>
+
+				<Form.Group className='mb-3' controlId='formBasicPassword'>
+					<Form.Label className='formLabel'>Contact</Form.Label>
+					<Form.Control
+						required
+						type='text'
+						placeholder=''
+						value={query.contact}
+						onChange={(event) => handleChange(event, 'contact')}
+					/>
+				</Form.Group>
+
 				<Form.Group className='mb-3'>
 					<Form.Label className='formLabel'>Gender</Form.Label>
 					<Form.Select

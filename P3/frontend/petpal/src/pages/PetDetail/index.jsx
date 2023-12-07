@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import Toast from 'react-bootstrap/Toast'
 import Table from './Table'
 import { useUserData } from '../../contexts/AuthContext'
@@ -7,13 +7,13 @@ import './Table/style.css'
 function PetDetails() {
 	const [show, setShow] = useState(false)
 	const [pet, setPet] = useState({})
-	// const [pet_id] = useState(11);
 	const { token } = useUserData()
-	const { identity, pet_id } = useParams() //when jump to detail page, it need to pass pet_id
+    const {identity, pet_id} = useLocation().state;
+
+    console.log(identity, "identity")
 	const navigate = useNavigate()
 
 	const handleClick = () => {
-		setShow(true)
 		const status = pet.status
 		if (status === 'Available') {
 			navigate('/application', {
@@ -25,12 +25,13 @@ function PetDetails() {
 				},
 			})
 		} else {
+            setShow(true)
 		}
 	}
 
 	useEffect(() => {
 		if (identity === 'Seeker') {
-			fetch(`http://192.168.10.72:8000/pet/seeker/pets/${pet_id}/`, {
+			fetch(`http://localhost:8000/pet/seeker/pets/${pet_id}/`, {
 				method: 'get',
 				headers: {
 					'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ function PetDetails() {
 					setPet(json)
 				})
 		} else {
-			fetch(`http://192.168.10.72:8000/pet/shelter/pets/${pet_id}/`, {
+			fetch(`http://localhost:8000/pet/shelter/pets/${pet_id}/`, {
 				method: 'get',
 				headers: {
 					'Content-Type': 'application/json',

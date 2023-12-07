@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useVariableState} from '../../hooks'
 import { VariableContextProvider } from '../../contexts/VariableContext'
 import { useUserData } from '../../contexts/AuthContext'
-import { useParams } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 
 function PetCreate() {
@@ -18,8 +18,10 @@ function PetCreate() {
 	// mode: 'cors',
 }
 	// const itemId = getUrlQuery(window.location.href, 'id')
-    const {pet_id} = useParams();
+    // const pet_id = 11;
+    const {pet_id} = useLocation().state;
 	const { query, petCreateQuery } = useVariableState()
+    const navigate = useNavigate()
 	const handleSubmit = (val) => {
 		if (pet_id) {
 			fetch(`http://localhost:8000/pet/shelter/pets/${pet_id}/`, { ...options, method: 'PATCH', body: val })
@@ -34,6 +36,7 @@ function PetCreate() {
 				.then((res) => res.json())
 				.then((data) => {
 					petCreateQuery()
+                    navigate("/ShelterManage")
 				})
 		}
 	}

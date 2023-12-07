@@ -48,9 +48,20 @@ function List({ petList, getList }) {
 													<div className='info'>{ele.Breed};</div>
 												</div>
 												<div className='item-info flex'>
-													<div className='label'>Date: </div>
-													<div className='info'>2022-05-12;</div>
+													<div className='label'>Gender: </div>
+													<div className='info'>{ele.gender}</div>
 												</div>
+
+												<div className='item-info flex'>
+													<div className='label'>Age: </div>
+													<div className='info'>{ele.age}</div>
+												</div>
+
+												<div className='item-info flex'>
+													<div className='label'>Color: </div>
+													<div className='info'>{ele.color}</div>
+												</div>
+
 												<div className='item-info flex'>
 													<div className='label'>Location: </div>
 													<div className='info'>{ele.location};</div>

@@ -13,7 +13,7 @@ import LayoutShelter from './components/LayoutShelter';
 import PetCreate from './pages/PetCreate';
 import Search from './pages/PetSearch';
 import { UserDataProvider } from './contexts/AuthContext';
-
+import HomeSeeker from './pages/Home/seeker';
 
 function Webpages(){
   return <BrowserRouter>
@@ -34,11 +34,11 @@ function Webpages(){
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="PetCreate" element={<PetCreate />}/>
       <Route path="PetSearch" element={<Search />}/>
-      
+      {/* <Route path="HomeSeeker" element={<HomeSeeker />}/> */}
     </Route>
 
     <Route path="/" element={<LayoutSeeker />}> 
-      <Route path="HomeSeeker" element={<Home />}/>
+      <Route path="HomeSeeker" element={<HomeSeeker />}/>
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>

@@ -26,11 +26,7 @@ function ShelterMag() {
 	}, [])
 	
 	const handleClick = () =>{
-		// navigate('/PetCreate', {
-		// 	state: {
-		// 		shelter_id: 
-		// 	},
-		// })
+		navigate('/PetCreate', {state: {pet_id:""}})
 	}
 	const AvailableList = petList.filter((ele) => ele.status === 'Available')
 	const PendingList = petList.filter((ele) => ele.status === 'Pending')
