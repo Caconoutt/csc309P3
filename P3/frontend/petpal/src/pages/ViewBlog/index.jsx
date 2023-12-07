@@ -11,7 +11,7 @@ const ViewBlog = () => {
     const [owner, setOwner] = useState('');
     const [userType, setUserType] = useState(null);
     const {token} = useUserData();
-    const { id, shelterID} = useParams(); // TODO get shelterID from BlogList
+    const { id, shelterID } = useParams(); // TODO get shelterID from BlogList
 
     // Fetch the blog data when the component mounts
     useEffect(() => {

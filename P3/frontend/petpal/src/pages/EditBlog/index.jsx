@@ -56,11 +56,31 @@ const EditBlog = () => {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
 
-            window.location.href = "/ListBlog";
+            window.location.href = "/BlogList";
         } catch (error) {
             console.error('Error updating blog:', error);
         }
     };
+
+    const deleteBlog = async () => {
+        try {
+            const resp = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+    
+            if (!resp.ok) {
+                throw new Error(`HTTP error! status: ${resp.status}`);
+            }
+    
+            window.location.href = "/BlogList";
+        } catch (error) {
+            console.error('Error deleting blog:', error);
+        }
+    };
+    
 
     return (
         <div className="page d-flex align-items-center py-4">
@@ -86,7 +106,8 @@ const EditBlog = () => {
                         <input value={content} onChange={e => setContent(e.target.value)} type="text" className="form-control" id="contentBlog" placeholder="Please enter the content."/>
                     </div>
                 </div>
-                <button onClick={updateBlog} id="submit_create_blog" className="btn btnStyle w-100 py-2">Update</button>
+                <button onClick={updateBlog} id="update_blog" className="btn btnStyle w-100 py-2">Update</button>
+                <button onClick={deleteBlog} id="delete_blog" className="btn btnStyle w-100 py-2">Delete</button>
             </main>
         </div>
     );
