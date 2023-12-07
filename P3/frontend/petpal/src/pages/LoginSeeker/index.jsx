@@ -26,9 +26,12 @@ const LoginSeeker = () => {
                 method: "POST",
                 headers:{
                     'Content-Type': 'application/json',
+                    Accept: 'application/json',
                 },
                 body: JSON.stringify(userData),
+                // mode: 'CORS',
             });
+            
             const new_resp = await resp.json();
             if (!resp.ok){
                 if ((await resp).status === 401){
