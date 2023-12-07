@@ -17,6 +17,20 @@ from django.contrib.auth import logout
 from rest_framework import status
 from .serializer import NewBlogSerializer, BlogSerializer
 
+
+class UserTypeView(RetrieveAPIView):
+  permission_classes = [IsItself]
+  def get(self, request, *args, **kwargs):
+    if request.user.is_authenticated:
+      if hasattr(request.user, 'seeker'):
+        return Response({'user_type': 'seeker'}, status=status.HTTP_200_OK)
+      elif hasattr(request.user, 'shelter'):
+        return Response({'user_type': 'shelter'}, status=status.HTTP_200_OK)
+      else:
+        return Response({'user_type': 'none'}, status=status.HTTP_200_OK)
+    else:
+      return Response({'user_type': 'none'}, status=status.HTTP_200_OK)
+
 #Logout
 class LogoutView(APIView):
   authentication_classes =[]
