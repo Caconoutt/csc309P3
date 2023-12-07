@@ -7,3 +7,13 @@
     margin: 10px 0;
     height: 80px;
   }
+
+#filter_readed{
+  width: 33% !important;
+}
+#filter_unreaded{
+  width: 33% !important;
+}
+#sort_time{
+  width: 33% !important;
+}
