@@ -48,7 +48,7 @@ const NotiPage=() =>{
 
     </div>
 
-    <button className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList">Back to all noti</Link></button>
+    <button className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList" style={{ textDecoration: 'none', color: 'inherit' }}>Back to all noti</Link></button>
     
     </main></div>
     </>

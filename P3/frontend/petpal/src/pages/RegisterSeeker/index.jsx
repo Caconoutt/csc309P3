@@ -68,20 +68,20 @@ const RegisterSeeker = () => {
         <div id="showOne">
             
             <div className="form-floating">
-                <input value={username} onChange={e => setUsername(e.target.value)} type="text" className="form-control" id="floatingUsername" placeholder="username" />
-                <label for="floatingUsername">Username</label>
+                <input value={username} onChange={e => setUsername(e.target.value)} type="text" className="form-control" id="floatingUsername" placeholder="Username" />
+                <label for="placeholder">Username</label>
             </div>
             <div className="form-floating">
-                <input value={email} onChange={e => setEmail(e.target.value)} type="email" className="form-control" id="registerEmail" placeholder="name@example.com" />
-                <label for="floatingInput">Email address</label>
+                <input value={email} onChange={e => setEmail(e.target.value)} type="email" className="form-control" id="registerEmail" placeholder="Email address" />
+                <label for="placeholder">Email address</label>
             </div>
             <div className="form-floating">
                 <input value={password} onChange={e => setPw1(e.target.value)} type="password" className="form-control" id="registerPw1" placeholder="Password" />
-                <label for="floatingPassword">Password</label>
+                <label for="placeholder">Password</label>
             </div>
             <div className="form-floating">
-                <input value={password2} onChange={e => setPw2(e.target.value)} type="password" className="form-control" id="registerPw2" placeholder="PasswordDoubleCheck" />
-                <label for="floatingPassword">Password Doublecheck</label>
+                <input value={password2} onChange={e => setPw2(e.target.value)} type="password" className="form-control" id="registerPw2" placeholder="Password Doublecheck" />
+                <label for="placeholder">Password Doublecheck</label>
             </div>
 
             <div className="text-start">
