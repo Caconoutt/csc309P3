@@ -8,6 +8,7 @@ import LoginSeeker from './pages/LoginSeeker';
 import LoginShelter from './pages/LoginShelter';
 import LayoutSeeker from './components/LayoutSeeker';
 import LayoutShelter from './components/LayoutShelter';
+import { UserDataProvider } from './contexts/AuthContext';
 
 
 function Webpages(){
@@ -36,7 +37,11 @@ function Webpages(){
 }
 
 function App(){
-  return <Webpages />;
+  return (
+    <UserDataProvider>
+      <Webpages />
+    </UserDataProvider>
+  );
 }
 
 export default App;
