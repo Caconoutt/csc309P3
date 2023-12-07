@@ -24,7 +24,14 @@ function ShelterMag() {
 	useEffect(() => {
 		getList()
 	}, [])
-
+	
+	const handleClick = () =>{
+		// navigate('/PetCreate', {
+		// 	state: {
+		// 		shelter_id: 
+		// 	},
+		// })
+	}
 	const AvailableList = petList.filter((ele) => ele.status === 'Available')
 	const PendingList = petList.filter((ele) => ele.status === 'Pending')
 	const AdoptedList = petList.filter((ele) => ele.status === 'Adopted')
@@ -51,7 +58,7 @@ function ShelterMag() {
 		<>
 			<div className='main'>
 				<h2 className='title'>Available for application:</h2>
-				<Button variant='primary' className='create-btn' onClick={() => navigate('/PetCreate')}>
+				<Button variant='primary' className='create-btn' onClick={handleClick}>
 					Create More Pets
 				</Button>
 				<Lists petList={newList} getList={getList} />

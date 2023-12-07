@@ -12,6 +12,9 @@ import LayoutSeeker from './components/LayoutSeeker';
 import LayoutShelter from './components/LayoutShelter';
 import PetCreate from './pages/PetCreate';
 import Search from './pages/PetSearch';
+import { UserDataProvider } from './contexts/AuthContext';
+
+
 function Webpages(){
   return <BrowserRouter>
   <Routes>
@@ -47,7 +50,11 @@ function Webpages(){
 }
 
 function App(){
-  return <Webpages />;
+  return (
+    <UserDataProvider>
+      <Webpages />
+    </UserDataProvider>
+  );
 }
 
 export default App;

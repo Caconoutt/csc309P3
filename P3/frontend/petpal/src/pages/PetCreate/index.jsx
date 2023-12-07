@@ -6,16 +6,17 @@ import { useVariableState} from '../../hooks'
 import { VariableContextProvider } from '../../contexts/VariableContext'
 import { useUserData } from '../../contexts/AuthContext'
 import { useParams } from 'react-router-dom'
-const {token} = useUserData();
-const options = {
+
+
+function PetCreate() {
+    const {token} = useUserData();
+    const options = {
 	method: 'GET',
 	headers: {
 		Authorization: 'Bearer ' + token,
 	},
 	// mode: 'cors',
 }
-
-function PetCreate() {
 	// const itemId = getUrlQuery(window.location.href, 'id')
     const {pet_id} = useParams();
 	const { query, petCreateQuery } = useVariableState()

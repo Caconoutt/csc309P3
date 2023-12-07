@@ -45,10 +45,11 @@ const LoginShelter = () => {
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
+                
                 setToken(new_resp.access);
-                console.log(token);
-                navigate('/ShelterManage')
-                // window.location.href = "/HomeShelter";
+                localStorage.setItem('token', new_resp.access);
+                //console.log(token);
+                window.location.href = "/HomeShelter";
             }
         }
         catch(error){
