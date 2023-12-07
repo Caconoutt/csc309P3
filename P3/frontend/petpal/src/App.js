@@ -15,6 +15,7 @@ import Search from './pages/PetSearch';
 import { UserDataProvider } from './contexts/AuthContext';
 import CreateBlog from './pages/CreateBlog';
 import HomeSeeker from './pages/Home/seeker';
+import EditBlog from './pages/EditBlog';
 
 function Webpages(){
   return <BrowserRouter>
@@ -47,6 +48,7 @@ function Webpages(){
       <Route path="CreateBlog" element={<CreateBlog />} />
       <Route path="ListBlog" element={<LoginSeeker />} />      
       <Route path="ShelterManage" element={<ShelterMag />}/> 
+      <Route path="EditBlog" element={<EditBlog />} />
     </Route>
   </Routes>
   </BrowserRouter>;
