@@ -3,6 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 const Logout = () =>{
     const {token, setToken } = useUserData();
+    console.log(token)
 
     const handleLogout = async() =>{
         
@@ -19,11 +20,11 @@ const Logout = () =>{
                 // Successful logout
                 console.log('User logged out successfully');
                 setToken("");
+                localStorage.setItem('token', '');
+                window.location.href = "/";
               } else {
-                // Handle logout error
                 console.log('fail to logout');
-                //const errorData = await resp;
-                //console.log(errorData.ok);
+                
               }
         }
         catch(error){
