@@ -5,7 +5,7 @@ import "../Home/style.css"
 import "../LoginSeeker/style.css"
 import { useState } from "react"
 import { useUserData } from "../../contexts/AuthContext"
-
+import { useNavigate } from "react-router-dom"
 
 
 const LoginShelter = () => {
@@ -13,7 +13,7 @@ const LoginShelter = () => {
     const [password, setPw] = useState("");
     const [errorMsg, setErrorMsg] =useState("");
     const {token, setToken} = useUserData();
-    
+    const navigate = useNavigate()
 
     const login = async() =>{
         if (username === "" || password === ""){
