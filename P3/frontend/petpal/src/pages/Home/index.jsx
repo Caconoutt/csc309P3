@@ -1,34 +1,14 @@
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import "./style.css"
 
 const Home = () => {
-  useEffect(() => {
-    fetch(`/account/token/`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      mode: 'cors',
-      body: JSON.stringify({ username: 'finale', password: 'alyssashelter333' }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.access, '=====')
-        window.localStorage.setItem('token', JSON.stringify(data.access))
-        console.log(localStorage.getItem('token'))
-      })
-  })
-
-  return (
-    <>
-      <h1>HOME</h1>
-      <Link to='/PetCreate'>pet create</Link>
-      <Link to='/PetDetail'>pet detail</Link>
-      <Link to='/ShelterManage'>Shelter Manage</Link>
-    </>
-  )
+  console.log("1111")
+    return <>
+      <div className="searchBar">
+            <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" className="form-control" placeholder="Search..." aria-label="Search" />
+            </form>
+        </div>
+    </>;
 }
 
 export default Home

@@ -1,6 +1,8 @@
 import { Accordion } from 'react-bootstrap'
 import './style.css'
+import { useUserData } from '../../../contexts/AuthContext'
 function List({ petList, getList }) {
+    const {token} = useUserData()
 	const btnObj = {
 		Available: ['Pending', 'Adopted', 'Withdrawed'],
 		Pending: ['Available', 'Adopted', 'Withdrawed'],
@@ -9,12 +11,12 @@ function List({ petList, getList }) {
 	}
 	const defaultActiveKey = petList[0] && petList[0].value[0] ? petList[0].value[0].id : 0
 	const changeStatus = (value, id) => {
-		fetch(`/pet/shelter/pet_update/${id}/`, {
+		fetch(`http://localhost:8000/pet/shelter/pet_update/${id}/`, {
 			method: 'put',
 			headers: {
 				'Content-Type': 'application/json',
 				Accept: 'application/json',
-				Authorization: 'Bearer ' + JSON.parse(window.localStorage.getItem('token')),
+				Authorization: 'Bearer ' + token,
 			},
 			mode: 'cors',
 			body: JSON.stringify({

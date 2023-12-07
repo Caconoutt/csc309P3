@@ -1,18 +1,20 @@
 import Lists from './Lists'
 import { Button } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useUserData } from "../../contexts/AuthContext"
 import './Lists/index'
 function ShelterMag() {
 	const [petList, setPetList] = useState([])
+	const {token} = useUserData()
+	console.log(token)
 	let navigate = useNavigate()
 	const getList = () => {
-		fetch(`/pet/shelter/petlist/`, {
+		fetch(`http://localhost:8000/pet/shelter/petlist/`, {
 			method: 'get',
 			headers: {
-				Authorization: 'Bearer ' + JSON.parse(window.localStorage.getItem('token')),
+				Authorization: 'Bearer ' + token,
 			},
-			mode: 'cors',
 		})
 			.then((response) => response.json())
 			.then((json) => {
@@ -57,5 +59,11 @@ function ShelterMag() {
 		</>
 	)
 }
+// function ShelterMag(){
+// 	return (
+// 		<div>HIIIIII</div>
+// 	)
+	
+// }
 
 export default ShelterMag
