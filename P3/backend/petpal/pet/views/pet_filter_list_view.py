@@ -18,7 +18,8 @@ class PetListView(ListAPIView):
         filters = {}
         if query_data.get('age'):#age filter
                 age = query_data.get('age')
-                age = json.loads(age)
+                # age = json.loads(age)
+                age = age.split(',')
                 age_list = []
                 for row in age: #this is because our age option is "1-2", it has a hyphen
                     a_list = row.split('-')
@@ -28,23 +29,31 @@ class PetListView(ListAPIView):
                 max_age = max(age_list)
                 filters['age__lte'] = max_age
                 filters['age__gte'] = min_age
+        if query_data.get('location'):#shelter filter
+            locations = query_data.get('location').split(',')
+            filters['location__in'] = locations
+
         if query_data.get('size'): #size filter
-                sizes = json.loads(query_data.get('size'))
+                # sizes = json.loads(query_data.get('size'))
+                sizes = query_data.get('size').split(',')
                 filters['size__in'] = sizes
 
         if query_data.get('color'):#color filter
-                colors = json.loads(query_data.get('color'))
+                # colors = json.loads(query_data.get('color'))
+                colors = query_data.get('color').split(',')
                 filters['color__in'] = colors
 
         if query_data.get('shelter'):#shelter filter
-            shelters = json.loads(query_data.get('shelter'))
-            filters['shelter_id__in'] = shelters
+            # shelters = json.loads(query_data.get('shelter'))
+            shelters = query_data.get('shelter').split(',')
+            filters['shelter__username__in'] = shelters
         
         if not query_data.get('status'): #status filter, our default for status filter is to choose Available pets
             stat = ['Available']
             filters['status__in'] = stat
         else:
-            stat = json.loads(query_data.get('status'))
+            # stat = json.loads(query_data.get('status'))
+            stat = query_data.get('status').split(',')
             filters['status__in'] = stat
 
         if filters:
@@ -53,9 +62,9 @@ class PetListView(ListAPIView):
         #if query_data.get('search') == "sort": #sort functionality
         if query_data.get('sort'):
                 #sorts = query_data.get('sort')
-            sorts = json.loads(query_data.get('sort'))
+            # sorts = json.loads(query_data.get('sort'))
+            sorts = query_data.get('sort').split(',')
             pets = pets.order_by(*sorts)
         return pets
-
 
 
