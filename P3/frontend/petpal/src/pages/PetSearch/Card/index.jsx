@@ -13,7 +13,7 @@ const Cards = ({ itemLst }) => {
   return (
     <>
       <Card className='item-card'>
-        <Card.Img variant='top' src='holder.js/100px180' />
+        <Card.Img variant='top' src={itemLst.image} />
         <Card.Body>
           <Card.Text>Name:{itemLst.name}</Card.Text>
           <Card.Text>Breed: {itemLst.Breed}</Card.Text>

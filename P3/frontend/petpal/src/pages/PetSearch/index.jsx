@@ -4,7 +4,7 @@ import './index.css'
 import Cards from './Card'
 import { useUserData } from '../../contexts/AuthContext'
 import { filterList, sortList, radioList, params } from './options'
-const pageSize = 10
+const pageSize = 2
 const Search = () => {
 	const { token } = useUserData()
 	const options = {
@@ -105,8 +105,8 @@ const Search = () => {
 	return (
 		<div className='search-container'>
 			<Form className='search-wrap'>
-				<Form.Control className='search-input' type='text' placeholder='Search' />
-				<div className='advance-search mt-3'>Advance Search:</div>
+				{/* <Form.Control className='search-input' type='text' placeholder='Search' /> */}
+				<div className='advance-search mt-3'>Search and Filter:</div>
 				<div className='flex'>
 					{['radio'].map((type) => (
 						<div key={`inline-${type}`} className='mb-2'>
