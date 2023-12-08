@@ -6,7 +6,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         model = Application
         fields = [
             'id', 'applicant_name', 'phone', 'email', 'address', 
-            'postal_code', 'city', 'household_info', 'pet_history', 'pet_history_text',
+            'postal_code', 'city', 'household_info', 'pet_history', 
             'status', 'creation_time', 'last_modified_time', 'pet', 'applicant', 'shelter'
         ]
         read_only_fields = ['id', 'creation_time', 'last_modified_time', 'pet', 'applicant', 'shelter']
