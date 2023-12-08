@@ -1,65 +1,9 @@
-// import React from 'react';
-// import { Link, useParams } from 'react-router-dom';
-
-// const ApplicationDetail = () => {
-//     var { id } = useParams();
-//     const token = localStorage.getItem('token');
-//     const appResponse = fetch(`http://127.0.0.1:8000/applications/${id}/`, {
-//         method: 'GET',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': `Bearer`+ token,
-//         },
-//       });
-
-//     const appData = appResponse.json();
-//     const petID = appData.pet;
-//     const userTypeRes = fetch(`http://127.0.0.1:8000/account/usertype/`, {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer`+ token,
-//         }
-//         })
-//     const userType = userTypeRes.json().user_type;
-    
-//     const petResponse = fetch(`http://127.0.0.1:8000/${userType}/pets/${petID}/`, {
-//         method: 'GET',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': `Bearer`+ token,
-//         },
-//       });
-//     const petData = petResponse.json();
-    
-
-//     const handleChange = async (event) => {
-//         const newStatus = event.target.value;
-//         try {
-//           const response = await fetch(`http://127.0.0.1:8000/application/${appData.id}/status/`, {
-//             method: 'PATCH',
-//             headers: {
-//               'Content-Type': 'application/json',
-//               'Authorization': `Bearer`+ token,
-//             },
-//             body: JSON.stringify({ status: newStatus })
-//           });
-    
-//           if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//           }
-//           window.location.reload();
-//         } catch (error) {
-//           console.error('Error updating status:', error);
-//         }
-//       };
-    
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 const ApplicationDetail = () => {
-  const { id } = useParams();
-  const token = localStorage.getItem('token');
+  const { application_id } = useParams();
+  const token = localStorage.getItem('auth-token');
 
   const [appData, setAppData] = useState(null);
   const [userType, setUserType] = useState(null);
@@ -69,22 +13,19 @@ const ApplicationDetail = () => {
     const fetchData = async () => {
       try {
         // Fetch application data
-        const appResponse = await fetch(`http://127.0.0.1:8000/applications/${id}/`, {
+        const appResponse = await fetch(`http://127.0.0.1:8000/pet/applications/${application_id}/`, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           },
         });
         if (!appResponse.ok) throw new Error('Error fetching application data');
         const appJson = await appResponse.json();
         setAppData(appJson);
-
         // Fetch user type
         const userTypeRes = await fetch(`http://127.0.0.1:8000/account/usertype/`, {
           method: 'GET',
           headers: {
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           },
         });
@@ -92,9 +33,11 @@ const ApplicationDetail = () => {
         const userTypeJson = await userTypeRes.json();
         setUserType(userTypeJson.user_type);
 
+        console.log(appJson[0].pet);
+        console.log(userTypeJson.user_type);
         // Fetch pet data
         if (appJson && userTypeJson.user_type) {
-          const petResponse = await fetch(`http://127.0.0.1:8000/${userTypeJson.user_type}/pets/${appJson.pet}/`, {
+          const petResponse = await fetch(`http://127.0.0.1:8000/pet/${userTypeJson.user_type}/pets/${appJson[0].pet}/`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -111,22 +54,45 @@ const ApplicationDetail = () => {
     };
 
     fetchData();
-  }, [id, token]);
+  }, [application_id, token]);
 
 
       let options;
       let isDisabled = false;
-    
       if (userType === 'seeker') {
         options = ['Pending', 'Accepted', 'Withdrawn'];
-        isDisabled = appData.status !== 'Pending' && appData.status !== 'Accepted';
+        isDisabled = appData[0].status !== 'Pending' && appData[0].status !== 'Accepted';
       } else if (userType === 'shelter') {
         options = ['Pending', 'Accepted', 'Denied'];
-        isDisabled = appData.status !== 'Pending';
+        isDisabled = appData[0].status !== 'Pending';
       }
+      
+      const handleChange = async (event) => {
+        const newStatus = event.target.value;
+        try {
+          const response = await fetch(`http://127.0.0.1:8000/pet/application/${appData[0].id}/status/`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status: newStatus })
+          });
     
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          window.location.reload();
+        } catch (error) {
+          console.error('Error updating status:', error);
+        }
+      };
 
-        
+        if (!appData || !petData) {
+          return <p>Loading...</p>; 
+        }
+        const {applicant_name, phone, email, address, postal_code, city, household_info, pet_history, pet_history_text, status } = appData[0];
+        const { name, Breed, image } = petData;
 
   return (
     <div className="page d-flex align-items-center py-4">
@@ -148,7 +114,7 @@ const ApplicationDetail = () => {
                 type="text"
                 className="form-control"
                 id="petID"
-                value={petID}
+                value={petData.id}
                 disabled
               />
               <label htmlFor="petID">Pet ID</label>
@@ -168,75 +134,81 @@ const ApplicationDetail = () => {
                 type="text"
                 className="form-control"
                 id="petBreed"
-                value={petData.breed}
+                value={petData.Breed}
                 disabled
               />
               <label htmlFor="petBreed">Pet Breed</label>
             </div>
           </div>
           {/* Seeker Info */}
-          <h1 className="h4 mb-1 fw-normal">Your Information</h1>
+          {appData && (
+            <>
+            <h1 className="h4 mb-1 fw-normal">Your Information</h1>
           <div className="row">
             <div className="col-sm-3">
-              <input type="text" className="form-control" value={appData.applicant_name} disabled />
+              <input type="text" className="form-control" value={applicant_name} disabled />
               <label htmlFor="seekerName">Name</label>
             </div>
             <div className="col-sm-3">
-              <input type="tel" className="form-control" value={appData.phone} disabled />
+              <input type="tel" className="form-control" value={phone} disabled />
               <label htmlFor="seekerPhone">Phone Number</label>
             </div>
             <div className="col-sm-6">
-              <input type="text" className="form-control" value={appData.email} disabled />
+              <input type="text" className="form-control" value={email} disabled />
               <label htmlFor="seekerEmail">Email</label>
             </div>
           </div>
           <div className="row">
             <div className="col-sm-6">
-              <input type="text" className="form-control" value={appData.address} disabled />
+              <input type="text" className="form-control" value={address} disabled />
               <label htmlFor="seekerAddress">Address</label>
             </div>
             <div className="col-sm-2">
-              <input type="text" className="form-control" value={appData.postal_code} disabled />
+              <input type="text" className="form-control" value={postal_code} disabled />
               <label htmlFor="seekerPC">Postal Code</label>
             </div>
             <div className="col-sm-4">
-              <input type="text" className="form-control" value={appData.city} disabled />
+              <input type="text" className="form-control" value={city} disabled />
               <label htmlFor="seekerCity">City</label>
             </div>
           </div>
           <div className="col-12">
             <textarea
               className="form-control"
-              value={appData.household_info}
+              value={household_info}
               disabled
             />
             <label htmlFor="seekerHouseholdInfo">Household Info</label>
           </div>
           <div className="col-sm-3">
-            <select className="form-control" value={appData.pet_history.length > 0 ? 'y' : 'n'} disabled>
+            <select className="form-control" value={pet_history ? 'y' : 'n'} disabled>
               <option value="n">No</option>
               <option value="y">Yes</option>
             </select>
             <label htmlFor="seekerPrevPetExp">Have you had a pet?</label>
           </div>
-          {appData.pet_history.length > 0 && (
+          {pet_history && (
             <div className="col-12">
               <textarea
                 className="form-control"
-                value={appData.pet_history}
+                value={pet_history_text}
                 disabled
               />
               <label htmlFor="seekerPrevPetExpText">Previous Experience with Pets</label>
             </div>
           )}
+            </>
+          )}
         </form>
-        <select value={appData.status} onChange={handleChange} disabled={isDisabled}>
+        <select value={status} onChange={handleChange} disabled={isDisabled}>
             {options.map((option) => (
                 <option key={option} value={option}>
                     {option}
                 </option>
             ))}
         </select>
+        <br/>
+        <label htmlFor="status">Status</label>
         <Link className="btn btnStyle w-100 mt-3 py-2" to="/ListApplication">Back to Application List</Link>
       </main>
     </div>
