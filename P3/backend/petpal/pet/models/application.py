@@ -18,7 +18,6 @@ class Application(models.Model):
     city = models.CharField(max_length=255)
     household_info = models.CharField(max_length=255)
     pet_history = models.BooleanField(default=False)
-    pet_history_text = models.CharField(max_length=255, default="")
     status = models.CharField(max_length=255, choices=STATUS_CHOICES)
     creation_time = models.DateTimeField(auto_now_add=True)
     last_modified_time = models.DateTimeField(auto_now=True)

@@ -1,18 +1,19 @@
+// AdoptionForm.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const CreateApplication = () => {
+const AdoptionForm = () => {
+  const [showPrevPetExpInput, setShowPrevPetExpInput] = useState(false);
   const [formData, setFormData] = useState({
-    applicant_name: '',
-    phone: '',
-    email: '',
-    address: '',
-    postal_code: '',
-    city: '',
-    household_info: '',
-    pet_history: '',
-    pet_history_text: ' ',
-    status: 'Pending',
+    seekerName: '',
+    seekerPhone: '',
+    seekerEmail: '',
+    seekerAddress: '',
+    seekerPC: '',
+    seekerCity: '',
+    seekerHouseholdInfo: '',
+    seekerPrevPetExp: '',
+    seekerPrevPetExpText: '',
   });
 
   const navigate = useNavigate();
@@ -23,13 +24,6 @@ const CreateApplication = () => {
       ...prevData,
       [id]: value,
     }));
-    if (id === 'pet_history') {
-      setFormData((prevData) => ({
-        ...prevData,
-        pet_history: value === 'y', 
-      }));
-    }
-  
   };
 
   const { state } = useLocation();
@@ -68,7 +62,7 @@ const CreateApplication = () => {
       <main className="form-adoption w-auto m-auto mainContent">
         <form style={{ width: '75vw', color: 'antiquewhite' }} onSubmit={handleSubmit}>
           <div style={{ textAlign: 'center' }}>
-            <img src={petData.image} alt={petData.name} />
+            <img src={petData.petImg} alt={petData.petName} />
             <h1 className="h3 mb-3 fw-normal">Please take me home!</h1>
           </div>
 
@@ -80,7 +74,7 @@ const CreateApplication = () => {
                 type="text"
                 className="form-control"
                 id="petID"
-                value={petData.id}
+                value={petData.petID}
                 disabled
               />
               <label htmlFor="petID">Pet ID</label>
@@ -90,7 +84,7 @@ const CreateApplication = () => {
                 type="text"
                 className="form-control"
                 id="petName"
-                value={petData.name}
+                value={petData.petName}
                 disabled
               />
               <label htmlFor="petName">Pet Name</label>
@@ -100,7 +94,7 @@ const CreateApplication = () => {
                 type="text"
                 className="form-control"
                 id="petBreed"
-                value={petData.Breed}
+                value={petData.petBreed}
                 disabled
               />
               <label htmlFor="petBreed">Pet Breed</label>
@@ -111,67 +105,68 @@ const CreateApplication = () => {
           <h1 className="h4 mb-1 fw-normal">Your Information</h1>
           <div className="row">
                 <div className="col-sm-3">
-                    <input type="text" className="form-control" id="applicant_name" onChange={handleInputChange}/>
-                    <label for="applicant_name">Name</label>
+                    <input type="text" className="form-control" id="seekerName" onChange={handleInputChange}/>
+                    <label for="seekerName">Name</label>
                 </div>
                 <div className="col-sm-3">
-                    <input type="tel" className="form-control" id="phone" onChange={handleInputChange}/>
-                    <label for="phone">Phone Number</label>
+                    <input type="tel" className="form-control" id="seekerPhone" onChange={handleInputChange}/>
+                    <label for="seekerPhone">Phone Number</label>
                 </div>
                 <div className="col-sm-6">
-                    <input type="text" className="form-control" id="email" onChange={handleInputChange}/>
-                    <label for="email">Email</label>
+                    <input type="text" className="form-control" id="seekerEmail" onChange={handleInputChange}/>
+                    <label for="seekerEmail">Email</label>
                 </div>
             </div>
             <div className="row">
                 <div className="col-sm-6">
-                    <input type="text" className="form-control" id="address" onChange={handleInputChange}/>
-                    <label for="address">Address</label>
+                    <input type="text" className="form-control" id="seekerAddress" onChange={handleInputChange}/>
+                    <label for="seekerAddress">Address</label>
                 </div>
                 <div className="col-sm-2">
-                    <input type="text" className="form-control" id="postal_code" onChange={handleInputChange}/>
-                    <label for="postal_code">Postal Code</label>
+                    <input type="text" className="form-control" id="seekerPC" onChange={handleInputChange}/>
+                    <label for="seekerPC">Postal Code</label>
                 </div>
                 <div className="col-sm-4">
-                    <input type="text" className="form-control" id="city" onChange={handleInputChange}/>
-                    <label for="city">City</label>
+                    <input type="text" className="form-control" id="seekerCity" onChange={handleInputChange}/>
+                    <label for="seekerCity">City</label>
                 </div>
             </div>
             <div className="col-12">
                 <textarea
                 className="form-control"
-                id="household_info"
+                id="seekerHouseholdInfo"
                 placeholder="Please describe where do you live(i.e. condo, house, etc.), how many people in the household, do they agree on the adoption, other pets in the household"
                 onChange={handleInputChange}
                 />
-                <label htmlFor="household_info">Household Info</label>
+                <label htmlFor="seekerHouseholdInfo">Household Info</label>
             </div>
             <div className="col-sm-3">
-                <select className="form-control" id="pet_history" onChange={handleInputChange} required>
+                <select className="form-control" id="seekerPrevPetExp" onChange={handleInputChange} required>
                     <option value="">Please Select</option>
                     <option value="n">No</option>
                     <option value="y">Yes</option>
                 </select>
-                <label htmlFor="pet_history">Have you had a pet?</label>
+                <label htmlFor="seekerPrevPetExp">Have you had a pet?</label>
             </div>
             <div className="col-12" id="seekerPrevPetExpInput" style={{ display: 'none' }}>
-              <textarea
-              className="form-control"
-              id="pet_history_text"
-              placeholder="Breed, age, Is the pet currently living with you?"
-              onChange={handleInputChange}
-              />
-              <label htmlFor="pet_history_text">Previous Experience with Pets</label>
+            <textarea
+            className="form-control"
+            id="seekerPrevPetExpText"
+            placeholder="Breed, age, Is the pet currently living with you?"
+            onChange={handleInputChange}
+            />
+            <label htmlFor="seekerPrevPetExpText">Previous Experience with Pets</label>
             </div>
-            {formData.pet_history && (
+            {showPrevPetExpInput && (
                 <div className="col-12" id="seekerPrevPetExpInput">
                 <textarea
                     className="form-control"
-                    id="pet_history_text"
+                    id="seekerPrevPetExpText"
                     placeholder="Breed, age, Is the pet currently living with you?"
+                    value={formData.seekerPrevPetExpText}
                     onChange={handleInputChange}
                 />
-                <label htmlFor="pet_history_text">Previous Experience with Pets</label>
+                <label htmlFor="seekerPrevPetExpText">Previous Experience with Pets</label>
                 </div>
           )}
 
@@ -184,4 +179,4 @@ const CreateApplication = () => {
   );
 };
 
-export default CreateApplication;
+export default AdoptionForm;

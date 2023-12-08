@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useUserData } from '../../contexts/AuthContext';
 
 import './style.css';
@@ -11,19 +11,21 @@ const ViewBlog = () => {
     const [owner, setOwner] = useState('');
     const [userType, setUserType] = useState(null);
     const {token} = useUserData();
-    const { id, shelterID } = useParams(); // TODO get shelterID from BlogList
+    // const { id, shelterID } = useParams(); // TODO get shelterID from BlogList
 
+    const {id, shelterID} = useLocation().state;
     // Fetch the blog data when the component mounts
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userTypeRes = await fetch(`http://127.0.0.1:8000/account/usertype/`, {
+                const userTypeRes = await fetch(`http://localhost:8000/account/usertype/`, {
                     method: 'GET',
                     headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                     },
                 });
+                console.log(userTypeRes);
                 if (!userTypeRes.ok) throw new Error('Error fetching user type');
                 const userTypeJson = await userTypeRes.json();
                 setUserType(userTypeJson.user_type);

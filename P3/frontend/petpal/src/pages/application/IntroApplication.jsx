@@ -1,51 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const IntroApplication = () => {
-    const { state } = useLocation();
-    const [petData, setPetData] = useState(null);
-    const token = localStorage.getItem('auth-token');
-    useEffect(() => {
-        const fetchPetData = async () => {
-            try {
-                const response = await fetch(`http://localhost:8000/pet/seeker/pets/1/`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                setPetData(data);
-            } catch (error) {
-                console.error('Error fetching pet data:', error);
-                // Handle the error appropriately
-            }
-        };
-    
-    // const aaa = petResponse.json();
-    fetchPetData()
-    }, []);
-    
-
-    // const petData = {petID: aaa.id,
-    //     petBreed: aaa.Breed,
-    //     petName: aaa.name,
-    //     petImg: aaa.image,};
-    // const petData = {petID: state.id,
-    //                  petBreed: state.Breed,
-    //                  petName: state.name,
-    //                  petImg: state.image,};
-    // const petData = {petID: '123',
-    //                  petBreed: 'Dog',
-    //                  petName: 'Buddy',
-    //                  petImg: 'https://www.petmd.com/sites/default/files/Acute-Dog-Diarrhea-47066074.jpg',};
+    // const { state } = useLocation();
+    // const petData = {petID: state.petid,
+    //                  petBreed: state.petbreed,
+    //                  petName: state.petname,
+    //                  petImg: state.petimg,};
+    const petData = {petID: '123',
+                     petBreed: 'Dog',
+                     petName: 'Buddy',
+                     petImg: 'https://www.petmd.com/sites/default/files/Acute-Dog-Diarrhea-47066074.jpg',};
     const navigate = useNavigate();
-    console.log(petData);
     return (
     <div className="page d-flex align-items-center py-4">
         <main className="form-adoption w-auto m-auto mainContent">

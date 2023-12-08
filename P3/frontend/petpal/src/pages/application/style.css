@@ -9,10 +9,6 @@
   .main-wrap{
   width:45%;
   margin:0 auto;
-  vertical-align: middle;
-  }
-  .btn-wrap {
-    height:30%;
   }
   .flex{
   display: flex;
@@ -66,7 +62,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 50%;
     }
     .pet-info .item-info{
     margin-bottom: 10px;
@@ -89,13 +84,3 @@
       }
     
     }  
-
-.view-application-btn {
-  margin-left: auto; /* Pushes the button to the right */
-  align-self: center; /* Vertically centers the button in the middle */
-}
-
-.custom-accordion {
-  width: 60%;
-  margin: auto; /* Centers the accordion if that's desired */
-}

@@ -9,7 +9,7 @@ const BlogList = () => {
     const navigate = useNavigate();
     const { shelterID } = useParams();
     const [userType, setUserType] = useState('');
-
+    console.log(shelterID + "shelter id is");
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -66,9 +66,9 @@ const BlogList = () => {
                     <p>Created at: {new Date(blog.created_at).toLocaleString()}</p>
 
                     <div className="buttons">
-                        <button className="details-button" onClick={() => navigate(`/ViewBlog/${blog.id}`)}>Details</button>
+                        <button className="details-button" onClick={() => navigate('/ViewBlog', {state:{id: blog.id, shelterID}})}>Details</button>
                        {userType === 'shelter' && user_id === blog.owner.id && (
-                            <button className="edit-button" onClick={() => navigate(`/EditBlog/${blog.id}`)}>Edit</button>
+                            <button className="edit-button" onClick={() => navigate('/EditBlog', {state:{id: blog.id}})}>Edit</button>
                         )}
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useUserData } from '../../contexts/AuthContext';
 
 import './style.css';
@@ -9,13 +9,15 @@ const EditBlog = () => {
     const [content, setContent] = useState('');
     const [createdAt, setCreatedAt] = useState('');
     const {token} = useUserData();
-    const { id } = useParams(); 
-
+    // const { id } = useParams(); 
+    const {id} = useLocation().state;
+    // const [id, setId] = useLocation().state;
     // Fetch the blog data when the component mounts
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchBlogData = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+                const response = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -31,6 +33,7 @@ const EditBlog = () => {
                 setTitle(blogData.title);
                 setContent(blogData.content);
                 setCreatedAt(blogData.created_at);
+                // setId(blogData.owner);
             } catch (error) {
                 console.error('Error fetching blog:', error);
             }
@@ -41,9 +44,9 @@ const EditBlog = () => {
 
     // Function to handle blog update
     const updateBlog = async () => {
-        const data = { 'title': title, 'content': content };
+        const data = { 'title': title, 'content': content, 'owner': id};
         try {
-            const resp = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+            const resp = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,8 +58,8 @@ const EditBlog = () => {
             if (!resp.ok) {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
-
-            window.location.href = "/BlogList";
+            navigate('/ListBlog');
+            // window.location.href = "/BlogList";
         } catch (error) {
             console.error('Error updating blog:', error);
         }
@@ -74,8 +77,8 @@ const EditBlog = () => {
             if (!resp.ok) {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
-    
-            window.location.href = "/BlogList";
+            navigate('/ListBlog');
+            // window.location.href = "/BlogList";
         } catch (error) {
             console.error('Error deleting blog:', error);
         }
