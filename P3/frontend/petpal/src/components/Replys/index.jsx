@@ -1,7 +1,7 @@
 import React from 'react';
 import Review from '../Review';
 
-const Reviews = ({data}) =>{
+const Replys = ({data}) =>{
 
     return (
         <>
@@ -22,4 +22,4 @@ const Reviews = ({data}) =>{
       );
     };
 
-export default Reviews
+export default Replys
