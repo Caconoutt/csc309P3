@@ -75,10 +75,6 @@ function Webpages(){
       <Route path="CreateApplication" element={<CreateApplication />} />
       <Route path="ReviewApplication" element={<ReviewApplication />} />
       <Route path="ListApplication" element={<ListApplication />} />
-      <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
-
-      {/* Review */}
-      <Route path="/review/:shelter_id/:review_id/" element={<ViewReview />} />
     </Route>
     <Route path='*' element={<NotFound />} />
   </Routes>
