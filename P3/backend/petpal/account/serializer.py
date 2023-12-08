@@ -34,7 +34,7 @@ class BlogSerializer(ModelSerializer):
   image_url = ImageField(required=False)
   class Meta:
     model = Blog
-    fields = ['title', 'content', 'image_url']
+    fields = '__all__'
 
 
 
