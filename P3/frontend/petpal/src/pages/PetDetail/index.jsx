@@ -76,7 +76,7 @@ function PetDetails() {
 					<img src={pet.image} className='rounded img1' />
 					<Table pet={pet} />
 					<div className='list-group-item flex'>
-					<Link to={'/ShelterDetail/'+ pet.shelter} className='info'>
+					<Link to={'/ShelterDetail/'+ pet.shelter} className='info' style = {{color:'black'}}>
 							check its shelter
 						</Link>
 					</div>

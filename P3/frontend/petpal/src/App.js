@@ -77,28 +77,18 @@ function Webpages(){
       {/* <Route path ="ShelterManage" element={<ShelterMag />}/>  */}
       {/* <Route path ="PetSearch/" element={<PetSearch />}/>
     {/* <Route path = "application" element={<PetDetails />}/> */}
-  </Route>
+    </Route>
 
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>
       <Route path="RegisterShelter" element={<RegisterShelter />}/>
       <Route path="LoginSeeker" element={<LoginSeeker />} />
       <Route path="LoginShelter" element={<LoginShelter />}/>
-<<<<<<< HEAD
-    
-=======
-      <Route path="PetDetail" element={<PetDetails />}/>
-      <Route path="PetCreate" element={<PetCreate />}/>
-      <Route path="PetSearch" element={<Search />}/>
-      <Route path="ShelterAllPet" element={<ListAllPets />}/>
-      
->>>>>>> master
       {/* <Route path="HomeSeeker" element={<HomeSeeker />}/> */}
     </Route>
 
     <Route path="/" element={<LayoutSeeker />}> 
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
-      <Route path="PetSearch" element={<Search />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
@@ -106,33 +96,26 @@ function Webpages(){
       <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
       <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
       <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
+      <Route path="PetSearch" element={<Search />}/>
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
-<<<<<<< HEAD
-      <Route path="CreateBlog" element={<CreateBlog />} />
-      <Route path="ListBlog" element={<BlogList />} />      
-      <Route path="ShelterManage" element={<ShelterMag />}/> 
-      <Route path="ShelterAllPet" element={<ListAllPets />}/>
-      <Route path="PetCreate" element={<PetCreate />}/>
-      <Route path="EditBlog" element={<EditBlog />} />
-      <Route path="ViewBlog" element={<ViewBlog />} />
-=======
       <Route path="ShelterManage" element={<ShelterMag />}/>
       <Route path="ShelterProfile" element={<ShelterProfile />}/>
       <Route path="ShelterEdit" element={<ShelterEdit />}/>
->>>>>>> master
+      <Route path="PetCreate" element={<PetCreate />}/>
+      <Route path="ShelterAllPet" element={<ListAllPets />}/>
       
     </Route>
 
     <Route path="/" element={<Layout />}>
-      <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="IntroApplication" element={<IntroApplication />} />
       <Route path="CreateApplication" element={<CreateApplication />} />
       <Route path="ReviewApplication" element={<ReviewApplication />} />
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
+      <Route path="PetDetail" element={<PetDetails />}/>
     </Route>
   </Routes>
   </BrowserRouter>;

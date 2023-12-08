@@ -39,32 +39,31 @@ function List({ petList, getList }) {
 						item.value.map((ele) => (
 							<Accordion defaultActiveKey={defaultActiveKey}>
 								<Accordion.Item eventKey={ele.id}>
-									<Accordion.Header>Pet #1:{ele.name}</Accordion.Header>
+									<Accordion.Header>Pet Info</Accordion.Header>
 									<Accordion.Body>
 										<div className='accordion-body item-body'>
 											<div className='pet-info'>
+											<div className='item-info flex'>
+													<div className='label'>Name: </div>
+													<div className='info'>{ele.name}</div>
+												</div>
+
 												<div className='item-info flex'>
 													<div className='label'>Breed: </div>
-													<div className='info'>{ele.Breed};</div>
+													<div className='info'>{ele.Breed}</div>
 												</div>
-												<div className='item-info flex'>
-													<div className='label'>Gender: </div>
-													<div className='info'>{ele.gender}</div>
-												</div>
+												
 
 												<div className='item-info flex'>
-													<div className='label'>Age: </div>
-													<div className='info'>{ele.age}</div>
+													<div className='label'>Status: </div>
+													<div className='info'>{ele.status}</div>
 												</div>
 
-												<div className='item-info flex'>
-													<div className='label'>Color: </div>
-													<div className='info'>{ele.color}</div>
-												</div>
+								
 
 												<div className='item-info flex'>
 													<div className='label'>Location: </div>
-													<div className='info'>{ele.location};</div>
+													<div className='info'>{ele.location}</div>
 												</div>
 											</div>
 											<div className='btn-wrap'>
@@ -84,7 +83,7 @@ function List({ petList, getList }) {
 							</Accordion>
 						))
 					) : (
-						<div className='noData'>Sorry, no data ~</div>
+						<div className='noData'>Sorry, No pet yet ~</div>
 					)}
 				</>
 			))}

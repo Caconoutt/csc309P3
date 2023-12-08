@@ -11,6 +11,15 @@ const CardLayout = ({ petList }) => {
       },
     })
   }
+  const viewPage = (id) => {
+    navigate(`/PetDetail`, {
+      state: {
+        pet_id:id,
+		identity: "Shelter",
+      },
+    })
+  }
+
   return (
     <>
       <Row className='search-container' style={{ padding: '10px' }}>
@@ -27,6 +36,9 @@ const CardLayout = ({ petList }) => {
                   <Card.Text>Location: {pet.location}</Card.Text>
                   <Button className='viewBtn' onClick={() => editPage(pet.id)}>
                     Edit
+                  </Button>
+                  <Button className='viewBtn' onClick={() => viewPage(pet.id)}>
+                    View
                   </Button>
                 </Card.Body>
               </Card>
