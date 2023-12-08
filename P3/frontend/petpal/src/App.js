@@ -16,6 +16,11 @@ import { UserDataProvider } from './contexts/AuthContext';
 import HomeSeeker from './pages/Home/seeker';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+import SeekerProfile from './pages/SeekerProfile';
+import ShelterProfile from './pages/ShelterProfile';
+import SeekerEdit from './pages/SeekerEdit';
+import ShelterEdit from './pages/ShelterEdit';
+import ShelterDetail from './pages/ShelterDetail';
 
 function Webpages(){
   return <BrowserRouter>
@@ -44,11 +49,20 @@ function Webpages(){
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      <Route path="SeekerProfile" element={<SeekerProfile />}/>
+      <Route path="SeekerEdit" element={<SeekerEdit />}/>
+      <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
       <Route path="ShelterManage" element={<ShelterMag />}/> 
+      <Route path="ShelterProfile" element={<ShelterProfile />}/>
+      <Route path="ShelterNotiList" element={<NotiList />}/>
+      <Route path="ShelterNotiList/Noti/:noti_id" element={<NotiPage />}/>
+      <Route path="ShelterEdit" element={<ShelterEdit />}/>
+      
+      {/* <Route path="ListBlog" element={<BlogList />} />   */}
     </Route>
   </Routes>
   </BrowserRouter>;

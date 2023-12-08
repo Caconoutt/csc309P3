@@ -25,7 +25,6 @@ const ShelterProfile = () => {
     const [email, setEmail] = useState(null);
     const [user, setUser] = useState(null);
     const [mission, setMission] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -61,18 +60,14 @@ const ShelterProfile = () => {
                   setPreference(userResult.preference);
                   setEmail(userResult.email);
                   setMission(userResult.mission);
-                  setIsLoading(false);
                 } else {
-                  setIsLoading(false);
                   console.log('Error fetching user data');
                 }
               }
             } else {
-              setIsLoading(false);
               console.log('Error fetching notifications');
             }
           } catch (error) {
-            setIsLoading(false);
             console.error(error);
           }
         };
@@ -82,10 +77,7 @@ const ShelterProfile = () => {
     
 
     // template below
-    return(<>
-    {isLoading ?(
-        <p>Loading...</p>
-    ) : (
+    return <>
     <div class="container" id="wrap">
         <div>
             <Button  class="btn-image" onClick={() => navigate('/ShelterEdit', { state: {user}})}>
@@ -156,9 +148,7 @@ const ShelterProfile = () => {
             </div> 
             
     </div>
-    )}
     </>
-    );
 }
 
 export default ShelterProfile;

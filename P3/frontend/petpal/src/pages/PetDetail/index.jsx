@@ -28,6 +28,7 @@ function PetDetails() {
 		}
 	}
 
+
 	useEffect(() => {
 		if (identity === 'Seeker') {
 			fetch(`http://localhost:8000/pet/seeker/pets/${pet_id}/`, {
@@ -68,7 +69,7 @@ function PetDetails() {
 					<img src={pet.image} className='rounded img1' />
 					<Table pet={pet} />
 					<div className='list-group-item flex'>
-						<Link to='/Shelter' className='info'>
+						<Link to={'/ShelterDetail/'+ pet.shelter} className='info'>
 							check its shelter
 						</Link>
 					</div>

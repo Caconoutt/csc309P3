@@ -24,7 +24,6 @@ const SeekerProfile = () => {
     const [preference, setPreference] = useState(null);
     const [email, setEmail] = useState(null);
     const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,19 +58,15 @@ const SeekerProfile = () => {
                   setLocation(userResult.location);
                   setPreference(userResult.preference);
                   setEmail(userResult.email);
-                  setIsLoading(false);
                 } else {
-                    setIsLoading(false);
                   console.log('Error fetching user data');
                 }
               }
             } else {
-                setIsLoading(false);
               console.log('Error fetching notifications');
             }
           } catch (error) {
             console.error(error);
-            setIsLoading(false);
           }
         };
       
@@ -85,11 +80,7 @@ const SeekerProfile = () => {
     
 
     // template below
-    return ( 
-    <> 
-    {isLoading ?(
-        <p>Loading...</p>
-    ) : (
+    return <>
     <div class="container" id="wrap">
         <div>
             <Button  class="btn-image" onClick={goEdit}>
@@ -159,9 +150,7 @@ const SeekerProfile = () => {
             
         </div> 
     </div>
-    )}
     </>
-    );
 }
 
 export default SeekerProfile;
