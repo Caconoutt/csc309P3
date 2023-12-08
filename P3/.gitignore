@@ -3,4 +3,4 @@ package-lock.json
 venv/
 __pycache__/
 migrations/
-P3/frontend/.DS_Store.DS_Store
+P3/frontend/.DS_Store

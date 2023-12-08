@@ -23,7 +23,7 @@ const LayoutSeeker = () =>{
 
     <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
       <li><Link to="/HomeSeeker" className="nav-link px-2 headerText">Home</Link></li>
-      <li><a href="my_application.html" class="nav-link px-2 headerText">My Applications</a></li>
+      <li><Link to="/ListApplication" class="nav-link px-2 headerText">My Applications</Link></li>
     </ul>
 
 
@@ -45,7 +45,7 @@ const LayoutSeeker = () =>{
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+            <Dropdown.Item href="/SeekerProfile">Profile</Dropdown.Item>
             <Dropdown.Divider />
             <Logout />
           </Dropdown.Menu>

@@ -24,7 +24,8 @@ const LayoutShelter = () =>{
     <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
       <li><Link to="/HomeShelter" className="nav-link px-2 headerText">Home</Link></li>
       <li><Link to="/ShelterAllPet" class="nav-link px-2 headerText">My Pets</Link></li>
-      <li><a href="shelter_petlist.html" class="nav-link px-2 headerText">My Pets</a></li>
+      <li><Link to="/ListApplication" class="nav-link px-2 headerText">Application</Link></li>
+      <li></li>
       <li>
         <Dropdown>
             <Dropdown.Toggle style={{backgroundColor:"#B55D4C", borderColor:"#B55D4C"}}>
@@ -51,7 +52,7 @@ const LayoutShelter = () =>{
             <Dropdown.Item href="#/action-1">dummy new noti</Dropdown.Item>
             </div>
             <Dropdown.Divider />
-            <Dropdown.Item href="#/action-2">All notification</Dropdown.Item>
+            <Dropdown.Item href="/NotiList">All notification</Dropdown.Item>
           </Dropdown.Menu>
     </Dropdown>
   
@@ -63,7 +64,7 @@ const LayoutShelter = () =>{
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+            <Dropdown.Item href="/ShelterProfile">Profile</Dropdown.Item>
             <Dropdown.Divider />
             <Logout />
           </Dropdown.Menu>
