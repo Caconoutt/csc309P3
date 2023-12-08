@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap'
+import { Form, Alert } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import './Cards/index'
 import CardLayout from './Cards'
@@ -8,6 +8,7 @@ function ListAllPets() {
     //this function is to show all the pets under a shelter
     const [petList, setPetList] = useState([])
 	const {token} = useUserData()
+	const [errorMessage, setErrMsg] = useState('')
 	console.log(token)
 	let navigate = useNavigate()
 	const getList = () => {
@@ -17,7 +18,13 @@ function ListAllPets() {
 				Authorization: 'Bearer ' + token,
 			},
 		})
-			.then((response) => response.json())
+			// .then((response) => response.json())
+			.then((response) => {
+				if (response.status !== 200){
+					setErrMsg(response.statusText)
+				}
+				return response.json()
+			})
 			.then((json) => {
 				setPetList(json)
 			})
@@ -25,6 +32,15 @@ function ListAllPets() {
 	useEffect(() => {
 		getList()
 	}, [])
-    return <CardLayout petList={petList}></CardLayout>
+    return <>
+	<CardLayout petList={petList}></CardLayout>
+	{errorMessage ? (
+				<Alert className = 'alert' variant='danger'>
+					{errorMessage}
+				</Alert>
+			) : (
+				<></>
+			)}
+	</>
 }
 export default ListAllPets
