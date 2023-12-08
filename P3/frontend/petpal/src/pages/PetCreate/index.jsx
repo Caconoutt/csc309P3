@@ -59,7 +59,12 @@ function PetCreate() {
 		function getItemById(id) {
 			if (id) {
 				fetch(`http://localhost:8000/pet/shelter/pets/${id}/`, options)
-					.then((res) => res.json())
+				.then((res) => {
+					if (res.status !== 200){
+						setErrMsg(res.statusText)
+					}
+					return res.json()
+				})
 					.then((data) => {
 						petCreateQuery(data)
 					})
