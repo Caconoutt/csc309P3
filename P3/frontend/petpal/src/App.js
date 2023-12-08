@@ -16,6 +16,8 @@ import { UserDataProvider } from './contexts/AuthContext';
 import CreateBlog from './pages/CreateBlog';
 import HomeSeeker from './pages/Home/seeker';
 import EditBlog from './pages/EditBlog';
+import BlogList from './pages/BlogList';
+
 
 function Webpages(){
   return <BrowserRouter>
@@ -46,7 +48,7 @@ function Webpages(){
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
       <Route path="CreateBlog" element={<CreateBlog />} />
-      <Route path="ListBlog" element={<LoginSeeker />} />      
+      <Route path="ListBlog" element={<BlogList />} />      
       <Route path="ShelterManage" element={<ShelterMag />}/> 
       <Route path="EditBlog" element={<EditBlog />} />
     </Route>
