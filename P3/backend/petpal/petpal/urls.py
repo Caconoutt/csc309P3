@@ -20,7 +20,6 @@ from django.views.static import serve
 from .settings import MEDIA_ROOT
 
 urlpatterns = [
-    #path('api/', include('api.urls')),
     path('account/', include('account.urls')),
     path('admin/', admin.site.urls),
     path('pet/', include('pet.urls')),
