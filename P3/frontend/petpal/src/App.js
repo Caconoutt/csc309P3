@@ -77,7 +77,7 @@ function Webpages(){
       {/* <Route path ="ShelterManage" element={<ShelterMag />}/>  */}
       {/* <Route path ="PetSearch/" element={<PetSearch />}/>
     {/* <Route path = "application" element={<PetDetails />}/> */}
-  </Route>
+    </Route>
 
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>

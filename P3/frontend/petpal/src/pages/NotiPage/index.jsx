@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useUserData } from '../../contexts/AuthContext'
 
 import SingleNoti from '../../components/SingleNoti'
+import './style.css'
 
 const NotiPage=() =>{
     const {noti_id} = useParams()
@@ -42,13 +43,14 @@ const NotiPage=() =>{
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">
 
-    <div class="main-wrap">
+    <div class="main-wrap" id="overwrite_main-wrap">
     
     <SingleNoti msg={msg} />
+    <button id="backToList" className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList" style={{ textDecoration: 'none', color: 'inherit' }}>Back to all noti</Link></button>
 
     </div>
 
-    <button className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList" style={{ textDecoration: 'none', color: 'inherit' }}>Back to all noti</Link></button>
+    
     
     </main></div>
     </>
