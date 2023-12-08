@@ -160,7 +160,7 @@ const ShelterDetail = () => {
         <div class="col-md-6">
         <div class="row">
               <div class="col-md-6 col-sm-12">
-              <Link to={`shelter/${shelter_id}/ListBlog`} className="management">
+              <Link to={`/shelter/${shelter_id}/ListBlog`} className="management">
                     <button class="btn btn-primary btn-submit">Shelter Blog</button>
                   </Link>
               </div>
