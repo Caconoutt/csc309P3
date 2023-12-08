@@ -25,6 +25,18 @@ import EditBlog from './pages/EditBlog';
 import BlogList from './pages/BlogList';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+
+import SeekerProfile from './pages/SeekerProfile';
+import SeekerEdit from './pages/SeekerEdit';
+import ShelterDetail from './pages/ShelterDetail';
+import ShelterProfile from './pages/ShelterProfile';
+import ShelterEdit from './pages/ShelterEdit';
+import ReviewList from './pages/ReviewList';
+import ReviewDetial from './pages/ReviewDetail';
+
+
+
+
 import ViewReview from './pages/ViewReview';
 import ListAllPets from './pages/ShelterAllPet';
 import ViewBlog from './pages/ViewBlog';
@@ -90,12 +102,19 @@ function Webpages(){
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      <Route path="SeekerProfile" element={<SeekerProfile />}/>
+      <Route path="SeekerEdit" element={<SeekerEdit />}/>
+      <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
+      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
+      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
       <Route path="shelter/:shelter_id/ListBlog" element={<BlogList />} />  
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
-      <Route path="CreateBlog" element={<CreateBlog />} />
+      <Route path="ShelterManage" element={<ShelterMag />}/>
+      <Route path="ShelterProfile" element={<ShelterProfile />}/>
+      <Route path="ShelterEdit" element={<ShelterEdit />}/>
       <Route path="ShelterManage" element={<ShelterMag />}/> 
       <Route path="EditBlog" element={<EditBlog />} />
 

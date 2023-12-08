@@ -4,15 +4,20 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 LOCATION_CHOICES = [
-        ('Location 1', 'Location 1'),
-        ('Location 2', 'Location 2'),
-        ('Location 3', 'Location 3'),
-        # Add other options as needed
+        ('Ontario', 'Ontario'),
+        ('British Columbia', 'British Columbia'),
+        ('Quebec', 'Quebec'),
+        ('Alberta', 'Alberta'),
+        ('Nova Scotia', 'Nova Scotia'),
+        ('New Brunswick', 'New Brunswick'),
+        ('Newfoundland and Labrador', 'Newfoundland and Labrador'),
+        ('Saskatchewan', 'Saskatchewan')
     ]
 PREFERENCE_CHOICES = [
-        ('Preference 1', 'Preference 1'),
-        ('Preference 2', 'Preference 2'),
-        ('Preference 3', 'Preference 3'),
+        ('Cat', 'Cat'),
+        ('Dog', 'Dog'),
+        ('Both', 'Both'),
+
         # Add other options as needed
     ]
 #specify the img upload
