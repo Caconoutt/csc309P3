@@ -25,6 +25,7 @@ import EditBlog from './pages/EditBlog';
 import BlogList from './pages/BlogList';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+import ViewReview from './pages/ViewReview';
 
 function Webpages(){
   const [userType, setUserType] = useState(null);
@@ -102,6 +103,9 @@ function Webpages(){
       <Route path="ReviewApplication" element={<ReviewApplication />} />
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
+
+      {/* Review */}
+      <Route path="/review/:shelter_id/:review_id/" element={<ViewReview />} />
     </Route>
   </Routes>
   </BrowserRouter>;
