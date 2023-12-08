@@ -2,7 +2,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.urls import path
 from .views import RegisterSeekerAPIView, RetrieveSeeker
 from .views import RegisterShelterAPIView, RetrieveShelter
-from .views import SeekerRetrieveShelter, ShelterList, ShelterRetrieveSeeker
+from .views import SeekerRetrieveShelter, ShelterList, ShelterRetrieveSeeker, UserTypeView
 from. views import NotiList, RetrieveNoti
 from. views import LogoutView
 from .views import NewBlogAPIView, BlogAPIView, BlogList,RetrieveBlogList,RetrieveBlog
@@ -10,6 +10,7 @@ from .views import NewBlogAPIView, BlogAPIView, BlogList,RetrieveBlogList,Retrie
 
 
 urlpatterns = [
+  path('usertype/', UserTypeView.as_view()),
   path('seeker/',RegisterSeekerAPIView.as_view()),
   path('seeker/profile/<int:pk>/', RetrieveSeeker.as_view()),
   path('seeker/<int:shelter_id>/', SeekerRetrieveShelter.as_view()),
