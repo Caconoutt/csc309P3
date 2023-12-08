@@ -59,7 +59,7 @@ const IntroApplication = () => {
             <p>You will be contacted if the shelter approves your application.</p>
 
             <button className="btn btnStyle w-75 py-2" onClick={() => navigate('/CreateApplication', { state: {petData} })}>Fill Out Application</button>
-            <Link to="/conversation" className="btn btnStyle w-75 py-2">Chat with Shelter</Link>
+            {/* <Link to="/conversation" className="btn btnStyle w-75 py-2">Chat with Shelter</Link> */}
         </div>
         </main>
     </div>

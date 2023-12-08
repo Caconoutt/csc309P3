@@ -29,6 +29,7 @@ import ShelterProfile from './pages/ShelterProfile';
 import ShelterEdit from './pages/ShelterEdit';
 import ReviewList from './pages/ReviewList';
 import ReviewDetial from './pages/ReviewDetail';
+import ChatPage from './pages/chat';
 
 
 
@@ -114,6 +115,7 @@ function Webpages(){
       <Route path="ReviewApplication" element={<ReviewApplication />} />
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
+      <Route path="Chat/:application_id" element={<ChatPage />} />
     </Route>
   </Routes>
   </BrowserRouter>;
