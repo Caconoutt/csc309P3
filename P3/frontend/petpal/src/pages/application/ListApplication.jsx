@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ApplicationItem from './ApplicationItem';
+import Accordion from 'react-bootstrap/Accordion';
+import './style.css';
 
 const ApplicationList = () => {
   const [applications, setApplications] = useState([]);
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('creation_time');
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth-token');
+  const [userType, setUserType] = useState(null);
+
   useEffect(() => {
+    fetchUserType(token).then(fetchedUserType => {
+      setUserType(fetchedUserType);
+    });
+  
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/applications/?status=${filter}&ordering=${sort}`, {
+        const response = await fetch(`http://127.0.0.1:8000/pet/applications/?status=${filter}&ordering=${sort}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -18,7 +26,11 @@ const ApplicationList = () => {
 
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
-        setApplications(data);
+        if (Array.isArray(data.results)) {
+          setApplications(data.results);
+        } else {
+          console.error('Expected an array, but received:', data);
+        }
       } catch (error) {
         console.error('Fetch error:', error);
       }
@@ -51,12 +63,7 @@ const ApplicationList = () => {
     }
   }
   
-  const userType = fetchUserType(token);
-  if (userType === 'seeker') {
-    options = ['Pending', 'Accepted', 'Withdrawn'];
-  } else if (userType === 'shelter') {
-    options = ['Pending', 'Accepted', 'Denied'];
-  }
+  options = ['Pending', 'Accepted', 'Denied', 'Withdrawn'];
 
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -74,10 +81,10 @@ const ApplicationList = () => {
           <label>Filter by Status:</label>
           <select onChange={handleFilterChange}>
             <option value="">All</option>
-            {options.map((option) => (
-                <option key={option} value={option}>
-                    {option}
-                </option>
+            {options && options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
             ))}
           </select>
         </div>
@@ -85,16 +92,15 @@ const ApplicationList = () => {
           <label>Sort by:</label>
           <select onChange={handleSortChange}>
             <option value="creation_time">Creation Time</option>
-            <option value="last_update_time">Last Update Time</option>
+            <option value="last_modified_time">Last Update Time</option>
           </select>
         </div>
       </div>
-
-      <ul>
+      <Accordion defaultActiveKey="0" className="custom-accordion">
         {applications.map(app => (
-          <ApplicationItem key={app.id} application={app} />
+          <ApplicationItem key={app.id} application={app} userType={userType} />
         ))}
-      </ul>
+      </Accordion>
     </div>
   );
 };
