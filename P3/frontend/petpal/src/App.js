@@ -19,9 +19,15 @@ import ApplicationDetail from './pages/application/ApplicationDetail';
 import PetCreate from './pages/PetCreate';
 import Search from './pages/PetSearch';
 import { UserDataProvider } from './contexts/AuthContext';
+import CreateBlog from './pages/CreateBlog';
 import HomeSeeker from './pages/Home/seeker';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+import ListAllPets from './pages/ShelterAllPet';
+import EditBlog from './pages/EditBlog';
+import BlogList from './pages/BlogList';
+import ViewBlog from './pages/ViewBlog';
+import NotFound from './pages/NotFound';
 
 function Webpages(){
   const [userType, setUserType] = useState(null);
@@ -75,7 +81,7 @@ function Webpages(){
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="PetCreate" element={<PetCreate />}/>
       <Route path="PetSearch" element={<Search />}/>
-      
+      <Route path="ShelterAllPet" element={<ListAllPets />}/>
       {/* <Route path="HomeSeeker" element={<HomeSeeker />}/> */}
     </Route>
 
@@ -87,8 +93,14 @@ function Webpages(){
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
+      <Route path="CreateBlog" element={<CreateBlog />} />
+      <Route path="ListBlog" element={<BlogList />} />      
       <Route path="ShelterManage" element={<ShelterMag />}/> 
+      <Route path="EditBlog" element={<EditBlog />} />
+      <Route path="ViewBlog" element={<ViewBlog />} />
+      
     </Route>
+   
 
     <Route path="/" element={<Layout />}>
       <Route path="IntroApplication" element={<IntroApplication />} />
@@ -97,6 +109,7 @@ function Webpages(){
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
     </Route>
+    <Route path='*' element={<NotFound />} />
   </Routes>
   </BrowserRouter>;
 }
