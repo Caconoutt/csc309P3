@@ -27,6 +27,8 @@ import SeekerEdit from './pages/SeekerEdit';
 import ShelterDetail from './pages/ShelterDetail';
 import ShelterProfile from './pages/ShelterProfile';
 import ShelterEdit from './pages/ShelterEdit';
+import ReviewList from './pages/ReviewList';
+import ReviewDetial from './pages/ReviewDetail';
 
 
 
@@ -95,6 +97,8 @@ function Webpages(){
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
       <Route path="SeekerEdit" element={<SeekerEdit />}/>
       <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
+      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
+      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>

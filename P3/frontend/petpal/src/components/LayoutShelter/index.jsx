@@ -36,7 +36,7 @@ const LayoutShelter = () =>{
             <Dropdown.Item href="#/action-1">dummy new noti</Dropdown.Item>
             </div>
             <Dropdown.Divider />
-            <Dropdown.Item href="#/action-2">All notification</Dropdown.Item>
+            <Dropdown.Item href="/notiList">All notification</Dropdown.Item>
           </Dropdown.Menu>
     </Dropdown>
   
@@ -48,7 +48,7 @@ const LayoutShelter = () =>{
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+            <Dropdown.Item href="/ShelterProfile">Profile</Dropdown.Item>
             <Dropdown.Divider />
             <Logout />
           </Dropdown.Menu>
