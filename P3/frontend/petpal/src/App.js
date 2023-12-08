@@ -16,6 +16,7 @@ import { UserDataProvider } from './contexts/AuthContext';
 import HomeSeeker from './pages/Home/seeker';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+import ShelterList from './pages/ShelterList';
 
 function Webpages(){
   return <BrowserRouter>
@@ -42,6 +43,7 @@ function Webpages(){
 
     <Route path="/" element={<LayoutSeeker />}> 
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
+      <Route path="ShelterList" element={<ShelterList />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
     </Route>
