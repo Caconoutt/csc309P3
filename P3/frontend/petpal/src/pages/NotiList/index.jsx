@@ -42,7 +42,7 @@ const NotiList = () =>{
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">
 
-    <div class="main-wrap">
+    <div class="main-wrap" id="overwrite_main-wrap">
     <h2>Your Messages:</h2>
     <Notis data={notiList} />
     <button onClick={e=>setFilter('readed')} id="filter_readed"className="btn btnStyle w-100 py-2" type="submit">View Read</button>

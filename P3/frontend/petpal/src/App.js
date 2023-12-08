@@ -30,6 +30,12 @@ import ShelterEdit from './pages/ShelterEdit';
 import ReviewList from './pages/ReviewList';
 import ReviewDetial from './pages/ReviewDetail';
 import ListAllPets from './pages/ShelterAllPet';
+import ShelterList from './pages/ShelterList';
+import CreateBlog from './pages/CreateBlog';
+import EditBlog from './pages/EditBlog';
+import BlogList from './pages/BlogList';
+import ViewBlog from './pages/ViewBlog';
+import NotFound from './pages/NotFound';
 
 
 
@@ -42,7 +48,7 @@ function Webpages(){
   useEffect(() => {
     async function fetchUserType(token) {
       try {
-        const userTypeRes = await fetch(`http://127.0.0.1:8000/account/usertype/`, {
+        const userTypeRes = await fetch(`http://localhost:8000/account/usertype/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -78,6 +84,14 @@ function Webpages(){
       {/* <Route path ="PetSearch/" element={<PetSearch />}/>
     {/* <Route path = "application" element={<PetDetails />}/> */}
     </Route>
+    <Route path="/" element={<Layout />}>
+      <Route path="IntroApplication" element={<IntroApplication />} />
+      <Route path="CreateApplication" element={<CreateApplication />} />
+      <Route path="ReviewApplication" element={<ReviewApplication />} />
+      <Route path="ListApplication" element={<ListApplication />} />
+      <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
+      <Route path="ViewBlog" element={<ViewBlog />} />
+    </Route>
 
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>
@@ -89,6 +103,7 @@ function Webpages(){
 
     <Route path="/" element={<LayoutSeeker />}> 
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
+      <Route path="ShelterList" element={<ShelterList />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
@@ -97,6 +112,7 @@ function Webpages(){
       <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
       <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
       <Route path="PetSearch" element={<Search />}/>
+      <Route path="shelter/:shelter_id/ListBlog" element={<BlogList />} />
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
@@ -106,6 +122,11 @@ function Webpages(){
       <Route path="ShelterEdit" element={<ShelterEdit />}/>
       <Route path="PetCreate" element={<PetCreate />}/>
       <Route path="ShelterAllPet" element={<ListAllPets />}/>
+      <Route path="CreateBlog" element={<CreateBlog />} />
+      <Route path="EditBlog" element={<EditBlog />} />
+      <Route path="ListBlog" element={<BlogList />} />
+       
+      
       
     </Route>
 
@@ -116,7 +137,9 @@ function Webpages(){
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
       <Route path="PetDetail" element={<PetDetails />}/>
+      <Route path="ViewBlog" element={<ViewBlog />} />  
     </Route>
+  
   </Routes>
   </BrowserRouter>;
 }
