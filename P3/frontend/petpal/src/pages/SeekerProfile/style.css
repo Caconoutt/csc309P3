@@ -1,0 +1,149 @@
+.form-control-dark {
+    border-color: var(--bs-gray);
+  }
+.form-control-dark:focus {
+border-color: #fff;
+box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+}
+
+.text-small {
+font-size: 85%;
+}
+
+.dropdown-toggle:not(:focus) {
+outline: 0;
+}
+
+.bd-placeholder-img {
+font-size: 1.125rem;
+text-anchor: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+}
+
+
+
+
+/* new added*/
+body{
+    background-color: #B55D4C;
+}
+.page{
+    position: relative;
+    min-height: 100vh;
+}
+#logo{
+    width: 40px;
+    height: 40px;
+}
+#logo1{
+    height: 40px;
+}
+.headerText{
+    font-weight: 700;
+    color: antiquewhite;
+
+}
+.footerContainer{
+    width: 100vw;
+    position: absolute;
+    bottom: 0px;
+}
+footer{
+    height: 120px;
+}
+
+.info{
+    color: antiquewhite;
+}
+
+.info-container{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: antiquewhite;
+}
+
+.title{
+    font-weight: bold;
+}
+
+
+
+.btn-image{
+    width:40px;
+    height: 40px;
+    float: right;
+    cursor: pointer;
+}
+
+.management{
+    text-decoration: none;
+    color:antiquewhite;
+    font-weight: bold;
+    font-size: Large;
+}
+
+.img-container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-left: 40px;
+}
+.portrait{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.profile-img{
+    width: 100px;
+    height: 100px;
+}
+
+
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+    
+    #wrap{
+        margin-top: 60px;
+    }
+    
+    .img-container{
+        margin-bottom: 20px;
+    }
+    .portrait{
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }
+    
+    .profile-img{
+        width: 200px;
+        height: 200px;
+    }
+    
+    .category{
+        padding-right: 10px;
+        margin:0px
+    }
+    .title{
+        font-size: 20px;
+    }
+    .text-md-left{
+        text-align:left;
+        align-items: left;
+        padding-left: 20px;
+        margin: 0px;
+        font-size: 20px;
+    }
+    
+    }

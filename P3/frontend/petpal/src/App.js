@@ -19,15 +19,21 @@ import ApplicationDetail from './pages/application/ApplicationDetail';
 import PetCreate from './pages/PetCreate';
 import Search from './pages/PetSearch';
 import { UserDataProvider } from './contexts/AuthContext';
-import CreateBlog from './pages/CreateBlog';
 import HomeSeeker from './pages/Home/seeker';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+import SeekerProfile from './pages/SeekerProfile';
+import SeekerEdit from './pages/SeekerEdit';
+import ShelterDetail from './pages/ShelterDetail';
+import ShelterProfile from './pages/ShelterProfile';
+import ShelterEdit from './pages/ShelterEdit';
+import ReviewList from './pages/ReviewList';
+import ReviewDetial from './pages/ReviewDetail';
 import ListAllPets from './pages/ShelterAllPet';
-import EditBlog from './pages/EditBlog';
-import BlogList from './pages/BlogList';
-import ViewBlog from './pages/ViewBlog';
-import NotFound from './pages/NotFound';
+
+
+
+
 
 function Webpages(){
   const [userType, setUserType] = useState(null);
@@ -65,13 +71,13 @@ function Webpages(){
 
   return <BrowserRouter>
   <Routes>
-    {/* <Route path="/" element={<Layout />}>
-      <Route index element={<Home />}/> */}
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />}/>
       {/* <Route path ="petDetail" element={<PetDetails />}/> */}
       {/* <Route path ="ShelterManage" element={<ShelterMag />}/>  */}
       {/* <Route path ="PetSearch/" element={<PetSearch />}/>
     {/* <Route path = "application" element={<PetDetails />}/> */}
-  {/* </Route> */}
+  </Route>
 
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>
@@ -82,6 +88,7 @@ function Webpages(){
       <Route path="PetCreate" element={<PetCreate />}/>
       <Route path="PetSearch" element={<Search />}/>
       <Route path="ShelterAllPet" element={<ListAllPets />}/>
+      
       {/* <Route path="HomeSeeker" element={<HomeSeeker />}/> */}
     </Route>
 
@@ -89,18 +96,20 @@ function Webpages(){
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      <Route path="SeekerProfile" element={<SeekerProfile />}/>
+      <Route path="SeekerEdit" element={<SeekerEdit />}/>
+      <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
+      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
+      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
-      <Route path="CreateBlog" element={<CreateBlog />} />
-      <Route path="ListBlog" element={<BlogList />} />      
-      <Route path="ShelterManage" element={<ShelterMag />}/> 
-      <Route path="EditBlog" element={<EditBlog />} />
-      <Route path="ViewBlog" element={<ViewBlog />} />
+      <Route path="ShelterManage" element={<ShelterMag />}/>
+      <Route path="ShelterProfile" element={<ShelterProfile />}/>
+      <Route path="ShelterEdit" element={<ShelterEdit />}/>
       
     </Route>
-   
 
     <Route path="/" element={<Layout />}>
       <Route path="IntroApplication" element={<IntroApplication />} />
@@ -109,7 +118,6 @@ function Webpages(){
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
     </Route>
-    <Route path='*' element={<NotFound />} />
   </Routes>
   </BrowserRouter>;
 }
