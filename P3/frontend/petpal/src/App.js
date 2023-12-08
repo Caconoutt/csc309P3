@@ -16,7 +16,7 @@ import { UserDataProvider } from './contexts/AuthContext';
 import HomeSeeker from './pages/Home/seeker';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
-
+import ListAllPets from './pages/ShelterAllPet';
 function Webpages(){
   return <BrowserRouter>
   <Routes>
@@ -36,7 +36,7 @@ function Webpages(){
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="PetCreate" element={<PetCreate />}/>
       <Route path="PetSearch" element={<Search />}/>
-      
+      <Route path="ShelterAllPet" element={<ListAllPets />}/>
       {/* <Route path="HomeSeeker" element={<HomeSeeker />}/> */}
     </Route>
 

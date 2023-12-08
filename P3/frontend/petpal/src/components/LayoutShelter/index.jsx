@@ -23,7 +23,7 @@ const LayoutShelter = () =>{
 
     <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
       <li><Link to="/HomeShelter" className="nav-link px-2 headerText">Home</Link></li>
-      <li><a href="shelter_petlist.html" class="nav-link px-2 headerText">My Pets</a></li>
+      <li><Link to="/ShelterAllPet" class="nav-link px-2 headerText">My Pets</Link></li>
     </ul>
 
     <Dropdown>
