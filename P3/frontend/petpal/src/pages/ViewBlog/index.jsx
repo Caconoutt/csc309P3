@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useUserData } from '../../contexts/AuthContext';
 
 import './style.css';
@@ -11,30 +11,39 @@ const ViewBlog = () => {
     const [owner, setOwner] = useState('');
     const [userType, setUserType] = useState(null);
     const {token} = useUserData();
-    const { id, shelterID } = useParams(); // TODO get shelterID from BlogList
 
+    const {id, shelter_id} = useLocation().state;
     // Fetch the blog data when the component mounts
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchUserType = async () => {
             try {
-                const userTypeRes = await fetch(`http://127.0.0.1:8000/account/usertype/`, {
+                const userTypeRes = await fetch(`http://localhost:8000/account/usertype/`, {
                     method: 'GET',
                     headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
                     },
                 });
                 if (!userTypeRes.ok) throw new Error('Error fetching user type');
                 const userTypeJson = await userTypeRes.json();
                 setUserType(userTypeJson.user_type);
-
-                var blogUrl = '';
+            } catch (error) {
+                console.error('Error fetching user type:', error);
+            }
+        };
+        fetchUserType();
+    }, [token]);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let blogUrl = '';
                 if (userType === 'shelter') {
-                    blogUrl = `http://localhost:8000/shelter/blog/${id}/`;
+                    blogUrl = `http://localhost:8000/account/shelter/blog/${id}/`;
                 } else if (userType === 'seeker') {
-                    blogUrl = `http://localhost:8000/shelter/${shelterID}/blog/${id}/`;
+                    blogUrl = `http://localhost:8000/account/shelter/${shelter_id}/blog/${id}/`;
                 }
-
+    
                 const response = await fetch(blogUrl, {
                     method: 'GET',
                     headers: {
@@ -42,11 +51,7 @@ const ViewBlog = () => {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const blogData = await response.json();
                 setTitle(blogData.title);
                 setContent(blogData.content);
@@ -56,9 +61,12 @@ const ViewBlog = () => {
                 console.error('Error fetching blog:', error);
             }
         };
-
-        fetchData();
-    }, [id, token]);
+    
+        if (userType) {
+            fetchData();
+        }
+    }, [id, token, userType, shelter_id]);
+    
 
 
     return (

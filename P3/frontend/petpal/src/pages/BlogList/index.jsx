@@ -5,10 +5,43 @@ import './style.css';
 
 const BlogList = () => {
     const [blogs, setBlogs] = useState();
-    const { token, user_id } = useUserData(); 
+    const [filter, setFilter] = useState('')
+    const [sort_time, setSort] = useState('')
+    const [current_user, setUser] = useState('');
+    const { token } = useUserData(); 
     const navigate = useNavigate();
-    const { shelterID } = useParams();
+    const { shelter_id } = useParams();
     const [userType, setUserType] = useState('');
+    console.log(shelter_id);
+    useEffect(() => {
+        const fetchData = async () => {
+          const url = `http://localhost:8000/account/noti/?filter=${filter}&order_by=${sort_time}`;
+          try {
+            const resp = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+            if (resp.ok) {
+              const result = await resp.json();
+              if (result.results.length > 0) {
+                const user_id = result.results[0].owner;
+                setUser(user_id);
+                } else {
+                  console.log('Error fetching user data');
+                }
+            } else {
+              console.log('Error fetching notifications');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchData();
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,7 +62,7 @@ const BlogList = () => {
                 if (userTypeJson.user_type === 'shelter') {
                     blogUrl = `http://localhost:8000/account/shelter/blog/list/`;
                 } else if (userTypeJson.user_type === 'seeker') {
-                    blogUrl = `http://localhost:8000/shelter/${shelterID}/blog/list/`;
+                    blogUrl = `http://localhost:8000/account/shelter/${shelter_id}/blog/list/`;
                 }
                 const response = await fetch(blogUrl, {
                     method: 'GET',
@@ -52,8 +85,7 @@ const BlogList = () => {
         };
 
         fetchData();
-    }, [shelterID, token]);
-
+    }, [shelter_id, token]);
 
 
     return (
@@ -66,9 +98,9 @@ const BlogList = () => {
                     <p>Created at: {new Date(blog.created_at).toLocaleString()}</p>
 
                     <div className="buttons">
-                        <button className="details-button" onClick={() => navigate(`/ViewBlog/${blog.id}`)}>Details</button>
-                       {userType === 'shelter' && user_id === blog.owner.id && (
-                            <button className="edit-button" onClick={() => navigate(`/EditBlog/${blog.id}`)}>Edit</button>
+                        <button className="details-button" onClick={() => navigate('/ViewBlog', {state:{id: blog.id, shelter_id: shelter_id}})}>Details</button>
+                       {userType === 'shelter' && current_user === blog.owner && (
+                            <button className="edit-button" onClick={() => navigate('/EditBlog', {state:{id: blog.id}})}>Edit</button>
                         )}
                     </div>
                 </div>

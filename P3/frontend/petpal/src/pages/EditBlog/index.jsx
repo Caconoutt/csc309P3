@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useUserData } from '../../contexts/AuthContext';
 
 import './style.css';
@@ -8,14 +8,48 @@ const EditBlog = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [createdAt, setCreatedAt] = useState('');
+    const [owner, setOwner] = useState('');
+    const [filter, setFilter] = useState('')
+    const [sort_time, setSort] = useState('')
     const {token} = useUserData();
-    const { id } = useParams(); 
-
+    // const { id } = useParams(); 
+    const {id} = useLocation().state;
+    // const [id, setId] = useLocation().state;
     // Fetch the blog data when the component mounts
+    const navigate = useNavigate();
     useEffect(() => {
+        const fetchData = async () => {
+          const url = `http://localhost:8000/account/noti/?filter=${filter}&order_by=${sort_time}`;
+          try {
+            const resp = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+            if (resp.ok) {
+              const result = await resp.json();
+              if (result.results.length > 0) {
+                const ownerId = result.results[0].owner;
+                setOwner(ownerId);
+                } else {
+                  console.log('Error fetching user data');
+                }
+            } else {
+              console.log('Error fetching notifications');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchData();
+
+
         const fetchBlogData = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+                const response = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -31,6 +65,7 @@ const EditBlog = () => {
                 setTitle(blogData.title);
                 setContent(blogData.content);
                 setCreatedAt(blogData.created_at);
+                // setId(blogData.owner);
             } catch (error) {
                 console.error('Error fetching blog:', error);
             }
@@ -41,9 +76,9 @@ const EditBlog = () => {
 
     // Function to handle blog update
     const updateBlog = async () => {
-        const data = { 'title': title, 'content': content };
+        const data = { 'title': title, 'content': content, 'owner': owner};
         try {
-            const resp = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+            const resp = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,16 +90,19 @@ const EditBlog = () => {
             if (!resp.ok) {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
-
-            window.location.href = "/BlogList";
+            navigate('/ListBlog');
         } catch (error) {
             console.error('Error updating blog:', error);
         }
     };
 
     const deleteBlog = async () => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this blog?');
+        if (!isConfirmed) {
+            return; // Stop the deletion process if not confirmed
+        }
         try {
-            const resp = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+            const resp = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -74,12 +112,12 @@ const EditBlog = () => {
             if (!resp.ok) {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
-    
-            window.location.href = "/BlogList";
+            navigate('/ListBlog');
         } catch (error) {
             console.error('Error deleting blog:', error);
         }
     };
+    
     
 
     return (

@@ -10,7 +10,6 @@ function PetDetails() {
 	const { token } = useUserData()
     const {identity, pet_id} = useLocation().state;
 
-    console.log(identity, "identity")
 	const navigate = useNavigate()
 
 	const handleClick = () => {

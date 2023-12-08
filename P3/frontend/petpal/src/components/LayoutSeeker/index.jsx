@@ -33,11 +33,7 @@ const LayoutSeeker = () =>{
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <div id="newAddedNoti">
-            <Dropdown.Item href="#/action-1">dummy new noti</Dropdown.Item>
-            </div>
-            <Dropdown.Divider />
-            <Dropdown.Item href="#/action-2">All notification</Dropdown.Item>
+            <Dropdown.Item href="/NotiList">All notification</Dropdown.Item>
           </Dropdown.Menu>
     </Dropdown>
   

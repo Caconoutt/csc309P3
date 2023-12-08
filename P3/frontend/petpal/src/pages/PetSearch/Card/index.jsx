@@ -18,6 +18,8 @@ const Cards = ({ itemLst }) => {
           <Card.Text>Name:{itemLst.name}</Card.Text>
           <Card.Text>Breed: {itemLst.Breed}</Card.Text>
           <Card.Text>Age: {itemLst.age}</Card.Text>
+		  <Card.Text>Status: {itemLst.status}</Card.Text>
+		  <Card.Text>Location: {itemLst.location}</Card.Text>
           <Button className='viewBtn' onClick={() => viewPage(itemLst.id)}>
             View
           </Button>
