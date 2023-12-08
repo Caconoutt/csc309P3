@@ -8,6 +8,9 @@ const EditBlog = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [createdAt, setCreatedAt] = useState('');
+    const [owner, setOwner] = useState('');
+    const [filter, setFilter] = useState('')
+    const [sort_time, setSort] = useState('')
     const {token} = useUserData();
     // const { id } = useParams(); 
     const {id} = useLocation().state;
@@ -15,6 +18,35 @@ const EditBlog = () => {
     // Fetch the blog data when the component mounts
     const navigate = useNavigate();
     useEffect(() => {
+        const fetchData = async () => {
+          const url = `http://localhost:8000/account/noti/?filter=${filter}&order_by=${sort_time}`;
+          try {
+            const resp = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+            if (resp.ok) {
+              const result = await resp.json();
+              if (result.results.length > 0) {
+                const ownerId = result.results[0].owner;
+                setOwner(ownerId);
+                } else {
+                  console.log('Error fetching user data');
+                }
+            } else {
+              console.log('Error fetching notifications');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchData();
+
+
         const fetchBlogData = async () => {
             try {
                 const response = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
@@ -44,7 +76,7 @@ const EditBlog = () => {
 
     // Function to handle blog update
     const updateBlog = async () => {
-        const data = { 'title': title, 'content': content, 'owner': id};
+        const data = { 'title': title, 'content': content, 'owner': owner};
         try {
             const resp = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                 method: 'PUT',
@@ -59,15 +91,18 @@ const EditBlog = () => {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
             navigate('/ListBlog');
-            // window.location.href = "/BlogList";
         } catch (error) {
             console.error('Error updating blog:', error);
         }
     };
 
     const deleteBlog = async () => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this blog?');
+        if (!isConfirmed) {
+            return; // Stop the deletion process if not confirmed
+        }
         try {
-            const resp = await fetch(`http://localhost:8000/shelter/blog/${id}/`, {
+            const resp = await fetch(`http://localhost:8000/account/shelter/blog/${id}/`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -78,11 +113,11 @@ const EditBlog = () => {
                 throw new Error(`HTTP error! status: ${resp.status}`);
             }
             navigate('/ListBlog');
-            // window.location.href = "/BlogList";
         } catch (error) {
             console.error('Error deleting blog:', error);
         }
     };
+    
     
 
     return (

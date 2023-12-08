@@ -27,8 +27,6 @@ import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
 import ViewReview from './pages/ViewReview';
 import ListAllPets from './pages/ShelterAllPet';
-import EditBlog from './pages/EditBlog';
-import BlogList from './pages/BlogList';
 import ViewBlog from './pages/ViewBlog';
 import NotFound from './pages/NotFound';
 
@@ -92,15 +90,16 @@ function Webpages(){
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      <Route path="shelter/:shelter_id/ListBlog" element={<BlogList />} />  
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
       <Route path="CreateBlog" element={<CreateBlog />} />
-      <Route path="ListBlog" element={<BlogList />} />      
       <Route path="ShelterManage" element={<ShelterMag />}/> 
       <Route path="EditBlog" element={<EditBlog />} />
-      <Route path="ViewBlog" element={<ViewBlog />} />
+
+      <Route path="ListBlog" element={<BlogList />} />   
       
     </Route>
    
@@ -111,6 +110,9 @@ function Webpages(){
       <Route path="ReviewApplication" element={<ReviewApplication />} />
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
+
+
+      <Route path="ViewBlog" element={<ViewBlog />} />   
     </Route>
     <Route path='*' element={<NotFound />} />
   </Routes>
