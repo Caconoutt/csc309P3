@@ -40,11 +40,11 @@
 }
 
 .details-button {
-    background-color: #007bff;
+    background-color:gold;
 }
 
 .edit-button {
-    background-color: #28a745;
+    background-color:chocolate;
 }
 
 .details-button:hover {
