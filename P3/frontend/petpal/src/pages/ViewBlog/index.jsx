@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import { useUserData } from '../../contexts/AuthContext';
 
 import './style.css';
@@ -86,6 +86,7 @@ const ViewBlog = () => {
 
                     <div>{content}</div>
                 </div>
+                <button id="backToBlogList" className="btn btnStyle w-100 py-2" type="submit"><Link to="/ListBlog" style={{ textDecoration: 'none', color: 'inherit' }}>Back to Blog List</Link></button>
             </main>
         </div>
     );
