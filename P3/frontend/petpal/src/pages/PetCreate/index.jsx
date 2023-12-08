@@ -16,17 +16,15 @@ function PetCreate() {
 	headers: {
 		Authorization: 'Bearer ' + token,
 	},
-	// mode: 'cors',
+
 }
-	// const itemId = getUrlQuery(window.location.href, 'id')
-    // const pet_id = 11;
+
     const {pet_id} = useLocation().state;
 	const { query, petCreateQuery } = useVariableState()
     const navigate = useNavigate()
 	const handleSubmit = (val) => {
 		if (pet_id) {
-			fetch(`http://localhost:8000/pet/shelter/pets/${pet_id}/`, { ...options, method: 'PATCH', body: val })
-				// .then((res) => res.json())
+			fetch(`http://localhost:8000/pet/shelter/pets/${pet_id}/`, { ...options, method: 'PUT', body: val })
 				.then((res) => {
 					if (res.status !== 200){
 						setErrMsg(res.statusText)
@@ -34,7 +32,6 @@ function PetCreate() {
 					return res.json()
 				})
 				.then((data) => {
-					// console.log(data, '=========================')
 					petCreateQuery(data)
 					navigate("/ShelterAllPet")
 				})
