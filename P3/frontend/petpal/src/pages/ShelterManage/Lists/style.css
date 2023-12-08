@@ -1,95 +1,107 @@
 .main {
-    width: 800px;
+  width: 40%;
+  margin: 0 auto;
+
+}
+
+.flex {
+  display: flex;
+}
+
+.title {
+  text-align: center;
+  padding: 80px 0 20px;
+  color: antiquewhite;
+}
+
+.create-btn {
+  border-color: coral;
+  background-color: coral;
+  color: antiquewhite;
+  margin-bottom: 20px;
+}
+
+.accordion-button,
+.accordion-item:first-of-type .accordion-button,
+.accordion-button:not(.collapsed),
+.btn:hover,
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+  color: antiquewhite;
+  background-color: coral;
+  box-shadow: inset 0 2px 0 coral;
+  border-color: coral;
+}
+
+.accordion-item {
+  border: 0;
+}
+
+.item-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Pending-title,
+.Adopted-title,
+.Withdraw-title {
+  margin: 30px 0 10px;
+  font-size: 18px;
+}
+
+.pet-info {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pet-info .item-info {
+  margin-bottom: 10px;
+}
+
+.pet-info .label {
+  font-weight: bold;
+  width: 80px;
+  text-align: right;
+  margin-right: 10px;
+
+}
+
+.pet-info .info {
+  color: #333
+}
+
+.accordion-item:last-child {
+  margin-bottom: 30px;
+}
+
+.create-btn {
+  margin-right: 10px;
+}
+
+.shelter-classify {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: antiquewhite;
+}
+
+.noData {
+  color: antiquewhite;
+  padding-bottom: 30px;
+}
+.alert {
+  max-width: 30%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1680px) {
+  .main {
+    width: 60%;
     margin: 0 auto;
-  
+
   }
-  
-  .flex {
-    display: flex;
-  }
-  
-  .title {
-    text-align: center;
-    padding: 80px 0 20px;
-    color: antiquewhite;
-  }
-  
-  .create-btn {
-    border-color: coral;
-    background-color: coral;
-    color: antiquewhite;
-    margin-bottom: 20px;
-  }
-  
-  .accordion-button,
-  .accordion-item:first-of-type .accordion-button,
-  .accordion-button:not(.collapsed),
-  .btn:hover,
-  .btn-check:checked+.btn,
-  .btn.active,
-  .btn.show,
-  .btn:first-child:active,
-  :not(.btn-check)+.btn:active {
-    color: antiquewhite;
-    background-color: coral;
-    box-shadow: inset 0 2px 0 coral;
-    border-color: coral;
-  }
-  
-  .accordion-item {
-    border: 0;
-  }
-  
-  .item-body {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .Pending-title,
-  .Adopted-title,
-  .Withdraw-title {
-    margin: 30px 0 10px;
-    font-size: 18px;
-  }
-  
-  .pet-info {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .pet-info .item-info {
-    margin-bottom: 10px;
-  }
-  
-  .pet-info .label {
-    font-weight: bold;
-    width: 80px;
-    text-align: right;
-    margin-right: 10px;
-  
-  }
-  
-  .pet-info .info {
-    color: #333
-  }
-  
-  .accordion-item:last-child {
-    margin-bottom: 30px;
-  }
-  
-  .create-btn {
-    margin-right: 10px;
-  }
-  
-  .shelter-classify {
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: antiquewhite;
-  }
-  
-  .noData {
-    color: antiquewhite;
-    padding-bottom: 30px;
-  }
+}

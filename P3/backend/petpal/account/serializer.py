@@ -34,7 +34,7 @@ class BlogSerializer(ModelSerializer):
   image_url = ImageField(required=False)
   class Meta:
     model = Blog
-    fields = ['title', 'content', 'image_url']
+    fields = '__all__'
 
 
 
@@ -135,7 +135,7 @@ class ShelterSerializer(ModelSerializer):
   email = EmailField(required = False)
   class Meta:
     model = Shelter
-    fields = ['username','date_joined','email', 'nickname','contact','location','mission','image_url']
+    fields = ['username','date_joined','email', 'nickname','contact','location','mission','image_url','id']
 
 #Shelter retrieve Seeker Profile
 class ShelterSeekerSerializer(ModelSerializer):

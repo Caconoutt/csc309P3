@@ -1,0 +1,30 @@
+#backToBlogList{
+    margin-top: 20px;
+}
+div#space{
+    margin: 30px;
+}
+
+span.blogElement{
+    font-weight: 800;
+}
+
+input::placeholder, label[for="placeholder"]{
+    color:cornflowerblue !important;
+    font-weight: 600;
+}
+
+
+#titleBlog, #contentBlog {
+    margin-bottom: 10px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#contentBlog {height: 100px;}
+
+#submit_create_blog{
+    margin-top: 25px;
+}

@@ -1,0 +1,94 @@
+.search-container {
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .search-wrap {
+    width: 30%;
+    margin-bottom: 30px;
+    /* margin: 0 auto; */
+  }
+  
+  .search-input {
+    width: 260px;
+  
+    /* float: right; */
+  }
+  
+  .search-card-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    /* border: 1px solid red; */
+  }
+  
+  .advance-search {
+    width: 160px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    background-color: antiquewhite;
+    color: #B55D4C;
+    margin-bottom: 20px;
+  }
+  
+  .filterBox {
+    margin-right: 10px;
+  }
+  
+  .form-check-label {
+    color: antiquewhite;
+  
+  }
+  
+  .viewBtn {
+    background-color: antiquewhite;
+    color: #B55D4C;
+    border-color: #B55D4C;
+  }
+  
+  .right {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .card-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-top: 50px;
+  }
+  
+  .item-card {
+    width: 30%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .filter-wrap {
+    width: 100%;
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+    padding: 10px;
+  }
+  
+  .filter-border {
+    color: antiquewhite;
+    border: 1px solid antiquewhite;
+    padding: 10px;
+  }
+  
+  .page-wrap {
+    padding-left: 10%;
+  }
+  
+  .page-wrap2 {
+    color: antiquewhite;
+  }
+  .alert {
+    max-width: 30%;
+    margin: 0 auto;
+  }
+  

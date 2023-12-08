@@ -8,7 +8,7 @@ import { useUserData } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const ShelterDetail = () => {
-    const { shelter_id } = useParams();
+    const {shelter_id} = useParams();
     const {token} = useUserData();
 
     const [nickname, setNickname] = useState(null);
@@ -21,6 +21,9 @@ const ShelterDetail = () => {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState('');
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
+
+    console.log(shelter_id);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -40,10 +43,13 @@ const ShelterDetail = () => {
             setContact(userResult.contact);
             setLocation(userResult.location);
             setMission(userResult.mission);
+            setIsLoading(false);
           } else {
+            setIsLoading(false);
             console.log('Error fetching user data');
           }
         } catch (error) {
+          setIsLoading(false);
           console.error('Error:', error);
         }
       };
@@ -94,7 +100,11 @@ const ShelterDetail = () => {
       navigate('/ReviewList');
     }
 
-    return <>
+    return (
+    <>
+    {isLoading ? (
+                <p>Loading...</p>
+            ) : (
     <div class="container" id="wrap">
       <div class="row info-container">
         <div class="col-md-6">
@@ -150,7 +160,7 @@ const ShelterDetail = () => {
         <div class="col-md-6">
         <div class="row">
               <div class="col-md-6 col-sm-12">
-                  <Link href="/BlogList" class="management">
+              <Link to={`/shelter/${shelter_id}/ListBlog`} className="management">
                     <button class="btn btn-primary btn-submit">Shelter Blog</button>
                   </Link>
               </div>
@@ -206,7 +216,9 @@ const ShelterDetail = () => {
       </div>
          
     </div>
+    )}
     </>
+);
 }
 
 export default ShelterDetail;

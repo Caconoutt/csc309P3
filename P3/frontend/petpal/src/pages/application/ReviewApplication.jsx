@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useUserData } from '../../contexts/AuthContext';
 
 const ReviewApplication = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const {token} = useUserData();
   var formData = state && state.formData ? state.formData : null;
   const petData = state && state.petData ? state.petData : null;
   formData.petID = petData.id;
@@ -14,7 +16,9 @@ const ReviewApplication = () => {
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem('auth-token');
+    if (!formData.pet_history) {
+      formData.pet_history_text = 'a';
+    }
     try {
       const response = await fetch(`http://127.0.0.1:8000/pet/seeker/pet/${petData.id}/application/`, {
         method: 'POST',

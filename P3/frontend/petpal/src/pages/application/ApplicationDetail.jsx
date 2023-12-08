@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useUserData } from '../../contexts/AuthContext';
+import './style.css';
 
 const ApplicationDetail = () => {
   const { application_id } = useParams();
-  const token = localStorage.getItem('auth-token');
 
+  const {token} = useUserData();
   const [appData, setAppData] = useState(null);
   const [userType, setUserType] = useState(null);
   const [petData, setPetData] = useState(null);
@@ -103,7 +105,7 @@ const ApplicationDetail = () => {
           </div>
 
           <div style={{ textAlign: 'center' }}>
-            <img src={petData.image} alt={petData.petName} />
+            <img id="pet-img" src={petData.image} alt={petData.petName} />
           </div>
 
           {/* Pet Info */}

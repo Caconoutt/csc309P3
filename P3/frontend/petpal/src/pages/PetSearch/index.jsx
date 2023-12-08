@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap'
+import { Alert, Form } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import './index.css'
 import Cards from './Card'
@@ -7,6 +7,7 @@ import { filterList, sortList, radioList, params } from './options'
 const pageSize = 2
 const Search = () => {
 	const { token } = useUserData()
+	const [errorMessage, setErrMsg] = useState('')
 	const options = {
 		method: 'GET',
 		headers: {
@@ -63,7 +64,13 @@ const Search = () => {
 			&shelter=${query.Shelter || []}`,
 			options
 		)
-			.then((res) => res.json())
+			//.then((res) => res.json())
+			.then((res) => {
+				if (res.status !== 200){
+					setErrMsg(res.statusText)
+				}
+				return res.json()
+			})
 			.then((data) => {
 				const totalPage = Math.ceil(data.count / pageSize)
 				setTotalPages(totalPage)
@@ -103,7 +110,7 @@ const Search = () => {
 		getShelterList()
 	}, [])
 	return (
-		<div className='search-container'>
+		<><div className='search-container'>
 			<Form className='search-wrap'>
 				{/* <Form.Control className='search-input' type='text' placeholder='Search' /> */}
 				<div className='advance-search mt-3'>Search and Filter:</div>
@@ -187,6 +194,15 @@ const Search = () => {
 				</p>
 			</div>
 		</div>
+		{errorMessage ? (
+				<Alert className = 'alert' variant='danger'>
+					{errorMessage}
+				</Alert>
+			) : (
+				<></>
+			)}setShow
+		</>
+		
 	)
 }
 
