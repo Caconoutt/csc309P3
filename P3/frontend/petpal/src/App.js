@@ -78,15 +78,13 @@ function Webpages(){
       <Route path="RegisterShelter" element={<RegisterShelter />}/>
       <Route path="LoginSeeker" element={<LoginSeeker />} />
       <Route path="LoginShelter" element={<LoginShelter />}/>
-      <Route path="PetDetail" element={<PetDetails />}/>
-      <Route path="PetCreate" element={<PetCreate />}/>
-      <Route path="PetSearch" element={<Search />}/>
-      <Route path="ShelterAllPet" element={<ListAllPets />}/>
+    
       {/* <Route path="HomeSeeker" element={<HomeSeeker />}/> */}
     </Route>
 
     <Route path="/" element={<LayoutSeeker />}> 
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
+      <Route path="PetSearch" element={<Search />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
     </Route>
@@ -96,6 +94,8 @@ function Webpages(){
       <Route path="CreateBlog" element={<CreateBlog />} />
       <Route path="ListBlog" element={<BlogList />} />      
       <Route path="ShelterManage" element={<ShelterMag />}/> 
+      <Route path="ShelterAllPet" element={<ListAllPets />}/>
+      <Route path="PetCreate" element={<PetCreate />}/>
       <Route path="EditBlog" element={<EditBlog />} />
       <Route path="ViewBlog" element={<ViewBlog />} />
       
@@ -103,6 +103,7 @@ function Webpages(){
    
 
     <Route path="/" element={<Layout />}>
+      <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="IntroApplication" element={<IntroApplication />} />
       <Route path="CreateApplication" element={<CreateApplication />} />
       <Route path="ReviewApplication" element={<ReviewApplication />} />

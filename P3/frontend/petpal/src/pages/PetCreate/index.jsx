@@ -24,7 +24,7 @@ function PetCreate() {
     const navigate = useNavigate()
 	const handleSubmit = (val) => {
 		if (pet_id) {
-			fetch(`http://localhost:8000/pet/shelter/pets/${pet_id}/`, { ...options, method: 'PUT', body: val })
+			fetch(`http://localhost:8000/pet/shelter/pets/${pet_id}/`, { ...options, method: 'PATCH', body: val })
 				.then((res) => {
 					if (res.status !== 200){
 						setErrMsg(res.statusText)
