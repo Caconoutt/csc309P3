@@ -1,0 +1,56 @@
+.blog-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.blog-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 300px;
+}
+
+.blog-card h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+.blog-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.details-button, .edit-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.details-button {
+    background-color:gold;
+}
+
+.edit-button {
+    background-color:chocolate;
+}
+
+.details-button:hover {
+    background-color: #0056b3;
+}
+
+.edit-button:hover {
+    background-color: #218838;
+}
