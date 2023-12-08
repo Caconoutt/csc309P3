@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useUserData } from '../../contexts/AuthContext';
 
 const ApplicationDetail = () => {
   const { application_id } = useParams();
-  const token = localStorage.getItem('auth-token');
 
+  const {token} = useUserData();
   const [appData, setAppData] = useState(null);
   const [userType, setUserType] = useState(null);
   const [petData, setPetData] = useState(null);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useUserData } from '../../contexts/AuthContext';
 import ApplicationItem from './ApplicationItem';
 import Accordion from 'react-bootstrap/Accordion';
 import './style.css';
@@ -8,7 +9,7 @@ const ApplicationList = () => {
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('creation_time');
 
-  const token = localStorage.getItem('auth-token');
+  const {token} = useUserData();
   const [userType, setUserType] = useState(null);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ const ApplicationList = () => {
   return (
     <div>
       <h1 className="h1 mb-1 fw-bold text-center">Applications</h1>
-      <div className="row justify-content-center mt-3 mb-3">
+      <div className="row justify-content-center mt-3 mb-3" id="filter-bar">
         <div className="col-sm-3 text-right mr-3">
           <label>Filter by Status:</label>
           <select onChange={handleFilterChange}>
