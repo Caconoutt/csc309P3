@@ -1,5 +1,5 @@
 .createFormsWrap {
-    width: 800px;
+    width: 40%;
     margin: 0 auto;
   }
   
@@ -31,4 +31,14 @@
     text-align: center;
     padding: 30px 0 20px;
     color: antiquewhite;
+  }
+  .alert {
+    max-width: 30%;
+    margin: 0 auto;
+  }
+  @media only screen and (max-width: 820px) {
+    .createFormsWrap {
+      width: 60%;
+    }
+    
   }

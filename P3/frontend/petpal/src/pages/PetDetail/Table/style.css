@@ -82,6 +82,11 @@
     .myToast .toast-body {
       color: #222;
     }
+    .alert {
+      max-width: 30%;
+      margin: 0 auto;
+    }
+    
     @media only screen and (max-width: 820px) {
       .main-wrap{
         width: 90%;
