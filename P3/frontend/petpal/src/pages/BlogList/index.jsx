@@ -8,6 +8,8 @@ const BlogList = () => {
     const { token, user_id } = useUserData(); 
     const navigate = useNavigate();
     const { shelterID } = useParams();
+    const [userType, setUserType] = useState('');
+    console.log(token)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,6 +23,8 @@ const BlogList = () => {
                 if (!userTypeRes.ok) throw new Error('Error fetching user type');
                 const userTypeJson = await userTypeRes.json();
 
+                setUserType(userTypeJson.user_type)
+            
                 let blogUrl = '';
                 if (userTypeJson.user_type === 'shelter') {
                     blogUrl = `http://localhost:8000/shelter/blog/list/`;
@@ -41,6 +45,7 @@ const BlogList = () => {
 
                 const blogData = await response.json();
                 setBlogs(blogData);
+                console.log(blogs)
             } catch (error) {
                 console.error('Error fetching blogs:', error);
             }
@@ -48,7 +53,6 @@ const BlogList = () => {
 
         fetchData();
     }, [shelterID, token]);
-
 
 
 
