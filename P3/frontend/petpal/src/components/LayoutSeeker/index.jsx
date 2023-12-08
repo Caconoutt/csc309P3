@@ -45,7 +45,7 @@ const LayoutSeeker = () =>{
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+            <Dropdown.Item href="/SeekerProfile">Profile</Dropdown.Item>
             <Dropdown.Divider />
             <Logout />
           </Dropdown.Menu>

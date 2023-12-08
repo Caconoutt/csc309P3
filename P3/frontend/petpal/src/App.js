@@ -22,6 +22,15 @@ import { UserDataProvider } from './contexts/AuthContext';
 import HomeSeeker from './pages/Home/seeker';
 import NotiList from './pages/NotiList';
 import NotiPage from './pages/NotiPage';
+import SeekerProfile from './pages/SeekerProfile';
+import SeekerEdit from './pages/SeekerEdit';
+import ShelterDetail from './pages/ShelterDetail';
+import ShelterProfile from './pages/ShelterProfile';
+import ShelterEdit from './pages/ShelterEdit';
+
+
+
+
 
 function Webpages(){
   const [userType, setUserType] = useState(null);
@@ -83,11 +92,16 @@ function Webpages(){
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      <Route path="SeekerProfile" element={<SeekerProfile />}/>
+      <Route path="SeekerEdit" element={<SeekerEdit />}/>
+      <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
     </Route>
 
     <Route path="/" element={<LayoutShelter />}>
       <Route path="HomeShelter" element={<Home />} />
-      <Route path="ShelterManage" element={<ShelterMag />}/> 
+      <Route path="ShelterManage" element={<ShelterMag />}/>
+      <Route path="ShelterProfile" element={<ShelterProfile />}/>
+      <Route path="ShelterEdit" element={<ShelterEdit />}/>
     </Route>
 
     <Route path="/" element={<Layout />}>
