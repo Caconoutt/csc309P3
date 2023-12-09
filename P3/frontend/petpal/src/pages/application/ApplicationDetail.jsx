@@ -211,7 +211,7 @@ const ApplicationDetail = () => {
         </select>
         <br/>
         <label htmlFor="status">Status</label>
-        <Link className="btn btnStyle w-100 mt-3 py-2" to={`/chat/${appData[0].id}`}> Want to Chat with the Shelter?</Link>
+        <Link className="btn btnStyle w-100 mt-3 py-2" to={`/chat/${appData[0].id}`}>Chat</Link>
         <Link className="btn btnStyle w-100 mt-3 py-2" to="/ListApplication">Back to Application List</Link>
       </main>
     </div>
