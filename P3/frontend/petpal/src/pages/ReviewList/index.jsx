@@ -3,6 +3,7 @@ import './style.css'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Reviews from '../../components/Reviews';
+import { Link } from 'react-router-dom';
 
 
 const ReviewList = () =>{
@@ -50,6 +51,8 @@ const ReviewList = () =>{
     <h2>Review List:</h2>
     <Reviews data={reviewList} />
     </div>
+
+    <button id="backToList" className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList" style={{ textDecoration: 'none', color: 'inherit' }}>Back to all noti</Link></button>
     
     </main></div>
     </>
