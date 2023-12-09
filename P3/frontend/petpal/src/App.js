@@ -38,6 +38,7 @@ import BlogList from './pages/BlogList';
 import ViewBlog from './pages/ViewBlog';
 import NotFound from './pages/NotFound';
 
+
 function Webpages(){
   const [userType, setUserType] = useState(null);
   const {token} = useUserData();
@@ -95,9 +96,9 @@ function Webpages(){
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
       <Route path="SeekerEdit" element={<SeekerEdit />}/>
       <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
-      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
-      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
+
       <Route path="PetSearch" element={<Search />}/>
+
       <Route path="shelter/:shelter_id/ListBlog" element={<BlogList />} />
     </Route>
 
@@ -111,6 +112,7 @@ function Webpages(){
       <Route path="CreateBlog" element={<CreateBlog />} />
       <Route path="EditBlog" element={<EditBlog />} />
       <Route path="ListBlog" element={<BlogList />} />
+
     </Route>
 
     <Route path="/" element={<LayoutSeeker />}>       
@@ -125,6 +127,8 @@ function Webpages(){
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="ViewBlog" element={<ViewBlog />} />  
+      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
+      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
     </Route>
   
   </Routes>

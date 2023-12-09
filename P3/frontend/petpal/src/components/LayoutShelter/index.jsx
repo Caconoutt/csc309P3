@@ -9,8 +9,48 @@ import login from "../../assets/images/login.png"
 import noti_new from "../../assets/images/noti_new.png"
 import Dropdown from 'react-bootstrap/Dropdown';
 import Logout from "../Logout";
+import noti from "../../assets/images/noti.png"
+import { useState, useEffect } from 'react';
+import { useUserData } from '../../contexts/AuthContext';
 
 const LayoutShelter = () =>{
+  const [unreadNotifications, setUnreadNotifications] = useState(false);
+  const [filter, setFilter] = useState('unreaded')
+  const [sort_time, setSort] = useState('')
+  const {token} = useUserData();
+
+  useEffect(()=>{
+    const url = `http://localhost:8000/account/noti/?filter=${filter}&order_by=${sort_time}`
+    const fetchNoti = async()=>{
+        try{
+            const resp = await fetch(url,{
+                method:'GET',
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            if (resp.ok){
+                const result = await resp.json();
+                // check if there is unread notification
+                // if there is, set unreadNotifications to true
+                // else, set unreadNotifications to false
+                if (result.results.length > 0){
+                  setUnreadNotifications(true);
+                }
+                else{
+                  setUnreadNotifications(false);
+                }
+            }
+            else{
+                console.log('error happend')
+            }
+        }
+        catch(error){console.error(error)}
+    };
+    fetchNoti();
+},[filter,sort_time]);
+
     return <>
     <header className="p-3 mb-3 border-bottom">
     <div className="container">
@@ -44,7 +84,8 @@ const LayoutShelter = () =>{
 
     <Dropdown>
           <Dropdown.Toggle style={{backgroundColor:"#B55D4C", borderColor:"#B55D4C"}}>
-          <img src={noti_new} alt="mdo" width="32" height="32" className="rounded-circle" />
+          <img src={unreadNotifications ? noti_new : noti}
+          alt="mdo" width="32" height="32" className="rounded-circle" />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
