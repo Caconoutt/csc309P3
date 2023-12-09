@@ -17,7 +17,7 @@ function PetDetails() {
 	const handleClick = () => {
 		const status = pet.status
 		if (status === 'Available') {
-			navigate('/application', {
+			navigate('/IntroApplication', {
 				state: {
 					petid: `${pet.id}`,
 					petname: `${pet.name}`,

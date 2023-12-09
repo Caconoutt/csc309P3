@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useUserData } from '../../contexts/AuthContext';
 import './style.css';
 
 const ApplicationItem = ({ application, userType }) => {
     const [petData, setPetData] = useState(null);
-    const token = localStorage.getItem('auth-token');
+    const {token} = useUserData();
     const navigate = useNavigate();
 
     useEffect(() => {

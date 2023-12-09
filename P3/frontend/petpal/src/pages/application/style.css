@@ -99,3 +99,13 @@
   width: 60%;
   margin: auto; /* Centers the accordion if that's desired */
 }
+
+#filter-bar {
+  width: 99%;
+}
+
+#pet-img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
