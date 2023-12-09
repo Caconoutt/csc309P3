@@ -2,7 +2,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import "./style.css"
 
 const HomeSeeker = () => {
-  console.log("1111")
+
   const navigate = useNavigate();
     return <>
       <div className="searchBar">

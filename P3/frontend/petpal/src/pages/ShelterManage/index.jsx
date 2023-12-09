@@ -1,5 +1,5 @@
 import Lists from './Lists'
-import { Button } from 'react-bootstrap'
+import { Button, Alert } from 'react-bootstrap'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUserData } from "../../contexts/AuthContext"
@@ -7,6 +7,7 @@ import './Lists/index'
 function ShelterMag() {
 	const [petList, setPetList] = useState([])
 	const {token} = useUserData()
+	const [errorMessage, setErrMsg] = useState('')
 	console.log(token)
 	let navigate = useNavigate()
 	const getList = () => {
@@ -16,7 +17,13 @@ function ShelterMag() {
 				Authorization: 'Bearer ' + token,
 			},
 		})
-			.then((response) => response.json())
+			.then((response) => {
+				if (response.status !== 200){
+					setErrMsg(response.statusText)
+
+				}
+				return response.json()
+			})
 			.then((json) => {
 				setPetList(json)
 			})
@@ -59,14 +66,16 @@ function ShelterMag() {
 				</Button>
 				<Lists petList={newList} getList={getList} />
 			</div>
+			{errorMessage ? (
+				<Alert className = 'alert' variant='danger'>
+					{errorMessage}
+				</Alert>
+			) : (
+				<></>
+			)}
 		</>
 	)
 }
-// function ShelterMag(){
-// 	return (
-// 		<div>HIIIIII</div>
-// 	)
-	
-// }
+
 
 export default ShelterMag

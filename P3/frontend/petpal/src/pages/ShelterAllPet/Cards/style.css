@@ -1,6 +1,6 @@
 .search-container {
     display: flex;
-    width: 1200px;
+    width: 60%;
     margin: 0 auto;
   }
   
@@ -87,3 +87,8 @@
   .page-wrap2 {
     color: antiquewhite;
   }
+  .alert {
+    max-width: 30%;
+    margin: 0 auto;
+  }
+  

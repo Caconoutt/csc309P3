@@ -29,6 +29,7 @@ function PetCreate() {
 				.then((data) => {
 					// console.log(data, '=========================')
 					petCreateQuery(data)
+					navigate("/ShelterAllPet")
 				})
 			
 		} else {

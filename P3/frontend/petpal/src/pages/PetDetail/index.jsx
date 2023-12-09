@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate, useSearchParams, useLocation } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
 import Toast from 'react-bootstrap/Toast'
 import Table from './Table'
 import { useUserData } from '../../contexts/AuthContext'
@@ -8,6 +9,7 @@ function PetDetails() {
 	const [show, setShow] = useState(false)
 	const [pet, setPet] = useState({})
 	const { token } = useUserData()
+	const [errorMessage, setErrMsg] = useState('')
     const {identity, pet_id} = useLocation().state;
 
 	const navigate = useNavigate()
@@ -15,7 +17,7 @@ function PetDetails() {
 	const handleClick = () => {
 		const status = pet.status
 		if (status === 'Available') {
-			navigate('/application', {
+			navigate('/IntroApplication', {
 				state: {
 					petid: `${pet.id}`,
 					petname: `${pet.name}`,
@@ -52,7 +54,13 @@ function PetDetails() {
 					Authorization: 'Bearer ' + token,
 				},
 			})
-				.then((response) => response.json())
+			.then((response) => {
+				if (response.status !== 200){
+					setErrMsg(response.statusText)
+				}
+				return response.json()
+			})
+				
 				.then((json) => {
 					console.log(json)
 					setPet(json)
@@ -61,14 +69,14 @@ function PetDetails() {
 	}, [pet_id])
 
 	return (
-		<div className='row row-wrap '>
+		<><div className='row row-wrap '>
 			<h1 className='title'>pet detail</h1>
 			<div className='col-sm-12 mb-3 mb-sm-0 item-pet-card'>
 				<div className='card'>
 					<img src={pet.image} className='rounded img1' />
 					<Table pet={pet} />
 					<div className='list-group-item flex'>
-					<Link to={'/ShelterDetail/'+ pet.shelter} className='info'>
+					<Link to={'/ShelterDetail/'+ pet.shelter} className='info' style = {{color:'black'}}>
 							check its shelter
 						</Link>
 					</div>
@@ -88,6 +96,15 @@ function PetDetails() {
 				<Toast.Body>This pet can't be adopted for now. Please try another one.</Toast.Body>
 			</Toast>
 		</div>
+		{errorMessage ? (
+				<Alert className = 'alert' variant='danger'>
+					{errorMessage}
+				</Alert>
+			) : (
+				<></>
+			)}
+		</>
+		
 	)
 }
 

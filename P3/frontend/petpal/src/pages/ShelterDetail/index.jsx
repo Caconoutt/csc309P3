@@ -26,6 +26,7 @@ const ShelterDetail = () => {
     const [reviewList, setReviewList] = useState([]);
     const [reloadReviews, setReloadReviews] = useState(false);
 
+
     console.log(shelter_id);
 
        useEffect(() => {
@@ -150,6 +151,7 @@ const ShelterDetail = () => {
 
     
 
+
      
 
 
@@ -254,7 +256,9 @@ const ShelterDetail = () => {
       </div>
          
     </div>
+
     : <p>Loading...</p>}
+
     </>
 );
 }
