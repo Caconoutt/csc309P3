@@ -31,9 +31,9 @@ const Layout = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item><Link to="/LoginSeeker">Seeker Login</Link></Dropdown.Item>
+            <Dropdown.Item href="/LoginSeeker">Seeker Login</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item><Link to="/LoginShelter">Shelter Login</Link></Dropdown.Item>
+            <Dropdown.Item href="/LoginShelter">Shelter Login</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
