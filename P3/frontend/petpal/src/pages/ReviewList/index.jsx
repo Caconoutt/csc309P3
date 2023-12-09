@@ -27,7 +27,7 @@ const ReviewList = () =>{
                 });
                 if (resp.ok){
                     const result = await resp.json();
-                    setReviewList(result.results)
+                    setReviewList(result.results);
                     
                 }
                 else{
@@ -46,11 +46,10 @@ const ReviewList = () =>{
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">
 
-    <div class="main-wrap">
+    <div class="main-wrap" id="overwrite_main-wrap">
     <h2>Review List:</h2>
     <Reviews data={reviewList} />
     </div>
-    
     
     </main></div>
     </>

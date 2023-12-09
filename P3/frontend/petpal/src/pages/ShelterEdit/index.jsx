@@ -95,10 +95,10 @@ const ShelterEdit = () => {
     
     return <>
         <div class="container" id="wrap">
-        <div>
-            <Button  class="btn-image" onClick={handleEdit}>
+        <div class = "edit-button-container">
+            <button  class="btn-image" onClick={handleEdit}>
                 <img src={Done} alt="Button Image" class="btn-image" />
-            </Button>
+            </button>
         </div>
         
         <div class="img-container">
@@ -112,44 +112,48 @@ const ShelterEdit = () => {
         </div>
         
         <div class="info-container">
-            <div class="row" >
-                <div class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Nickname:</p>
-                </div>
-                <div class="col-md-6 input-left">
-                    <input type="text" class="form-control" id="form-input" placeholder="Enter text" 
+
+
+        <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Nickname:</p>
+              </div>
+              <div class="custom-col input-left">
+                    <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter text" 
                     value={nickname_u} onChange={(e) => setNickname_u(e.target.value)}/>
                 </div>
-            </div>
+          </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Name:</p>
-                </div>
-                <div class="col-md-6">
-                        <input type="text" class="form-control" id="form-input" placeholder="Enter text"
+
+          <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Name:</p>
+              </div>
+              <div class="custom-col input-left">
+              <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter text" 
                         value={username_u} 
-                        onChange={(e) => setUsername_u(e.target.value)}/>
+                        onChange={(e) => setUsername_u(e.target.value)}
+                        />
                 </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Contact:</p>
-                </div>
-                <div class="col-md-6">
-                        <input type="text" class="form-control" id="form-input" placeholder="Enter Number"
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Contact:</p>
+              </div>
+              <div class="custom-col input-left">
+              <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter Number" 
                         value={contact_u}
                         onChange={(e) => setContact_u(e.target.value)}/>
                 </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Location:</p>
+            <div class="custom-row">
+                <div  class="custom-col text-sm-center text-md-end">
+                    <p class="seeker-title">Location:</p>
                 </div>
-                <div class="col-md-6">
-                    <select id="choice" class="form-select" required
+                <div class="custom-col input-left">
+                    <select id="choice" class="form-select edit-form" 
                     value={location_u}  
                     onChange={(e) => setLocation_u(e.target.value)}>
                         <option selected disabled value=" ">Choose...</option>
@@ -163,24 +167,24 @@ const ShelterEdit = () => {
                         <option>Saskatchewan</option></select>
                 </div>
             </div>
-            <div class="row">
-              <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                  <p class="title">Mission Statement:</p>
-              </div>
-              <div class="col-md-6">
-                      <input type="text" class="form-control" id="form-input" placeholder="Enter your mission statement"
-                       value={mission_u}  
-                       onChange={(e) => setMission_u(e.target.value)}/>
-              </div>
-          </div>
 
-            <div class="row">
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Mission Statement:</p>
+              </div>
+              <div class="custom-col input-left">
+                    <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter your mission statement"
+                     value={mission_u}  
+                     onChange={(e) => setMission_u(e.target.value)}/>
+                </div>
+          </div>
+            {/* <div class="row">
                 <div class="col-md-6 col-sm-12 text-center text-md-end category">
                     <Link to="/ShelterManage" class="management">
                       <button class="btn btn-primary btn-submit">Pet Management</button>
                     </Link>
                 </div>
-            </div>
+            </div> */}
         </div> 
     </div>
     </>

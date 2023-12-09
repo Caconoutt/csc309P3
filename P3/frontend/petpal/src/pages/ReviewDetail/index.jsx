@@ -132,7 +132,7 @@ const ReviewDetail=() =>{
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">
 
-    <div class="main-wrap">
+    <div class="main-wrap" id="overwrite_main-wrap">
     
     <SingleReview detail={msg} reviewer_id={id}/>
     <Replys data={replyList} />
@@ -141,7 +141,7 @@ const ReviewDetail=() =>{
     <div class="container" id="wrap">
         <form>
         <div class="form-group">
-        <label for="exampleFormControlTextarea1">Reply:</label>
+        <label for="exampleFormControlTextarea1"> Leave Your Reply:</label>
         <textarea
         className="form-control"
         id="exampleFormControlTextarea1"
@@ -156,7 +156,7 @@ const ReviewDetail=() =>{
     </div>
     {/* submit button */}
     <div class="container" id="wrap">
-        <button type="button" class="btn btn-primary" onClick={handleSubmit}>Submit Reply</button>
+        <button className="btn btnStyle w-90 py-2" type="submit" onClick={handleSubmit}>Submit Reply</button>
     </div>
     </div>
 

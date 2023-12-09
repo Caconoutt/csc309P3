@@ -1,19 +1,21 @@
-
-
 .conta {
-    border: 2px solid #dedede;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-    height: 80px;
-  }
+  border: 2px solid #dedede;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  height: 80px;
+}
 
 #filter_readed{
-  width: 33% !important;
+width: 33% !important;
 }
 #filter_unreaded{
-  width: 33% !important;
+width: 33% !important;
 }
 #sort_time{
-  width: 34% !important;
+width: 34% !important;
+}
+
+div#overwrite_main-wrap{
+width: 90% !important;
 }
