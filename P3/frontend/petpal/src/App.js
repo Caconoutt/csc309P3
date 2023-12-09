@@ -84,14 +84,14 @@ function Webpages(){
       {/* <Route path ="PetSearch/" element={<PetSearch />}/>
     {/* <Route path = "application" element={<PetDetails />}/> */}
     </Route>
-    <Route path="/" element={<Layout />}>
+    {/* <Route path="/" element={<Layout />}>
       <Route path="IntroApplication" element={<IntroApplication />} />
       <Route path="CreateApplication" element={<CreateApplication />} />
       <Route path="ReviewApplication" element={<ReviewApplication />} />
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
       <Route path="ViewBlog" element={<ViewBlog />} />
-    </Route>
+    </Route> */}
 
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>
