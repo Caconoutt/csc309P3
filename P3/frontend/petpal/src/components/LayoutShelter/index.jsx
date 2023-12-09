@@ -126,11 +126,7 @@ const LayoutShelter = () =>{
           <img src={unreadNotifications ? noti_new : noti}
           alt="mdo" width="32" height="32" className="rounded-circle" />
           </Dropdown.Toggle>
-
           <Dropdown.Menu>
-            <div id="newAddedNoti">
-            <Dropdown.Item href="#/action-1">dummy new noti</Dropdown.Item>
-            </div>
             <Dropdown.Divider />
             <Dropdown.Item href="/NotiList">All notification</Dropdown.Item>
           </Dropdown.Menu>
