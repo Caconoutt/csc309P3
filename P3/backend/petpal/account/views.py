@@ -1,10 +1,10 @@
-from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import CreateAPIView, RetrieveAPIView, \
   ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveDestroyAPIView
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from .serializer import RegisterSeekerSerializer,SeekerSerializer
@@ -88,6 +88,7 @@ class RegisterShelterAPIView(CreateAPIView):
 class RetrieveSeeker(RetrieveUpdateDestroyAPIView):
   serializer_class = SeekerSerializer
   permission_classes = [IsItself]
+  parser_classes = [MultiPartParser, FormParser]
   def get_object(self):
     obj = get_object_or_404(Seeker, id=self.kwargs['pk'])
     self.check_object_permissions(self.request, obj)
@@ -97,6 +98,7 @@ class RetrieveSeeker(RetrieveUpdateDestroyAPIView):
 class RetrieveShelter(RetrieveUpdateDestroyAPIView):
   serializer_class = ShelterSerializer
   permission_classes = [IsItself]
+  parser_classes = [MultiPartParser, FormParser]
   def get_object(self):
     obj = get_object_or_404(Shelter, id=self.kwargs['pk'])
     self.check_object_permissions(self.request, obj)

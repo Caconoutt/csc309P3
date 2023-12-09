@@ -1,12 +1,7 @@
-
-
 import './style.css';
 import React from 'react';
-import { Link, redirect } from "react-router-dom";
-import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Done from "../../assets/images/Done.png";
-import Edit from "../../assets/images/edit.png" 
 import './style.css';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -30,6 +25,7 @@ const ShelterEdit = () => {
     const [preference_u, setPreference_u] = useState(preference);
     const [image_url_u, setImage_url_u] = useState(image_url);
     const [mission_u, setMission_u] = useState(mission);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,7 +34,6 @@ const ShelterEdit = () => {
             const resp = await fetch(url, {
               method: 'GET',
               headers: {
-                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
               },
             });
@@ -56,42 +51,55 @@ const ShelterEdit = () => {
         fetchData();
       }, []);
 
-      const handleEdit = async (event) => {
-        event.preventDefault();
-      
-        const url = `http://localhost:8000/account/shelter/profile/${firstItemId}/`;
-        console.log(location_u);
-      
-        const updatedData = {
-            username: username_u,
-            nickname: nickname_u,
-            contact: contact_u,
-            location: location_u,
-            preference: preference_u,
-            mission: mission_u,
-          // Include other fields that need to be updated
-        };
-      
-        try {
-          const response = await fetch(url, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(updatedData),
-          });
-      
-          if (response.ok) {
-            // Redirect to SeekerProfile upon successful update
-            navigate('/ShelterProfile');
-          } else {
-            console.log('Error updating profile');
-          }
-        } catch (error) {
-          console.error('Error:', error);
+    const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedImage(e.target.files[0]);
         }
-      };      
+    };
+
+
+    const handleEdit = async (event) => {
+      event.preventDefault();
+      if (location_u === null) {
+        alert("You must select a location");
+        return;
+      }
+      const url = `http://localhost:8000/account/shelter/profile/${firstItemId}/`;
+      
+      const formData = new FormData();
+      formData.append('username', username_u);
+      formData.append('nickname', nickname_u);
+      formData.append('contact', contact_u);
+      formData.append('location', location_u);
+      formData.append('preference', preference_u);
+      formData.append('mission', mission_u);
+      
+      // Only append image if selectedImage is not null
+      if (selectedImage) {
+        formData.append('image_url', selectedImage);
+      }
+    
+      try {
+        const response = await fetch(url, {
+          method: 'PATCH',
+          headers: {
+            // Do NOT set 'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: formData,
+        });
+    
+        if (response.ok) {
+          navigate('/ShelterProfile');
+        } else {
+          const errorResponse = await response.json();
+          console.log('Error updating profile', errorResponse);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+      
     
     return <>
         <div class="container" id="wrap">
@@ -104,7 +112,7 @@ const ShelterEdit = () => {
         <div class="img-container">
             <div class = "portrait">
                 <div class="custom-upload">
-                    <input type="file" class="img-input" id="imageUpload" />
+                    <input type="file" class="img-input" id="imageUpload" onChange={handleImageChange}/>
                     <label class="custom-file-label" for="imageUpload">Choose Image</label>
                 </div>
             </div>
@@ -153,7 +161,7 @@ const ShelterEdit = () => {
                     <p class="seeker-title">Location:</p>
                 </div>
                 <div class="custom-col input-left">
-                    <select id="choice" class="form-select edit-form" 
+                    <select id="choice" class="form-select edit-form"
                     value={location_u}  
                     onChange={(e) => setLocation_u(e.target.value)}>
                         <option selected disabled value=" ">Choose...</option>

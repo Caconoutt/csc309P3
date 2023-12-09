@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useUserData } from "../../contexts/AuthContext"
 import { Link } from "react-router-dom";
-import Login from "../../assets/images/login.png"
+import login from "../../assets/images/login.png"
 
 const ShelterProfile = () => {
     const navigate = useNavigate();
@@ -24,6 +24,7 @@ const ShelterProfile = () => {
     const [user, setUser] = useState(null);
     const [mission, setMission] = useState("");
     const [isloading, setIsloading] = useState(true);
+    const [image_url, setImage_url] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +61,7 @@ const ShelterProfile = () => {
                   setEmail(userResult.email);
                   setMission(userResult.mission);
                   setIsloading(false);
+                  setImage_url(userResult.image_url);
                 } else {
                   setIsloading(false);
                   console.log('Error fetching user data');
@@ -113,7 +115,7 @@ const ShelterProfile = () => {
 
         <div class="img-container">
             <div class = "portrait">
-                <img src={Login} class="img-fluid profile-img" /> 
+                <img src={image_url === null ? login : image_url} class="img-fluid profile-img" /> 
             </div>
         </div>
         
