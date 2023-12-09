@@ -1,5 +1,6 @@
 import React from 'react';
 import Review from '../Review';
+import Reply from '../Reply';
 
 const Replys = ({data}) =>{
 
@@ -10,13 +11,13 @@ const Replys = ({data}) =>{
               console.log(item.id);
               return (
                 <React.Fragment key={item.id}>
-                  <Review detail={item.detail} review_id={item.id} />
+                  <Reply detail={item.detail} review_id={item.id} />
                   {console.log(item.detail)}
                 </React.Fragment>
               );
             })
           ) : (
-            <p>No reviews/reply available</p>
+            <p> No Reply available</p>
           )}
         </>
       );

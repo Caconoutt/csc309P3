@@ -155,11 +155,11 @@ const ReviewDetail=() =>{
         </form>
     </div>
     {/* submit button */}
-    <div class="container" id="wrap">
-        <button className="btn btnStyle w-90 py-2" type="submit" onClick={handleSubmit}>Submit Reply</button>
+    {/* <div class="container" id="wrap"> */}
+        
+    {/* </div> */}
     </div>
-    </div>
-
+    <button className="btn btnStyle w-100 py-2" type="submit" onClick={handleSubmit}>Submit Reply</button>
     <button className="btn btnStyle w-100 py-2" type="submit"><Link to={`/ReviewList/${shelter_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>Back to all Review</Link></button>
     
     </main></div>

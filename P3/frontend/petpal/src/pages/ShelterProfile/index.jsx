@@ -80,6 +80,26 @@ const ShelterProfile = () => {
         fetchData();
       }, []);
     
+      const handleDelete = async () => {  
+        const url = `http://localhost:8000/account/seeker/profile/${firstItemId}/`;
+        try {
+          const resp = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          if (resp.ok) {
+            navigate(`/`);
+          } else {
+            console.log('Error deleting user');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+    };
+
     // template below
     return (
       <>
@@ -153,8 +173,15 @@ const ShelterProfile = () => {
                   </Link>
                   </div> 
               </div> 
+
+              <div class="col-md-6 col-sm-12 text-center text-md-end">
+                 
+                <button class="btn btn-primary btn-submit" onClick={handleDelete}>Delete</button>
+                 
+              </div> 
               
             </div> 
+
             
       </div>
     )}

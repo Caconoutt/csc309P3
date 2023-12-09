@@ -200,7 +200,7 @@ const Search = () => {
 				</Alert>
 			) : (
 				<></>
-			)}setShow
+			)}
 		</>
 		
 	)
