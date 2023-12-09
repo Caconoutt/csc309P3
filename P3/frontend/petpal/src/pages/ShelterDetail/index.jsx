@@ -169,16 +169,6 @@ const ShelterDetail = () => {
             </div>
           </div>
 
-          {/* <div class="row">
-            <div class="col-md-6 category">
-                <p class="title">Nickname:</p>
-            </div>
-
-            <div class="col-md-6 text-md-left">
-                <p>{nickname}</p>
-            </div>
-          </div> */}
-
           <div class="custom-row">
             <div class="custom-col text-sm-center text-md-end">
               <p class="seeker-title">Nickname:</p>

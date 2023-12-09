@@ -92,8 +92,7 @@ function Webpages(){
     <Route path="/" element={<LayoutSeeker />}> 
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="ShelterList" element={<ShelterList />}/>
-      <Route path="NotiList" element={<NotiList />}/>
-      <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
       <Route path="SeekerEdit" element={<SeekerEdit />}/>
       <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
@@ -130,6 +129,8 @@ function Webpages(){
       <Route path="ViewBlog" element={<ViewBlog />} />  
       <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
       <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
+      <Route path="NotiList" element={<NotiList />}/>
+      <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
     </Route>
   
   </Routes>

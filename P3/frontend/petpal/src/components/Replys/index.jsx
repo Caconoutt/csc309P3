@@ -16,7 +16,7 @@ const Replys = ({data}) =>{
               );
             })
           ) : (
-            <p>No reviews/reply available</p>
+            <p> No Reply available</p>
           )}
         </>
       );
