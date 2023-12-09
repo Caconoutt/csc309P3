@@ -81,7 +81,7 @@ const ShelterProfile = () => {
       }, []);
     
       const handleDelete = async () => {  
-        const url = `http://localhost:8000/account/seeker/profile/${firstItemId}/`;
+        const url = `http://localhost:8000/account/shelter/profile/${firstItemId}/`;
         try {
           const resp = await fetch(url, {
             method: 'DELETE',
