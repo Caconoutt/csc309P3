@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useUserData } from "../../contexts/AuthContext"
 import { Button } from "react-bootstrap";
-import { useRef } from "react";
 
 const SeekerProfile = () => {
     const navigate = useNavigate();
@@ -104,14 +103,14 @@ const SeekerProfile = () => {
         </div>
         
         <div class="info-container">
-            <div class="row" >
-                <div class="col-md-6 col-sm-12 text-center text-md-end category">
+              <div class="row">
+                <div class="col-md-6 col-sm-12 category">
                     <p class="title">Nickname:</p>
                 </div>
                 <div class="col-md-6 col-sm-12 text-md-left">
                     <p>{nickname}</p>
                 </div>
-            </div>
+              </div>
             <div class="row" >
                 <div class="col-md-6 col-sm-12 text-center text-md-end category">
                     <p class="title">Email:</p>
