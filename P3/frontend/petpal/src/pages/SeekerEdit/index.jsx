@@ -30,6 +30,7 @@ const SeekerEdit = () => {
     const [location_u, setLocation_u] = useState(location);
     const [preference_u, setPreference_u] = useState(preference);
     const [image_url_u, setImage_url_u] = useState(image_url);
+    const [selectedImage, setSelectedImage] = useState(null);
 
 
     useEffect(() => {
@@ -57,36 +58,49 @@ const SeekerEdit = () => {
         fetchData();
       }, []);
 
+      const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+          setSelectedImage(e.target.files[0]);
+        }
+    };
+
       const handleEdit = async (event) => {
         event.preventDefault();
-      
+        if (location_u === null) {
+          alert("You must select a location");
+          return;
+        }
+        if (preference_u === null) {
+          alert("You must select a preference");
+          return;
+        }
+
         const new_url = `http://localhost:8000/account/seeker/profile/${firstItemId}/`;
-        console.log(location_u);
       
-        const updatedData = {
-            username: username_u,
-            nickname: nickname_u,
-            contact: contact_u,
-            location: location_u,
-            preference: preference_u,
-          // Include other fields that need to be updated
-        };
-      
+        const formData = new FormData();
+        formData.append('username', username_u);
+        formData.append('nickname', nickname_u);
+        formData.append('contact', contact_u);
+        formData.append('location', location_u);
+        formData.append('preference', preference_u);
+        if (selectedImage) {
+          formData.append('image_url', selectedImage);
+        }
         try {
           const response = await fetch(new_url, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
-              'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify(updatedData),
+            body: formData,
           });
       
           if (response.ok) {
             // Redirect to SeekerProfile upon successful update
             navigate('/SeekerProfile');
           } else {
-            console.log('Error updating profile');
+            const errorResponse = await response.json();
+            console.log('Error updating profile', errorResponse);
           }
         } catch (error) {
           console.error('Error:', error);
@@ -104,7 +118,7 @@ const SeekerEdit = () => {
         <div class="img-container">
             <div class = "portrait">
                 <div class="custom-upload">
-                    <input type="file" class="img-input" id="imageUpload" />
+                    <input type="file" class="img-input" id="imageUpload" onChange={handleImageChange}/>
                     <label class="custom-file-label" for="imageUpload">Choose Image</label>
                 </div>
             </div>

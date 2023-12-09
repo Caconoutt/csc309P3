@@ -5,7 +5,7 @@ import { useUserData } from '../../contexts/AuthContext'
 
 import SingleNoti from '../../components/SingleNoti'
 import './style.css'
-
+import { useNavigate } from 'react-router-dom'
 
 const NotiPage=() =>{
     const {noti_id} = useParams()
@@ -14,6 +14,7 @@ const NotiPage=() =>{
     const [msg, setMsg] = useState('')
     const [notiCase, setNotiCase] = useState('')
     const [shelter_id, setShelter_id] = useState('')
+    const navigate = useNavigate();
 
     useEffect(()=>{
         
@@ -60,7 +61,29 @@ const NotiPage=() =>{
             return;
         }
       };
-    
+
+    const handleDelete = async () => {
+        // delete the notification
+        const url = `http://localhost:8000/account/noti/${noti_id}/`;
+        try {
+          const resp = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          if (resp.ok) {
+            // navigate to total notification page
+            navigate(`/NotiList`);
+          } else {
+            console.log('Error deleting user');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        
+    };
 
     return <>
     <div className="page d-flex align-items-center py-4">
@@ -78,6 +101,8 @@ const NotiPage=() =>{
           </button>
 
     <button id="backToList" className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList" style={{ textDecoration: 'none', color: 'inherit' }}>Back to all noti</Link></button>
+    {/* i want add an button to delete this noti */}
+    <button id="deleteNoti" className="btn btnStyle w-100 py-2" type="submit" onClick={handleDelete}>Delete this noti</button>
 
     </div>
 

@@ -25,6 +25,7 @@ const SeekerProfile = () => {
     const [email, setEmail] = useState(null);
     const [user, setUser] = useState(null);
     const [isloading, setIsloading] = useState(true);  
+    const [image_url, setImage_url] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +61,8 @@ const SeekerProfile = () => {
                   setPreference(userResult.preference);
                   setEmail(userResult.email);
                   setIsloading(false);
+                  setImage_url(userResult.image_url);
+                  console.log(userResult.image_url);
                 } else {
                     setIsloading(false);
                   console.log('Error fetching user data');
@@ -82,6 +85,26 @@ const SeekerProfile = () => {
         navigate(`/SeekerEdit`, { state: {user:user}});
 
     };
+
+    const handleDelete = async () => {  
+        const url = `http://localhost:8000/account/seeker/profile/${firstItemId}/`;
+        try {
+          const resp = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          if (resp.ok) {
+            navigate(`/`);
+          } else {
+            console.log('Error deleting user');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+    }
     
 
     // template below
@@ -99,7 +122,7 @@ const SeekerProfile = () => {
 
         <div class="img-container">
             <div class = "portrait">
-                <img src={Login} class="img-fluid profile-img" /> 
+                <img src={image_url === null ? Login : image_url} class="img-fluid profile-img" /> 
             </div>
         </div>
         
@@ -159,6 +182,15 @@ const SeekerProfile = () => {
               <p class = "seeker-info">{preference}</p>
             </div>
           </div>
+
+          <div class="row">
+              <div class="col-md-6 col-sm-12 text-center text-md-end category">
+                 
+              <button class="btn btn-primary btn-submit" onClick={handleDelete}>Delete</button>
+                 
+              </div> 
+              
+            </div> 
             
         </div> 
     </div>
