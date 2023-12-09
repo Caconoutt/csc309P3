@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { Outlet, Link, useLocation } from "react-router-dom"
-import { APIContext } from "../../contexts/AuthContext";
+import { useEffect, useState } from "react";
+import { useUserData } from "../../contexts/AuthContext";
+import { Outlet, Link } from "react-router-dom"
 import "../../pages/Home/style.css"
 import '../Layout/style.css';
 import logo from "../../assets/images/logo.png"
@@ -11,6 +11,54 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Logout from "../Logout";
 
 const LayoutShelter = () =>{
+    const {token} = useUserData();
+    const [image, setImage] = useState(null);
+    const [filter, setFilter] = useState('')
+    const [sort_time, setSort] = useState('')
+
+    useEffect(() => {
+        const fetchData = async () => {
+          const url = `http://localhost:8000/account/noti/?filter=${filter}&order_by=${sort_time}`;
+          try {
+            const resp = await fetch(url, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+            if (resp.ok) {
+              const result = await resp.json();
+              if (result.results.length > 0) {
+                const ownerId = result.results[0].owner;
+                const newUrl = `http://localhost:8000/account/shelter/profile/${ownerId}/`;
+                const userResp = await fetch(newUrl, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                  },
+                });
+                if (userResp.ok) {
+                  const userResult = await userResp.json();
+                  setImage(userResult.image_url);
+                } else {
+                  console.log('Error fetching user data');
+                }
+              }
+            } else {
+              console.log('Error fetching notifications');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      
+        fetchData();
+      }, [image]);
+
+
+
     return <>
     <header className="p-3 mb-3 border-bottom">
     <div className="container">
@@ -60,7 +108,7 @@ const LayoutShelter = () =>{
     
     <Dropdown>
           <Dropdown.Toggle style={{backgroundColor:"#B55D4C", borderColor:"#B55D4C"}}>
-          <img src={login} alt="mdo" width="32" height="32" className="rounded-circle" />
+          <img src={image === null ? login : image} alt="mdo" width="32" height="32" className="rounded-circle" />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>

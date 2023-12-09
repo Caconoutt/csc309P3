@@ -25,6 +25,7 @@ const SeekerProfile = () => {
     const [email, setEmail] = useState(null);
     const [user, setUser] = useState(null);
     const [isloading, setIsloading] = useState(true);  
+    const [image_url, setImage_url] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +61,8 @@ const SeekerProfile = () => {
                   setPreference(userResult.preference);
                   setEmail(userResult.email);
                   setIsloading(false);
+                  setImage_url(userResult.image_url);
+                  console.log(userResult.image_url);
                 } else {
                     setIsloading(false);
                   console.log('Error fetching user data');
@@ -99,7 +102,7 @@ const SeekerProfile = () => {
 
         <div class="img-container">
             <div class = "portrait">
-                <img src={Login} class="img-fluid profile-img" /> 
+                <img src={image_url === null ? Login : image_url} class="img-fluid profile-img" /> 
             </div>
         </div>
         
