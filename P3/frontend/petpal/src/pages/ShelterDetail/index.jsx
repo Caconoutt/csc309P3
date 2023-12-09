@@ -157,7 +157,7 @@ const ShelterDetail = () => {
     <>
     {!isLoading && ratingGot ?
     <div class="container" id="wrap">
-      <div class="row info-container">
+      <div class="row detail-info-container">
         <div class="col-md-6">
           <div class="img-container">
             <div class="img-container">
@@ -167,7 +167,7 @@ const ShelterDetail = () => {
             </div>
           </div>
 
-          <div class="row">
+          {/* <div class="row">
             <div class="col-md-6 category">
                 <p class="title">Nickname:</p>
             </div>
@@ -175,40 +175,49 @@ const ShelterDetail = () => {
             <div class="col-md-6 text-md-left">
                 <p>{nickname}</p>
             </div>
-          </div>
+          </div> */}
 
-
-          <div class="row">
-            <div  class="col-md-6 col-sm-12 category">
-                <p class="title">Contact:</p>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Nickname:</p>
             </div>
-            <div class="col-md-6 col-sm-12 text-md-left">
-                <p>{contact}</p>
-            </div>
-          </div>
-
-          <div class="row">
-            <div  class="col-md-6 col-sm-12 category">
-                <p class="title">Location:</p>
-            </div>
-            <div class="col-md-6 col-sm-12 text-md-left">
-                <p>{location}</p>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{nickname}</p>
             </div>
           </div>
 
-          <div class="row">
-            <div  class="col-md-6 col-sm-12 ">
-                <p class="title">Mission Statement:</p>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Contact:</p>
             </div>
-            <div class="col-md-6 col-sm-12 text-md-left">
-                <p>{mission}</p>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{contact}</p>
             </div>
           </div>
+
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Location:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{location}</p>
+            </div>
+          </div>
+
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Mission Statement:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{mission}</p>
+            </div>
+          </div>
+
           
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-6 right-side">
         <div class="row">
               <div class="col-md-6 col-sm-12">
               <Link to={`/shelter/${shelter_id}/ListBlog`} className="management">

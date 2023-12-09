@@ -51,7 +51,6 @@ const ReviewList = () =>{
     <Reviews data={reviewList} />
     </div>
     
-    
     </main></div>
     </>
     
