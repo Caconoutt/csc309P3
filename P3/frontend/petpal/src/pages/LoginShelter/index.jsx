@@ -13,6 +13,7 @@ const LoginShelter = () => {
     const [password, setPw] = useState("");
     const [errorMsg, setErrorMsg] =useState("");
     const {token, setToken} = useUserData();
+    const [userType, setUserType] = useState(null);
     const navigate = useNavigate()
 
     const login = async() =>{
@@ -45,11 +46,25 @@ const LoginShelter = () => {
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
-                
                 setToken(new_resp.access);
                 localStorage.setItem('token', new_resp.access);
-                //console.log(token);
+                const userTypeRes = await fetch(`http://127.0.0.1:8000/account/usertype/`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                if (!userTypeRes.ok) throw new Error('Error fetching user type');
+                const userTypeJson = await userTypeRes.json();
+                setUserType(userTypeJson.user_type);
+
+                if (userType != 'shelter'){
+                    setErrorMsg(
+                        "You are not authorized to access this page as a seeker."
+                    );
+                }
                 window.location.href = "/HomeShelter";
+                
             }
         }
         catch(error){

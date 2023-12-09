@@ -87,9 +87,9 @@ const LayoutShelter = () =>{
         console.error(error);
       }
     };
-  
     fetchData();
   }, [image]);
+  
     return <>
     <header className="p-3 mb-3 border-bottom">
     <div className="container">
