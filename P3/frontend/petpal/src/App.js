@@ -97,8 +97,6 @@ function Webpages(){
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
       <Route path="SeekerEdit" element={<SeekerEdit />}/>
       <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
-      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
-      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
 
       <Route path="PetSearch" element={<Search />}/>
 
@@ -130,6 +128,8 @@ function Webpages(){
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="ViewBlog" element={<ViewBlog />} />  
+      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
+      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
     </Route>
   
   </Routes>

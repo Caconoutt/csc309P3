@@ -50,7 +50,7 @@ const NotiPage=() =>{
         // if case is review/reply, navigate to shelter page
         // if case is application, navigate to application list
         if (notiCase === 'review' || notiCase === 'reply'){
-            window.location.href = `http://localhost:3000/ShelterDetail/${shelter_id}`;
+            window.location.href = `http://localhost:3000/ReviewList/${shelter_id}`;
         }
         else if (notiCase === 'application'){
             window.location.href = "http://localhost:3000/ListApplication";
