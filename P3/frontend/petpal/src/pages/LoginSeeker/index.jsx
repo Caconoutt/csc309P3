@@ -56,12 +56,16 @@ const LoginSeeker = () => {
                 if (!userTypeRes.ok) throw new Error('Error fetching user type');
                 const userTypeJson = await userTypeRes.json();
                 setUserType(userTypeJson.user_type);
-                if (userType != 'seeker'){setErrorMsg(
+
+                
+                if (userType === 'shelter'){setErrorMsg(
                     "You are not authorized to access this page as a shelter."
                     );
-                
                 }
-                window.location.href = "/HomeSeeker";
+                else{
+                    window.location.href = "/HomeSeeker";
+                }
+                
         }
     }
                 
