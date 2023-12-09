@@ -80,7 +80,6 @@ function Webpages(){
     {/* <Route path = "application" element={<PetDetails />}/> */}
     </Route>
 
-
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>
       <Route path="RegisterShelter" element={<RegisterShelter />}/>

@@ -1,6 +1,6 @@
 import { Button, Form, Col, Row, InputGroup } from 'react-bootstrap'
 import './style.css'
-import { useRef, useContext, useEffect } from 'react'
+import { useRef, useContext, useEffect, useState } from 'react'
 import { VariableContextProvider } from '../../../contexts/VariableContext'
 
 const fd = new FormData()
@@ -16,11 +16,12 @@ const appendOrReplace = (formData, name, value) => {
 }
 
 function Forms({ handleSubmit }) {
+  
   const { query, petCreateQuery } = useContext(VariableContextProvider)
-
+  const [validated, setValidated] = useState(false)
   const fileInputDataRef = useRef('')
   const fileInputViewRef = useRef('')
-
+  
   const fileInputViewClick = () => {
     fileInputDataRef.current.click()
   }
@@ -36,14 +37,22 @@ function Forms({ handleSubmit }) {
 
     fileInputDataRef.current.value = null
   }
-  const onSubmit = (event) => {
+  const onSubmit = async(event) => {
+    const form = event.currentTarget
     event.preventDefault()
     event.stopPropagation()
-    if (!query.pet_id && !query.image) {
-      fileInputViewRef.current.focus()
-      return
+    const v = await form.checkValidity()
+
+    if (v){
+      if (!query.pet_id && !query.image) {
+        fileInputViewRef.current.focus()
+        return
+      }
+      handleSubmit(fd)
+    }else{
+      setValidated(true)
     }
-    handleSubmit(fd)
+   
   }
   const handleChange = (event, keys) => {
     petCreateQuery({
@@ -56,7 +65,7 @@ function Forms({ handleSubmit }) {
 
   return (
     <div>
-      <Form className="createFormsWrap" onSubmit={onSubmit}>
+      <Form className="createFormsWrap" onSubmit={onSubmit} noValidate validated={validated}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="formLabel">Name</Form.Label>
           <Form.Control
@@ -66,6 +75,7 @@ function Forms({ handleSubmit }) {
             value={query.name}
             onChange={(event) => handleChange(event, 'name')}
           />
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>Please provide a username.</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -77,6 +87,7 @@ function Forms({ handleSubmit }) {
             value={query.Breed}
             onChange={(event) => handleChange(event, 'Breed')}
           />
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>Please provide Breed.</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -88,19 +99,22 @@ function Forms({ handleSubmit }) {
             value={query.contact}
             onChange={(event) => handleChange(event, 'contact')}
           />
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>Please provide contact.</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label className="formLabel">Gender</Form.Label>
           <Form.Select
+            required
             placeholder="Choose"
             value={query.gender}
             onChange={(event) => handleChange(event, 'gender')}
           >
-            <option>Choose</option>
+            <option disabled value="">Choose</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </Form.Select>
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>Please Provide Gender.</Form.Control.Feedback>
         </Form.Group>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -112,7 +126,7 @@ function Forms({ handleSubmit }) {
               value={query.age}
               onChange={(event) => handleChange(event, 'age')}
             />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+           
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom02">
             <Form.Label className="formLabel">Size</Form.Label>
@@ -122,7 +136,7 @@ function Forms({ handleSubmit }) {
               value={query.size}
               onChange={(event) => handleChange(event, 'size')}
             >
-              <option>Choose</option>
+              <option disabled value="">Choose</option>
               <option value="small">Small</option>
               <option value="medium">Medium</option>
               <option value="large">Large</option>
@@ -136,7 +150,7 @@ function Forms({ handleSubmit }) {
               value={query.color}
               onChange={(event) => handleChange(event, 'color')}
             >
-              <option>Choose</option>
+              <option disabled value="">Choose</option>
               <option value="White/light">White/light</option>
               <option value="Black/dark">Black/dark</option>
               <option value="Colorless/transparent">
@@ -155,17 +169,15 @@ function Forms({ handleSubmit }) {
             value={query.location}
             onChange={(event) => handleChange(event, 'location')}
           >
-            <option>Choose</option>
+            <option disabled value="">Choose</option>
             <option value="Ontario">Ontario</option>
             <option value="British Columbia">British Columbia</option>
             <option value="Quebec">Quebec</option>
             <option value="Alberta">Alberta</option>
             <option value="Nova Scotia">Nova Scotia</option>
-            <option value="New Brunswick">New Brunswick</option>
-            <option value="Newfoundland and Labrador">
-              Newfoundland and Labrador
+            <option value="Saskat">
+            Saskat
             </option>
-            <option value="Saskatchewan">Saskatchewan</option>
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -178,28 +190,40 @@ function Forms({ handleSubmit }) {
             rows={3}
             placeholder="If no prior medical history, simply write None"
           />
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>
+						Please provide Medical History.
+					</Form.Control.Feedback>
+
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label className="formLabel">
             Special Needs/Requirements
           </Form.Label>
           <Form.Control
+          required
             as="textarea"
             rows={3}
             value={query.special_needs}
             onChange={(event) => handleChange(event, 'special_needs')}
             placeholder="If no special needs required, please simply write None"
           />
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>
+						Please provide Special Needs.
+					</Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label className="formLabel">Behavior Descriptions</Form.Label>
           <Form.Control
+          required
             value={query.behaviour_description}
             onChange={(event) => handleChange(event, 'behaviour_description')}
             as="textarea"
             rows={3}
             placeholder="Please describe its daily behaviours in details"
           />
+          <Form.Control.Feedback type='invalid' style={{color:"white"}}>
+						Please provide Behaviour Description.
+					</Form.Control.Feedback>
         </Form.Group>
 
         {/* <Form.Group className="position-relative mb-3">
@@ -218,6 +242,7 @@ function Forms({ handleSubmit }) {
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon3">Select a picture</InputGroup.Text>
           <Form.Control
+            autocomplete='off'
             type="text"
             ref={fileInputViewRef}
             id="basic-url"
@@ -234,6 +259,7 @@ function Forms({ handleSubmit }) {
           <input
             type="file"
             // required
+            autocomplete='off'
             hidden
             name="image"
             ref={fileInputDataRef}

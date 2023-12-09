@@ -71,12 +71,13 @@ function PetDetails() {
 	return (
 		<><div className='row row-wrap '>
 			<h1 className='title'>pet detail</h1>
-			<div className='col-sm-12 mb-3 mb-sm-0 item-pet-card'>
-				<div className='card'>
+			<div className='outercard'>
+			<div className='item-pet-card2'>
+				<div className='cardformat'>
 					<img src={pet.image} className='rounded img1' />
 					<Table pet={pet} />
 					<div className='list-group-item flex'>
-					<Link to={'/ShelterDetail/'+ pet.shelter} className='info' style = {{color:'black'}}>
+					<Link to={'/ShelterDetail/'+ pet.shelter} className='checkinfo' style = {{color:'black'}}>
 							check its shelter
 						</Link>
 					</div>
@@ -87,7 +88,7 @@ function PetDetails() {
 					</div>
 				</div>
 			</div>
-
+			</div>
 			<Toast className='myToast' onClose={() => setShow(false)} show={show} delay={3000}>
 				<Toast.Header>
 					<strong className='me-auto'>attention</strong>
