@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useUserData } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Prev } from "react-bootstrap/esm/PageItem";
+import Login from "../../assets/images/login.png"
 
 const ShelterDetail = () => {
     const {shelter_id} = useParams();
@@ -25,6 +26,7 @@ const ShelterDetail = () => {
     const [ratingGot, setRatingGot] = useState(false);
     const [reviewList, setReviewList] = useState([]);
     const [reloadReviews, setReloadReviews] = useState(false);
+    const [image_url, setImage_url] = useState(null);
 
 
     console.log(shelter_id);
@@ -47,6 +49,7 @@ const ShelterDetail = () => {
             setContact(userResult.contact);
             setLocation(userResult.location);
             setMission(userResult.mission);
+            setImage_url(userResult.image_url);
             setIsLoading(false);
           } else {
             setIsLoading(false);
@@ -164,7 +167,9 @@ const ShelterDetail = () => {
           <div class="img-container">
             <div class="img-container">
                 <div class = "portrait">
-                    <img src="img/shelter.jpeg" class="img-fluid profile-img" /> 
+
+                    {/* <img src="img/shelter.jpeg" class="img-fluid profile-img" />  */}
+                    <img src={image_url === null ? Login : image_url} class="img-fluid profile-img" /> 
                 </div>
             </div>
           </div>
