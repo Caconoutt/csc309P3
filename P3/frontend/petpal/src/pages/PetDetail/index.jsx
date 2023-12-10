@@ -29,6 +29,12 @@ function PetDetails() {
             setShow(true)
 		}
 	}
+	const backTransfer = () =>{
+		navigate('/ShelterAllPet')
+	}
+	
+
+
 
 	useEffect(() => {
 		if (identity === 'Seeker') {
@@ -67,7 +73,27 @@ function PetDetails() {
 				})
 		}
 	}, [pet_id])
-
+	if(identity === 'Shelter'){
+		return (
+			<><div className='row row-wrap '>
+				<h1 className='title'>pet detail</h1>
+				<div className='outercard'>
+				<div className='item-pet-card2'>
+					<div className='cardformat'>
+						<img src={pet.image} className='rounded img1' />
+						<Table pet={pet} />
+						
+					</div>
+					<div className='card-body'>
+						<button role='button' className='button  adopt-btn' onClick={backTransfer}>
+							Back To Listing
+						</button>
+					</div>
+					</div>
+					</div>
+				</div>
+				</>	)
+	}
 	return (
 		<><div className='row row-wrap '>
 			<h1 className='title'>pet detail</h1>
