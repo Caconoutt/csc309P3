@@ -25,7 +25,7 @@ const NotiList = () =>{
                 });
                 if (resp.ok){
                     const result = await resp.json();
-                    setNotiList(result.results.reverse());
+                    setNotiList(result.results);
                     
                 }
                 else{

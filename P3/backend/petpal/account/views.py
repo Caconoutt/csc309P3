@@ -151,7 +151,7 @@ class NotiList(ListAPIView):
     #order by time
     if order_by is not None:
       if order_by == 'created_time':
-        notis = notis.order_by('created_at')
+        notis = notis.order_by('-created_at')
     
     return notis
 
