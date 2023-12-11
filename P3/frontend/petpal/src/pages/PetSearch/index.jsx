@@ -42,7 +42,7 @@ const Search = () => {
 		}
 		console.log(params, 'params[radioVal]')
 		setPageQuery({page:1})
-		// getPetList({ ...pageQuery, ...params })
+		//getPetList({ ...pageQuery, ...params })
 	}
 
 
