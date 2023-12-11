@@ -131,6 +131,7 @@ function Webpages(){
       <Route path="NotiList" element={<NotiList />}/>
       <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
     </Route>
+    <Route path="*" element={<NotFound />} />
   
   </Routes>
   </BrowserRouter>;
