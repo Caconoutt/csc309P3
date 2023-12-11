@@ -66,6 +66,17 @@ const ViewBlog = () => {
             fetchData();
         }
     }, [id, token, userType, shelter_id]);
+
+    // determine which page to change
+
+    const getPage= () => {
+        if (userType === 'shelter') {
+            return `/ListBlog`;
+        }
+        else  {
+            return `/shelter/${shelter_id}/ListBlog`;
+        }
+    }
     
 
 
@@ -86,7 +97,8 @@ const ViewBlog = () => {
 
                     <div>{content}</div>
                 </div>
-                <button id="backToBlogList" className="btn btnStyle w-100 py-2" type="submit"><Link to="/ListBlog" style={{ textDecoration: 'none', color: 'inherit' }}>Back to Blog List</Link></button>
+                <button id="backToBlogList" className="btn btnStyle w-100 py-2" type="submit"><Link to={getPage()}
+ style={{ textDecoration: 'none', color: 'inherit' }}>Back to Blog List</Link></button>
             </main>
         </div>
     );
