@@ -30,6 +30,8 @@ import ShelterProfile from './pages/ShelterProfile';
 import ShelterEdit from './pages/ShelterEdit';
 import ReviewList from './pages/ReviewList';
 import ReviewDetial from './pages/ReviewDetail';
+import ChatPage from './pages/chat';
+
 import ListAllPets from './pages/ShelterAllPet';
 import ShelterList from './pages/ShelterList';
 import CreateBlog from './pages/CreateBlog';
@@ -124,6 +126,7 @@ function Webpages(){
     <Route path="/" element={<CustomLayout />}>
       <Route path="ListApplication" element={<ListApplication />} />
       <Route path="ApplicationDetail/:application_id" element={<ApplicationDetail />} />
+      <Route path="Chat/:application_id" element={<ChatPage />} />
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="ViewBlog" element={<ViewBlog />} />  
       <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
