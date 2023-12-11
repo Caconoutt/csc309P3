@@ -1,13 +1,11 @@
-import "./style.css"
-import Seeker from "../../assets/images/seeker.jpeg"
+import "./style.css" 
 import Edit from "../../assets/images/edit.png"
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useUserData } from "../../contexts/AuthContext"
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Shelter from "../../assets/images/shelter.jpeg"
+import login from "../../assets/images/login.png"
 
 const ShelterProfile = () => {
     const navigate = useNavigate();
@@ -26,6 +24,7 @@ const ShelterProfile = () => {
     const [user, setUser] = useState(null);
     const [mission, setMission] = useState("");
     const [isloading, setIsloading] = useState(true);
+    const [image_url, setImage_url] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -62,6 +61,7 @@ const ShelterProfile = () => {
                   setEmail(userResult.email);
                   setMission(userResult.mission);
                   setIsloading(false);
+                  setImage_url(userResult.image_url);
                 } else {
                   setIsloading(false);
                   console.log('Error fetching user data');
@@ -80,6 +80,25 @@ const ShelterProfile = () => {
         fetchData();
       }, []);
     
+      const handleDelete = async () => {  
+        const url = `http://localhost:8000/account/shelter/profile/${firstItemId}/`;
+        try {
+          const resp = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          if (resp.ok) {
+            navigate(`/`);
+          } else {
+            console.log('Error deleting user');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+    };
 
     // template below
     return (
@@ -88,62 +107,63 @@ const ShelterProfile = () => {
                   <p>Loading...</p>
               ) : (
     <div class="container" id="wrap">
-        <div>
-            <Button  class="btn-image" onClick={() => navigate('/ShelterEdit', { state: {user}})}>
+        <div class = "edit-button-container">
+            <button  class="btn-image" onClick={() => navigate('/ShelterEdit', { state: {user}})}>
                 <img src={Edit} alt="Button Image" class="btn-image" />
-            </Button>
+            </button>
         </div>
 
         <div class="img-container">
             <div class = "portrait">
-                <img src={Shelter} class="img-fluid profile-img" /> 
+                <img src={image_url === null ? login : image_url} class="img-fluid profile-img" /> 
             </div>
         </div>
         
         <div class="info-container">
-            <div class="row" >
-                <div class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Nickname:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{nickname}</p>
-                </div>
+
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Nickname:</p>
+              </div>
+              <div class="custom-col">
+                <p class = "seeker-info">{nickname}</p>
+              </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Name:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{username}</p>
-                </div>
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Name:</p>
+              </div>
+              <div class="custom-col">
+                <p class = "seeker-info">{username}</p>
+              </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Contact:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{contact}</p>
-                </div>
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Contact:</p>
+              </div>
+              <div class="custom-col">
+                <p class = "seeker-info">{contact}</p>
+              </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Location:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{location}</p>
-                </div>
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Location:</p>
+              </div>
+              <div class="custom-col">
+                <p class = "seeker-info">{location}</p>
+              </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Mission Statement:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{mission}</p>
-                </div>
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Mission Statement:</p>
+              </div>
+              <div class="custom-col">
+                <p class = "seeker-info">{mission}</p>
+              </div>
             </div>
 
             <div class="row">
@@ -153,10 +173,17 @@ const ShelterProfile = () => {
                   </Link>
                   </div> 
               </div> 
+
+              <div class="col-md-6 col-sm-12 text-center text-md-end">
+                 
+                <button class="btn btn-primary btn-submit" onClick={handleDelete}>Delete</button>
+                 
+              </div> 
               
             </div> 
+
             
-    </div>
+      </div>
     )}
     </>
 );

@@ -12,6 +12,7 @@ const LoginSeeker = () => {
     const [password, setPw] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const {token, setToken} = useUserData();
+    const [userType, setUserType] = useState(null);
 
 
     const logIn = async() => {
@@ -57,6 +58,7 @@ const LoginSeeker = () => {
 
 
     }
+    
     return <>
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">

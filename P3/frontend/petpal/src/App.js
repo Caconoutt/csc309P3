@@ -40,6 +40,7 @@ import BlogList from './pages/BlogList';
 import ViewBlog from './pages/ViewBlog';
 import NotFound from './pages/NotFound';
 
+
 function Webpages(){
   const [userType, setUserType] = useState(null);
   const {token} = useUserData();
@@ -81,7 +82,6 @@ function Webpages(){
     {/* <Route path = "application" element={<PetDetails />}/> */}
     </Route>
 
-
     <Route path="/">
       <Route path="RegisterSeeker" element={<RegisterSeeker />}/>
       <Route path="RegisterShelter" element={<RegisterShelter />}/>
@@ -93,14 +93,13 @@ function Webpages(){
     <Route path="/" element={<LayoutSeeker />}> 
       <Route path="HomeSeeker" element={<HomeSeeker />}/>
       <Route path="ShelterList" element={<ShelterList />}/>
-      <Route path="NotiList" element={<NotiList />}/>
-      <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
+      
       <Route path="SeekerProfile" element={<SeekerProfile />}/>
       <Route path="SeekerEdit" element={<SeekerEdit />}/>
       <Route path="ShelterDetail/:shelter_id" element={<ShelterDetail />}/>
-      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
-      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
+
       <Route path="PetSearch" element={<Search />}/>
+
       <Route path="shelter/:shelter_id/ListBlog" element={<BlogList />} />
     </Route>
 
@@ -114,6 +113,7 @@ function Webpages(){
       <Route path="CreateBlog" element={<CreateBlog />} />
       <Route path="EditBlog" element={<EditBlog />} />
       <Route path="ListBlog" element={<BlogList />} />
+
     </Route>
 
     <Route path="/" element={<LayoutSeeker />}>       
@@ -129,7 +129,12 @@ function Webpages(){
       <Route path="Chat/:application_id" element={<ChatPage />} />
       <Route path="PetDetail" element={<PetDetails />}/>
       <Route path="ViewBlog" element={<ViewBlog />} />  
+      <Route path="ReviewList/:shelter_id" element={<ReviewList />}/>
+      <Route path="ReviewList/:shelter_id/Review/:review_id" element={<ReviewDetial />} />
+      <Route path="NotiList" element={<NotiList />}/>
+      <Route path="NotiList/Noti/:noti_id" element={<NotiPage />}/>
     </Route>
+    <Route path="*" element={<NotFound />} />
   
   </Routes>
   </BrowserRouter>;

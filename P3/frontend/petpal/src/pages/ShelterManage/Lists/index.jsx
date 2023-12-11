@@ -39,7 +39,7 @@ function List({ petList, getList }) {
 						item.value.map((ele) => (
 							<Accordion defaultActiveKey={defaultActiveKey}>
 								<Accordion.Item eventKey={ele.id}>
-									<Accordion.Header>Pet Info</Accordion.Header>
+									<Accordion.Header>{ele.name}</Accordion.Header>
 									<Accordion.Body>
 										<div className='accordion-body item-body'>
 											<div className='pet-info'>

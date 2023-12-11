@@ -30,6 +30,7 @@ const SeekerEdit = () => {
     const [location_u, setLocation_u] = useState(location);
     const [preference_u, setPreference_u] = useState(preference);
     const [image_url_u, setImage_url_u] = useState(image_url);
+    const [selectedImage, setSelectedImage] = useState(null);
 
 
     useEffect(() => {
@@ -57,36 +58,49 @@ const SeekerEdit = () => {
         fetchData();
       }, []);
 
+      const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+          setSelectedImage(e.target.files[0]);
+        }
+    };
+
       const handleEdit = async (event) => {
         event.preventDefault();
-      
+        if (location_u === null) {
+          alert("You must select a location");
+          return;
+        }
+        if (preference_u === null) {
+          alert("You must select a preference");
+          return;
+        }
+
         const new_url = `http://localhost:8000/account/seeker/profile/${firstItemId}/`;
-        console.log(location_u);
       
-        const updatedData = {
-            username: username_u,
-            nickname: nickname_u,
-            contact: contact_u,
-            location: location_u,
-            preference: preference_u,
-          // Include other fields that need to be updated
-        };
-      
+        const formData = new FormData();
+        formData.append('username', username_u);
+        formData.append('nickname', nickname_u);
+        formData.append('contact', contact_u);
+        formData.append('location', location_u);
+        formData.append('preference', preference_u);
+        if (selectedImage) {
+          formData.append('image_url', selectedImage);
+        }
         try {
           const response = await fetch(new_url, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
-              'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify(updatedData),
+            body: formData,
           });
       
           if (response.ok) {
             // Redirect to SeekerProfile upon successful update
             navigate('/SeekerProfile');
           } else {
-            console.log('Error updating profile');
+            const errorResponse = await response.json();
+            console.log('Error updating profile', errorResponse);
           }
         } catch (error) {
           console.error('Error:', error);
@@ -95,62 +109,62 @@ const SeekerEdit = () => {
 
     return <>
      <div class="container" id="wrap">
-        <div>
-            <Button  class="btn-image" onClick={handleEdit}>
+        <div class = "edit-button-container">
+            <button  class="btn-image" onClick={handleEdit}>
                 <img src={Done} alt="Button Image" class="btn-image" />
-            </Button>
+            </button>
         </div>
         
         <div class="img-container">
             <div class = "portrait">
                 <div class="custom-upload">
-                    <input type="file" class="img-input" id="imageUpload" />
+                    <input type="file" class="img-input" id="imageUpload" onChange={handleImageChange}/>
                     <label class="custom-file-label" for="imageUpload">Choose Image</label>
                 </div>
             </div>
-
         </div>
         
         <div class="info-container">
-            <div class="row" >
-                <div class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Nickname:</p>
-                </div>
-                <div class="col-md-6 input-left">
-                    <input type="text" class="form-control" id="form-input" placeholder="Enter text" 
+
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Nickname:</p>
+              </div>
+              <div class="custom-col input-left">
+                    <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter text" 
                     value={nickname_u} onChange={(e) => setNickname_u(e.target.value)}/>
                 </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Name:</p>
-                </div>
-                <div class="col-md-6">
-                        <input type="text" class="form-control" id="form-input" placeholder="Enter text" 
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Name:</p>
+              </div>
+              <div class="custom-col input-left">
+              <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter text" 
                         value={username_u} 
                         onChange={(e) => setUsername_u(e.target.value)}
                         />
                 </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Contact:</p>
-                </div>
-                <div class="col-md-6">
-                        <input type="text" class="form-control" id="form-input" placeholder="Enter Number" 
+            <div class="custom-row">
+              <div class="custom-col text-sm-center text-md-end">
+                <p class="seeker-title">Contact:</p>
+              </div>
+              <div class="custom-col input-left">
+              <input type="text" class="form-control edit-form" id="form-input" placeholder="Enter Number" 
                         value={contact_u}
                         onChange={(e) => setContact_u(e.target.value)}/>
                 </div>
             </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Location:</p>
+            <div class="custom-row">
+                <div  class="custom-col text-sm-center text-md-end">
+                    <p class="seeker-title">Location:</p>
                 </div>
-                <div class="col-md-6">
-                    <select id="choice" class="form-select" required 
+                <div class="custom-col input-left">
+                    <select id="choice" class="form-select edit-form" 
                     value={location_u}  
                     onChange={(e) => setLocation_u(e.target.value)}>
                         <option selected disabled value=" ">Choose...</option>
@@ -164,12 +178,13 @@ const SeekerEdit = () => {
                         <option>Saskatchewan</option></select>
                 </div>
             </div>
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Preference:</p>
+
+            <div class="custom-row">
+                <div  class="custom-col text-sm-center text-md-end">
+                    <p class="seeker-title ">Preference:</p>
                 </div>
-                <div class="col-md-6">
-                    <select id="choice" class="form-select" required
+                <div class="custom-col input-left">
+                    <select id="choice" class="form-select edit-form"
                     value={preference_u} 
                     onChange={(e) => setPreference_u(e.target.value)}>
                         <option selected disabled value=" ">Choose...</option>

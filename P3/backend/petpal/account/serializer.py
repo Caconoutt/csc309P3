@@ -79,10 +79,10 @@ class RegisterSeekerSerializer(ModelSerializer):
 
 #Retrive & Update Seeker profile
 class SeekerSerializer(ModelSerializer):
-  username = CharField(read_only = True, allow_null=False)
-  date_joined = DateTimeField(read_only = True, allow_null=False)
-  image_url = ImageField(required=False)
-  email = EmailField(required = False)
+  # username = CharField(read_only = True, allow_null=False)
+  # date_joined = DateTimeField(read_only = True, allow_null=False)
+  # image_url = ImageField(required=False)
+  # email = EmailField(required = False)
   class Meta:
     model = Seeker
     fields = ['username','date_joined','email', 'nickname','contact','location','preference','image_url']
@@ -127,12 +127,13 @@ class RegisterShelterSerializer(ModelSerializer):
     noti.save()
     return user
 
-#Retrive & Update Seeker profile
+#Retrive & Update Shelter profile
 class ShelterSerializer(ModelSerializer):
-  username = CharField(read_only = True, allow_null=False)
-  date_joined = DateTimeField(read_only = True, allow_null=False)
-  image_url = ImageField(required=False)
-  email = EmailField(required = False)
+  # username = CharField(read_only = True, allow_null=False)
+  # date_joined = DateTimeField(read_only = True, allow_null=False)
+  # image_url = ImageField(required=False, allow_null=True)
+  # email = EmailField(required = False, allow_null=True)
+  # location = CharField(required=False, allow_null=True)
   class Meta:
     model = Shelter
     fields = ['username','date_joined','email', 'nickname','contact','location','mission','image_url','id']

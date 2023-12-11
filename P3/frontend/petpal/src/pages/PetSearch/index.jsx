@@ -41,7 +41,8 @@ const Search = () => {
 			params[radioVal][name].splice(params[radioVal][name].indexOf(value), 1)
 		}
 		console.log(params, 'params[radioVal]')
-		getPetList({ ...pageQuery, ...params })
+		setPageQuery({page:1})
+		//getPetList({ ...pageQuery, ...params })
 	}
 
 
@@ -200,7 +201,7 @@ const Search = () => {
 				</Alert>
 			) : (
 				<></>
-			)}setShow
+			)}
 		</>
 		
 	)

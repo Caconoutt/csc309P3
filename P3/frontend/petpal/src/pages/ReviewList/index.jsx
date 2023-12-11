@@ -3,6 +3,7 @@ import './style.css'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Reviews from '../../components/Reviews';
+import { Link } from 'react-router-dom';
 
 
 const ReviewList = () =>{
@@ -27,7 +28,7 @@ const ReviewList = () =>{
                 });
                 if (resp.ok){
                     const result = await resp.json();
-                    setReviewList(result.results)
+                    setReviewList(result.results);
                     
                 }
                 else{
@@ -46,11 +47,12 @@ const ReviewList = () =>{
     <div className="page d-flex align-items-center py-4">
     <main className="form-signin w-100 m-auto mainContent">
 
-    <div class="main-wrap">
+    <div class="main-wrap" id="overwrite_main-wrap">
     <h2>Review List:</h2>
     <Reviews data={reviewList} />
     </div>
-    
+
+    <button id="backToList" className="btn btnStyle w-100 py-2" type="submit"><Link to="/NotiList" style={{ textDecoration: 'none', color: 'inherit' }}>Back to all noti</Link></button>
     
     </main></div>
     </>

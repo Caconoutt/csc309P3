@@ -1,219 +1,58 @@
-.form-control-dark {
-    border-color: var(--bs-gray);
+.img-input {
+    display: none; /* Hide the input */
   }
-.form-control-dark:focus {
-border-color: #fff;
-box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
-}
-
-.text-small {
-font-size: 85%;
-}
-
-.dropdown-toggle:not(:focus) {
-outline: 0;
-}
-
-.bd-placeholder-img {
-font-size: 1.125rem;
-text-anchor: middle;
--webkit-user-select: none;
--moz-user-select: none;
-user-select: none;
-}
-
-
-
-
-
-
-/* new added*/
-body{
-    background-color: #B55D4C;
-}
-.page{
-    position: relative;
-    min-height: 100vh;
-}
-#logo{
-    width: 40px;
-    height: 40px;
-}
-#logo1{
-    height: 40px;
-}
-.headerText{
-    font-weight: 700;
-    color: antiquewhite;
-
-}
-.footerContainer{
-    width: 100vw;
-    position: absolute;
-    bottom: 0px;
-}
-footer{
-    height: 120px;
-}
-
-.info{
-    color: antiquewhite;
-}
-
-.info-container{
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    color: antiquewhite;
-}
-
-.title{
-    font-weight: bold;
-    margin: 5px;
-
-}
-
-.btn-image{
-    width:30px;
-    height: 30px;
-    float: right;
+  
+  .custom-file-label {
+    padding: 8px 12px;
     cursor: pointer;
-    background-color: none;
-}
-
-.management{
-    text-decoration: none;
-    color:antiquewhite;
-    font-weight: bold;
-    font-size: Large;
-}
-
-.img-container{
-    justify-content: center;
-    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Keep only the label visible */
+  .custom-upload {
     display: flex;
-    margin-left: 40px;
-}
-
-.portrait{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    align-items: center;
     justify-content: center;
-    display: flex;
-    border-color: #fff;
-    border-style: solid;
-
-}
-
-.img-input{
-    visibility: hidden;
+    align-items: center;
+    width: 200px; /* Set width for the container */
+    height: 200px; /* Set height for the container */
+    border-radius: 50%; /* Apply rounded shape */
+    overflow: hidden; /* Hide overflow */
+    position: relative; /* Position the container */
+    border: 2px solid #ccc; /* Example border style */
+  }
+  
+  .custom-upload input {
+    display: none; /* Hide the input */
+  }
+  
+  .custom-upload label {
     position: absolute;
-}
-
-.custom-upload{
-    color: #fff; /* Button text color */
-    padding: 8px 5px; /* Button padding */
-    border: 1px solid none;
-    border-radius: 4px;
-    cursor: pointer;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: block;
-    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    font-size: small;
-}
+    width: 100%;
+  }
 
-
-.custom-file-img{
-    cursor: pointer;
-    white-space: nowrap;
-    display: block;
-    overflow: hidden;
-    text-align: center;
-    width: 5px;
-    height: 5px;
-}
-
-#form-input{
-    margin-top: 5px;
-    padding: 0 10px;
-}
-
-#choice{
-    padding: 3px 10px;
-    margin-bottom: 3px;
-}
-
-.category{
-    padding: 0 10px;
-}
-
-.btn-image{
-    width:40px;
-    height: 40px;
-    float: right;
-    cursor: pointer;
-}
-
-
-@media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-        font-size: 3.5rem;
+  .edit-form {
+    max-width: 300px; /* Set a maximum width for form elements on larger screens */
+    font-size: 1em; /* Adjust font size for form elements on larger screens */
+  }
+  
+  @media (max-width: 768px) {
+    .custom-upload {
+      width: 100px; /* Adjust width for smaller screens */
+      height: 100px; /* Adjust height for smaller screens */
     }
-    
-    #wrap{
-        margin-top: 60px;
-    }
-    
-    .img-container{
-        margin-bottom: 20px;
-    }
-    .portrait{
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-    }
-    
-    .category{
-        padding-right: 60px;
-        margin:0px
+  
+    .custom-upload label {
+      font-size: 0.8em; /* Reduce font size for smaller screens */
     }
 
-    #form-input{
-        /* margin-top: 5px; */
-        padding-top: 10px;
-    }
-    .title{
-        font-size: 20px;
-    }
-    .text-md-left{
-        text-align:left;
-        align-items: left;
-        padding-left: 20px;
-        margin: 0px;
-        font-size: 20px;
-    }
-    .custom-upload{
-        font-size: large;
-    }
+    .edit-form {
+        max-width: 500px; /* Set a maximum width for form elements on larger screens */
+        font-size: 1em; /* Adjust font size for form elements on larger screens */
+      }
 
-    .input-left{
-        margin: 0;
-    }
-    #form-input{
-        margin-left: 0;
-        max-width: 300px;
-    }
-
-    #choice{
-        margin-top: 5px;
-        padding: 5px 10px;
-        margin-bottom: 3px;
-        max-width: 300px;
-    }
-    
-}
+  }
+  

@@ -13,6 +13,7 @@ const LoginShelter = () => {
     const [password, setPw] = useState("");
     const [errorMsg, setErrorMsg] =useState("");
     const {token, setToken} = useUserData();
+    const [userType, setUserType] = useState(null);
     const navigate = useNavigate()
 
     const login = async() =>{
@@ -55,6 +56,9 @@ const LoginShelter = () => {
         catch(error){
             console.error("Error: ", error);
         }
+
+
+    
 
 
     }

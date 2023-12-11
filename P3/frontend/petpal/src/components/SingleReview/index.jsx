@@ -9,7 +9,7 @@ const SingleReview = ({detail, reviewer_id}) =>{
     });
     return <>
     <div class="conta">
-        <p>{reviewer_id + ":" + detail}</p>
+        <p>{"From " + reviewer_id + " : " + detail}</p>
     </div>
     
     </>

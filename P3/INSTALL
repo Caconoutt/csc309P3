@@ -3,4 +3,96 @@
 # You should write detailed description on:
 
 # 1. All the packages you need to install
-# 2. How to configure various servers (e.g., Nginx, Apache, etc)
+For server:
+sudo apt install 
+sudo apt install nodejs
+sudo apt install npm
+
+git clone https://github.com/Caconoutt/csc309P3.git
+cd csc309P3/P3
+
+To run the server:
+cd backend
+source startup.sh
+sh run.sh
+
+To run the forntend:
+cd frontend
+npm install
+npm start
+
+# 2. Deployment steps
+
+For React Frontend:
+1. create a new repository on github and upload the project to the repository
+2. open Vercel and create a new account, link the github account to vercel
+3. select 'Add New...' and select 'Project', then select the project you want to deploy 
+4. set Framework preset to 'Create React App' and Root Directory to 'frontend/petpal'
+and click 'Deploy'
+4. Add REACT_APP_SERVER=localhost:3000 to the environment in the frontend/petpal/.env file 
+5. API calls will be done using ${process.env.REACT_APP_SERVER} as the base url
+
+
+For django backend:
+1. sign up for a account on render and connect to github account
+# PostgresSQL will be used as the database instead of the default sqlite3
+2. click "Add New" and select to create a PostgreSQL database. Get the database URL and save it for later use
+3. Install for deployment:
+# also included in the requirements.txt file
+pip install psycopg2
+pip install dj-database-url
+pip install gunicorn
+
+4. settings.py changes:
+import os
+import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv(BASE_DIR / '.env')
+# change to make it refer to the .env file
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+
+# overwrite the default database settings
+DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
+
+5. Add the following code to .env file:
+ALLOWED_HOSTS=name of the website in Render
+SECRET_KEY= #secret key in the Render
+DATABASE_URL= External Database URL of the database in Render database created
+
+# render need to reinstall all the libraries in when deploying
+6. Add a new file called requirements.txt and add the following code:
+django
+Pillow
+djangorestframework
+djangorestframework-simplejwt
+django-phonenumber-field[phonenumberslite]
+drf-nested-routers
+django-extensions
+django-filter
+shortuuid
+django-cors-headers
+dj_database_url
+python-dotenv
+psycopg2-binary
+gunicorn
+
+7. click "Add New" and select to create a web service. Select the github repo:
+build command: sh build.sh
+start command: gunicorn petpal.wsgi 
+solve the problem according to the error message
+
+8. click "Environment" and add the following variables:
+ALLOWED_HOSTS=name of the allowed website in Render(website name and localhost)
+DATABASE_URL= Internal Database URL of the database in PostgreSQL database created above
+DEBUG = what you want
+SECRET_KEY = any secret key you want
+
+
+The above steps are for deploying the website.

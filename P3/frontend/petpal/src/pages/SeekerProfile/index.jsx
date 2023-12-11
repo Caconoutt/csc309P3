@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useUserData } from "../../contexts/AuthContext"
 import { Button } from "react-bootstrap";
-import { useRef } from "react";
+import Login from "../../assets/images/login.png"
 
 const SeekerProfile = () => {
     const navigate = useNavigate();
@@ -25,6 +25,7 @@ const SeekerProfile = () => {
     const [email, setEmail] = useState(null);
     const [user, setUser] = useState(null);
     const [isloading, setIsloading] = useState(true);  
+    const [image_url, setImage_url] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +61,8 @@ const SeekerProfile = () => {
                   setPreference(userResult.preference);
                   setEmail(userResult.email);
                   setIsloading(false);
+                  setImage_url(userResult.image_url);
+                  console.log(userResult.image_url);
                 } else {
                     setIsloading(false);
                   console.log('Error fetching user data');
@@ -82,6 +85,26 @@ const SeekerProfile = () => {
         navigate(`/SeekerEdit`, { state: {user:user}});
 
     };
+
+    const handleDelete = async () => {  
+        const url = `http://localhost:8000/account/seeker/profile/${firstItemId}/`;
+        try {
+          const resp = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          if (resp.ok) {
+            navigate(`/`);
+          } else {
+            console.log('Error deleting user');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+    }
     
 
     // template below
@@ -91,71 +114,83 @@ const SeekerProfile = () => {
                 <p>Loading...</p>
             ) : (
     <div class="container" id="wrap">
-        <div>
-            <Button  class="btn-image" onClick={goEdit}>
+        <div class = "edit-button-container">
+            <button  class="btn-image" onClick={goEdit}>
                 <img src={Edit} alt="Button Image" class="btn-image" />
-            </Button>
+            </button>
         </div>
 
         <div class="img-container">
             <div class = "portrait">
-                <img src={Seeker} class="img-fluid profile-img" /> 
+                <img src={image_url === null ? Login : image_url} class="img-fluid profile-img" /> 
             </div>
         </div>
         
         <div class="info-container">
-            <div class="row" >
-                <div class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Nickname:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{nickname}</p>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Email:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{email}</p>
-                </div>
-            </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Name:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{username}</p>
-                </div>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Nickname:</p>
             </div>
+            <div class="custom-col">
+              <p class = "seeker-info">{nickname}</p>
+            </div>
+          </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Contact:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{contact}</p>
-                </div>
-            </div>
 
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Location:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{location}</p>
-                </div>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Email:</p>
             </div>
-            <div class="row">
-                <div  class="col-md-6 col-sm-12 text-center text-md-end category">
-                    <p class="title">Preference:</p>
-                </div>
-                <div class="col-md-6 col-sm-12 text-md-left">
-                    <p>{preference}</p>
-                </div>
+            <div class="custom-col">
+              <p class = "seeker-info">{email}</p>
             </div>
+          </div>
 
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Name:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info">{username}</p>
+            </div>
+          </div>
+
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Contact:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info">{contact}</p>
+            </div>
+          </div>
+
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Location:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info">{location}</p>
+            </div>
+          </div>
+
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Preference:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info">{preference}</p>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6 col-sm-12 text-center text-md-end category">
+                 
+              <button class="btn btn-primary btn-submit" onClick={handleDelete}>Delete</button>
+                 
+              </div> 
+              
+            </div> 
             
         </div> 
     </div>

@@ -1,11 +1,11 @@
 import "./style.css"
-import Seeker from "../../assets/images/seeker.jpeg"
-import Edit from "../../assets/images/edit.png"
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useUserData } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Prev } from "react-bootstrap/esm/PageItem";
+import Login from "../../assets/images/login.png"
 
 const ShelterDetail = () => {
     const {shelter_id} = useParams();
@@ -22,10 +22,16 @@ const ShelterDetail = () => {
     const [review, setReview] = useState('');
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
+    const [averageRating, setAverageRating] = useState(0);
+    const [ratingGot, setRatingGot] = useState(false);
+    const [reviewList, setReviewList] = useState([]);
+    const [reloadReviews, setReloadReviews] = useState(false);
+    const [image_url, setImage_url] = useState(null);
+
 
     console.log(shelter_id);
 
-    useEffect(() => {
+       useEffect(() => {
       const fetchData = async () => {
         try {
           const url = `http://localhost:8000/account/seeker/${shelter_id}/`;
@@ -43,6 +49,7 @@ const ShelterDetail = () => {
             setContact(userResult.contact);
             setLocation(userResult.location);
             setMission(userResult.mission);
+            setImage_url(userResult.image_url);
             setIsLoading(false);
           } else {
             setIsLoading(false);
@@ -56,6 +63,50 @@ const ShelterDetail = () => {
     
       fetchData();
     }, [shelter_id, token]);
+
+    useEffect(() => {
+      const fetchReview = async () => {
+        try {
+          const resp = await fetch(`http://localhost:8000/comment/reviews/${shelter_id}/`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+  
+          if (resp.ok) {
+            const result = await resp.json();
+            setReviewList(result.results);
+            setRatingGot(true);
+          } else {
+            console.log('Error happened');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      fetchReview();
+    }, [shelter_id, token, reloadReviews]);
+  
+    useEffect(() => {
+      const calculateAverageRating = () => {
+        if (!isLoading && ratingGot) {
+          const ratings = reviewList.map(review => review.rating);
+          if (ratings.length > 0) {
+            const total = ratings.reduce((acc, rating) => acc + rating, 0);
+            return (total / ratings.length).toFixed(1);
+          }
+        }
+        return 0; // Return a default value if conditions are not met or no ratings
+      };
+  
+      if (!isLoading && ratingGot) {
+        const avgRating = calculateAverageRating();
+        setAverageRating(avgRating);
+      }
+    }, [isLoading, ratingGot, reviewList]);
 
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -80,6 +131,7 @@ const ShelterDetail = () => {
           // clear the form
           setRating(0);
           setReview('');
+          setReloadReviews(!reloadReviews);
           // Optionally, you can handle further actions upon successful submission
         } else {
           alert('Failed to submit review. Please try again.');
@@ -88,76 +140,81 @@ const ShelterDetail = () => {
         console.error('Error:', error);
         alert('An error occurred while submitting the review.');
       }
+      
     };
+    
 
     const handleRatingChange = (event) => {
       let value = parseInt(event.target.value);
       value = Math.min(Math.max(value, 1), 5); // Ensure the value stays between 1 and 5
       setRating(value);
     };
+
     
-    const handleReviewList= (event) => {
-      navigate('/ReviewList');
-    }
+
+    
+
+
+     
+
 
     return (
     <>
-    {isLoading ? (
-                <p>Loading...</p>
-            ) : (
+    {!isLoading && ratingGot ?
     <div class="container" id="wrap">
-      <div class="row info-container">
+      <div class="row detail-info-container">
         <div class="col-md-6">
           <div class="img-container">
             <div class="img-container">
                 <div class = "portrait">
-                    <img src="img/shelter.jpeg" class="img-fluid profile-img" /> 
+
+                    {/* <img src="img/shelter.jpeg" class="img-fluid profile-img" />  */}
+                    <img src={image_url === null ? Login : image_url} class="img-fluid profile-img" /> 
                 </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-6 category">
-                <p class="title">Nickname:</p>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Nickname:</p>
             </div>
-
-            <div class="col-md-6 text-md-left">
-                <p>{nickname}</p>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div  class="col-md-6 col-sm-12 category">
-                <p class="title">Contact:</p>
-            </div>
-            <div class="col-md-6 col-sm-12 text-md-left">
-                <p>{contact}</p>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{nickname}</p>
             </div>
           </div>
 
-          <div class="row">
-            <div  class="col-md-6 col-sm-12 category">
-                <p class="title">Location:</p>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Contact:</p>
             </div>
-            <div class="col-md-6 col-sm-12 text-md-left">
-                <p>{location}</p>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{contact}</p>
             </div>
           </div>
 
-          <div class="row">
-            <div  class="col-md-6 col-sm-12 ">
-                <p class="title">Mission Statement:</p>
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Location:</p>
             </div>
-            <div class="col-md-6 col-sm-12 text-md-left">
-                <p>{mission}</p>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{location}</p>
             </div>
           </div>
+
+          <div class="custom-row">
+            <div class="custom-col text-sm-center text-md-end">
+              <p class="seeker-title">Mission Statement:</p>
+            </div>
+            <div class="custom-col">
+              <p class = "seeker-info shelter">{mission}</p>
+            </div>
+          </div>
+
           
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-6 right-side">
         <div class="row">
               <div class="col-md-6 col-sm-12">
               <Link to={`/shelter/${shelter_id}/ListBlog`} className="management">
@@ -167,7 +224,7 @@ const ShelterDetail = () => {
             </div>
           <h2>Rating and Reviews</h2>
             <div class="total-rating">
-              <p>Overall rating: 4.5 stars</p>
+              <p>Overall rating: {averageRating} stars</p>
             </div>
                 <div class="form-group">
                     <label for="rating">Rating:</label>
@@ -189,34 +246,14 @@ const ShelterDetail = () => {
                 >
                   View All Reviews
                 </button>
-
-                {/* <ul class="list-group">
-                    <li class="list-group-item review-comment">
-                      <p>From User: This shelter is great!</p>
-                      <a href="shelter_review.html">
-                        <button class="btn btn-primary btn-submit btn-reply">View</button>  
-                      </a>
-                    </li>
-                    <li class="list-group-item review-comment">
-                      <p>From Shelter: Thanks for adopting cat</p>
-                      <a href="shelter_review.html">
-                        <button class="btn btn-primary btn-submit btn-reply">View</button>  
-                      </a>
-                    </li>
-                    <li class="list-group-item review-comment">
-                      <p>From User: Great Shelter!</p>
-                      <a href="shelter_review.html">
-                        <button class="btn btn-primary btn-submit btn-reply">View</button>  
-                      </a>
-                    </li>
-                    
-                </ul> */}
                 
         </div>
       </div>
          
     </div>
-    )}
+
+    : <p>Loading...</p>}
+
     </>
 );
 }
