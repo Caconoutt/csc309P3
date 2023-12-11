@@ -127,7 +127,6 @@ const LayoutShelter = () =>{
           alt="mdo" width="32" height="32" className="rounded-circle" />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Divider />
             <Dropdown.Item href="/NotiList">All notification</Dropdown.Item>
           </Dropdown.Menu>
     </Dropdown>

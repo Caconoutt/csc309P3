@@ -46,31 +46,19 @@ const LoginShelter = () => {
                 setErrorMsg("Error Messages: " + allError);
             }
             else{
+                
                 setToken(new_resp.access);
                 localStorage.setItem('token', new_resp.access);
-                const userTypeRes = await fetch(`http://127.0.0.1:8000/account/usertype/`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                if (!userTypeRes.ok) throw new Error('Error fetching user type');
-                const userTypeJson = await userTypeRes.json();
-                setUserType(userTypeJson.user_type);
-
-                if (userType === 'seeker'){
-                    setErrorMsg(
-                        "You are not authorized to access this page as a seeker."
-                    );
-                }
-                else{window.location.href = "/HomeShelter";}
-                
-                
+                //console.log(token);
+                window.location.href = "/HomeShelter";
             }
         }
         catch(error){
             console.error("Error: ", error);
         }
+
+
+    
 
 
     }
